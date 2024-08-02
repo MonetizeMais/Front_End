@@ -1,0 +1,143 @@
+*{
+
+  padding: 0px;
+  margin: 0px;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 60vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #F8F8F8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.TelaInicial {
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Torna os elementos em uma coluna */
+  align-items: center; /* Centraliza os elementos horizontalmente */
+  justify-content: space-between; /* Centraliza os elementos verticalmente */
+  min-height: 100vh; /* Garante que ocupe a altura total da tela */
+  margin: 0; /* Remove margens */
+  padding: 0; /* Remove paddings */
+}
+
+.TelaInicial img {
+  width: 60%;
+  height: auto;
+}
+
+.TelaInicial button {
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+.TelaInicial p, .TituloPrincipal{
+
+  color: #FA5B77;
+
+}
+
+.TelaInicial h2{
+
+  color: #8C8383;
+
+}
+
+.TelaInicial .box1{
+  margin-top: 20%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.TelaInicial .box1 h2{
+  font-size: larger;
+  font-weight: 600;
+}
+
+.TelaInicial .box2{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10%;
+}
+
+.TelaInicial .box2 p{
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.TelaInicial .box1 p, .TelaInicial .box2 button{
+
+  font-weight: bolder;
+  text-transform: uppercase;
+
+}
+
+.LogoPrincipal {
+  height: 100%;
+  width: 100%;
+}
+
+.botaoPrincipal {
+  background-color: #FA5B77;
+  height: 7vh;
+  width: 95%;
+  border-radius: 15px;
+  border-color: transparent;
+  font-size: 120%;
+  color:#F8F8F8;
+}
+
+.MainInput{
+  height: 5vh;
+  width: 95%;
+  border-radius: 15px;
+  border: 1px solid #EBEBEB;
+  color: #EBEBEB;
+}
+
+.MainInput::placeholder{
+  padding-left: 5%;
+}
+
+.MainBox{
+  /* background-color: #61dafb; */
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  
+}

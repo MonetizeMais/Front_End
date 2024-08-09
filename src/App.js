@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import TelaInicial from './Screens/TelaInicial';
-import InsereDados from './Screens/InsereDados';
+import AppRoutes from './Screens/Routes';
 
 function App() {
   return (
-    <InsereDados/>
-    // <TelaInicial/>
+    <div>
+      <AppRoutes/>
+    </div>
   );
 }
 

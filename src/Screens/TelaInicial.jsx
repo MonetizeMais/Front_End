@@ -10,12 +10,12 @@ function TelaInicial() {
       <div className='box1'>
         <img className='LogoPrincipal' src={logo} alt="Logo do Porco" />
         <div>
-        <MainTitle text={'monetize+'}/>
+          <MainTitle text={'monetize+'}/>
           <h2>Dinheiro divertido, futuro seguro.</h2>
         </div>
       </div>
       <div className='box2'>
-        <MainButton text={'começar'}/>
+        <MainButton text={'começar'} url={'/InsereDados'}/>
         <p>já tenho uma conta</p>
       </div>
     </div>

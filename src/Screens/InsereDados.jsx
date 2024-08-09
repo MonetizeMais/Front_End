@@ -3,6 +3,7 @@ import '.././App.css';
 import MainButton from '../components/button.jsx'; 
 import MainTitle from '../components/Title.jsx'; 
 import MainInput from '../components/input.jsx'; 
+import PrivacyTerms from '../components/privacyTerms.jsx'; 
 
 function InsereDadosScreen() {
     return (
@@ -12,9 +13,9 @@ function InsereDadosScreen() {
             <MainInput type={'text'} text={'E-mail ou nome de usuário'}/>
             <MainInput type={'password'}text={'Senha'}/>
         </form>
-            <MainButton text={'Entrar'}/>
+            <MainButton text={'Entrar'} url={'/CadastreDados'}/>
             <a href="#">Esqueci a senha</a>
-            <p>Ao entrar no Monetize+, você concorda com nossos <a href="#">Termos</a> e <a href="#">Política de Privacidade</a>.</p>
+            <PrivacyTerms/>
       </div>
     );
   }

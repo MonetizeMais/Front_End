@@ -126,7 +126,6 @@
   width: 95%;
   border-radius: 15px;
   border: 2px solid #EBEBEB;
-  color: #EBEBEB;
 }
 
 .MainInput::placeholder{
@@ -217,15 +216,58 @@
   height: 60%;
 }
 
+
+.MainBox4{
+  height: 40vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding-top: 10%;
+  justify-content: space-around;
+}
+
+.MainBox4 a{
+  color: #FA5B77;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 0.85rem;
+}
+
+.MainBox4 form{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 60%;
+  gap: 1rem;
+}
+
 .EnviarCadastro{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 50%;
-
 }
 
+.EnviarCode{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+}
+
+.InputCode{
+  height: 5vh;
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid #EBEBEB;
+  text-align: center;
+}
 
 .TermsPrivacy p {
   color: #B5B5B5;
@@ -253,5 +295,17 @@
   text-align: center;
   font-weight: 400;
   font-size: 0.90rem;
+}
+
+.EnviarNovaSenha{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+}
+.EnviarNovaSenha form{
+  height: 50%;
 }
 

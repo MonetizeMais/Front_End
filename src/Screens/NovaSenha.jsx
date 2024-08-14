@@ -5,21 +5,21 @@ import MainTitle from '../components/Title.jsx';
 import MainInput from '../components/input.jsx'; 
 import MainDescription from '../components/description.jsx'; 
 
-function RedefinirSenha() {
+function NovaSenha() {
     return (
       <div className='MainBox3'>
         <MainTitle text={'Redefinir senha'}/>
-        <MainDescription text={'Digite o  e-mail utilizado na hora do cadastro.Enviaremos um código de verificação.'}/>
-        <div className='EnviarCadastro'>
+        <div className='EnviarNovaSenha'>
         <form action="">
-            <MainInput type={'text'} text={'E-mail usado no cadastro '}/>
+            <MainInput type={'text'} text={'Nova senha'}/>
+            <MainInput type={'text'} text={'Confirmação da senha'}/>
         </form>
-        <MainButton text={'Enviar código'} url={'ValidaCodigo'}/>
+        <MainButton text={'Redefinir Senha'}/>
 
         </div>
       </div>
     );
   }
   
-  export default RedefinirSenha;
+  export default NovaSenha;
   

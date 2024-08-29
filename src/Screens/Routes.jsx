@@ -7,7 +7,6 @@ import ValidaCodigo from '../Screens/ValidaCodigo';
 import NovaSenha from '../Screens/NovaSenha';
 import Comecar from '../Screens/Comecar';
 import Perguntas from '../Screens/Perguntas';
-import ComoConheceu from '../Screens/ComoConheceu';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -23,7 +22,6 @@ const AppRoutes = () => {
                 <Route path="/NovaSenha" element={<NovaSenha/>}></Route>
                 <Route path="/Comecar" element={<Comecar/>}></Route>
                 <Route path="/Perguntas" element={<Perguntas/>}></Route>
-                <Route path="/ComoConheceu" element={<ComoConheceu/>}></Route>
             </Routes>
         </Router>
     )

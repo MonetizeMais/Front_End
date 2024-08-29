@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '.././Assets/LogoPorco.png'; 
 import '.././App.css'; 
-import MainButton from '../components/button.jsx'; 
+import MainButton from '../../components/Button/button.jsx'; 
 import Typical from 'react-typical'
 
 function Comecar() {

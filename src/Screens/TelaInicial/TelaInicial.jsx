@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from '.././Assets/LogoPorco.png'; 
-import '.././App.css'; 
-import MainButton from '../components/button.jsx'; 
-import MainTitle from '../components/Title.jsx'; 
+import logo from '../../Assets/LogoPorco.png'; 
+import '../TelaInicial/TelaInicial.css'; 
+import MainButton from '../../components/Button/button.jsx'; 
+import MainTitle from '../../components/Title/Title.jsx'; 
 
 function TelaInicial() {
   return (

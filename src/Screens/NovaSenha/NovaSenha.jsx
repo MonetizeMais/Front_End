@@ -1,5 +1,5 @@
 import React from 'react';
-import '.././App.css'; 
+import '../NovaSenha/NovaSenha.css'; 
 import MainButton from '../../components/Button/button.jsx'; 
 import MainTitle from '../../components/Title/Title.jsx'; 
 import MainInput from '../../components/Input/input.jsx'; 

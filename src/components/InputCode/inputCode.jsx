@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../InputCode/InputCode.css';
 
 const MainInput = ({ type }) => {
   const handleInputChange = (event) => {

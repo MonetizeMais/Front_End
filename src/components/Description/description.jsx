@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../Description/Description.css';
 
 const MainDescription = ({ text }) => {
   return (

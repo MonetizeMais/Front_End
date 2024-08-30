@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import '../Button/Button.css';
 
 const MainButton = ({ text, url }) => {
   const handleClick = () => {

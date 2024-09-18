@@ -3,7 +3,6 @@ import '../NovaSenha/NovaSenha.css';
 import MainButton from '../../components/Button/button.jsx'; 
 import MainTitle from '../../components/Title/Title.jsx'; 
 import MainInput from '../../components/Input/input.jsx'; 
-import MainDescription from '../../components/Description/description.jsx'; 
 
 function NovaSenha() {
     return (
@@ -14,7 +13,7 @@ function NovaSenha() {
             <MainInput type={'text'} text={'Nova senha'}/>
             <MainInput type={'text'} text={'Confirmação da senha'}/>
         </form>
-        <MainButton text={'Redefinir Senha'}/>
+        <MainButton text={'Redefinir Senha'} url={'/Comecar'}/>
 
         </div>
       </div>

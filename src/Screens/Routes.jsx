@@ -1,12 +1,12 @@
 import React from "react";
 import TelaInicial from '../Screens/TelaInicial';
-import InsereDados from '../Screens/InsereDados';
-import CadastroDados from '../Screens/CadastroDados';
+import InsereDados from './InsereDados/InsereDados';
+import CadastroDados from './Cadastro/CadastroDados';
 import RedefinirSenha from '../Screens/RedefinirSenha';
 import ValidaCodigo from '../Screens/ValidaCodigo';
-import NovaSenha from '../Screens/NovaSenha';
-import Comecar from '../Screens/Comecar';
-import Perguntas from '../Screens/Perguntas';
+import NovaSenha from './NovaSenha/NovaSenha';
+import Comecar from './Começar/Comecar';
+import Perguntas from './Perguntas/Perguntas';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 

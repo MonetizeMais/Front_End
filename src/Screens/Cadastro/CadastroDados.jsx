@@ -1,9 +1,9 @@
 import React from 'react';
 import '.././App.css'; 
-import MainButton from '../components/button.jsx'; 
-import MainTitle from '../components/Title.jsx'; 
-import MainInput from '../components/input.jsx'; 
-import PrivacyTerms from '../components/privacyTerms.jsx'; 
+import MainButton from '../../components/Button/button.jsx'; 
+import MainTitle from '../../components/Title/Title.jsx'; 
+import MainInput from '../../components/Input/input.jsx'; 
+import PrivacyTerms from '../../components/PrivacyTerms/privacyTerms.jsx'; 
 
 function CadastroDadosScreen() {
     return (

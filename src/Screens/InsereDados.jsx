@@ -17,6 +17,7 @@ function InsereDadosScreen() {
             <p>Ao entrar no Monetize+, você concorda com nossos <a href="#">Termos</a> e <a href="#">Política de Privacidade</a>.</p>
       </div>
     );
+    
   }
   
   export default InsereDadosScreen;

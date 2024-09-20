@@ -5,8 +5,7 @@ import InsereDados from './Screens/InsereDados';
 
 function App() {
   return (
-    <InsereDados/>
-    // <TelaInicial/>
+     <InsereDados/>
   );
 }
 

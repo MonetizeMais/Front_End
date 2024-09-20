@@ -1,0 +1,12 @@
+.MainInput{
+  height: 5vh;
+  width: 95%;
+  border-radius: 15px;
+  border: 2px solid #EBEBEB;
+}
+
+
+.MainInput::placeholder{
+  padding-left: 5%;
+  color: #B5B5B5;
+}

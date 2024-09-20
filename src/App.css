@@ -40,12 +40,12 @@
 .TelaInicial {
   text-align: center;
   display: flex;
-  flex-direction: column; /* Torna os elementos em uma coluna */
-  align-items: center; /* Centraliza os elementos horizontalmente */
-  justify-content: space-between; /* Centraliza os elementos verticalmente */
-  min-height: 100vh; /* Garante que ocupe a altura total da tela */
-  margin: 0; /* Remove margens */
-  padding: 0; /* Remove paddings */
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: space-between; 
+  min-height: 100vh; 
+  margin: 0; 
+  padding: 0;   
 }
 
 .TelaInicial img {
@@ -113,7 +113,7 @@
 
 .botaoPrincipal {
   background-color: #FA5B77;
-  height: 7vh;
+  height: 6vh;
   width: 95%;
   border-radius: 15px;
   border-color: transparent;
@@ -125,19 +125,253 @@
   height: 5vh;
   width: 95%;
   border-radius: 15px;
-  border: 1px solid #EBEBEB;
-  color: #EBEBEB;
+  border: 2px solid #EBEBEB;
 }
 
 .MainInput::placeholder{
   padding-left: 5%;
+  color: #B5B5B5;
 }
 
 .MainBox{
-  /* background-color: #61dafb; */
+  height: 40vh;
   width: 80%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  
+  align-items: center;
+  padding-top: 10%;
+  justify-content: space-between;
+}
+
+.MainBox a{
+  color: #FA5B77;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 0.85rem;
+}
+
+
+.MainBox form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 40%;
+}
+
+.MainBox2{
+  height: 60vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding-top: 10%;
+  justify-content: space-around;
+}
+
+.MainBox2 a{
+  color: #FA5B77;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 0.85rem;
+}
+
+.MainBox2 form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 60%;
+}
+
+.MainBox3{
+  height: 35vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding-top: 10%;
+  justify-content: space-around;
+}
+
+.MainBox3 a{
+  color: #FA5B77;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 0.85rem;
+}
+
+.MainBox3 form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 60%;
+}
+
+
+.MainBox4{
+  height: 40vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding-top: 10%;
+  justify-content: space-around;
+}
+
+.MainBox4 a{
+  color: #FA5B77;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 0.85rem;
+}
+
+.MainBox4 form{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 60%;
+  gap: 1rem;
+}
+
+.EnviarCadastro{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+
+.EnviarCode{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+}
+
+.InputCode{
+  height: 5vh;
+  width: 100%;
+  border-radius: 15px;
+  border: 2px solid #EBEBEB;
+  text-align: center;
+}
+
+.TermsPrivacy p {
+  color: #B5B5B5;
+  text-align: justify;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.TermsPrivacy a {
+  color: #FA5B77;
+  text-decoration: none;
+  text-align: justify;
+  font-weight: 600;
+}
+
+.TermsAccept{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.MainDescription{
+  color: #FA5B77;
+  text-align: center;
+  font-weight: 400;
+  font-size: 0.90rem;
+}
+
+.EnviarNovaSenha{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+}
+.EnviarNovaSenha form{
+  height: 50%;
+}
+
+.Comecar {
+  text-align: center;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  min-height: 100vh; 
+  margin: 0; 
+  padding: 0;
+}
+
+.box2{
+  height: 70vh;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.Comecar img {
+  width: 60%;
+  height: auto;
+}
+
+.Dialog {
+  height: 7vh;
+}
+
+.Dialog2{
+  height: 10vh;
+  padding: 0.5em;
+}
+
+.Dialog, .Dialog2{
+  display: flex;
+  border: 1px solid #EBEBEB;
+  border-radius: 1em;
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: start;
+}
+
+.Dialog p, .Dialog2 {
+  color: #B5B5B5;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 300ms, transform 300ms;
 }

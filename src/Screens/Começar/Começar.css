@@ -1,0 +1,39 @@
+.Comecar {
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    min-height: 100vh; 
+    margin: 0; 
+    padding: 0;
+  }
+
+.Comecar img {
+    width: 60%;
+    height: auto;
+  }
+
+.Dialog {
+  height: 7vh;
+}
+  
+.Dialog2{
+  height: 10vh;
+  padding: 0.5em;
+}
+  
+.Dialog, .Dialog2{
+  display: flex;
+  border: 1px solid #EBEBEB;
+  border-radius: 1em;
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: start;
+}
+  
+.Dialog p, .Dialog2 {
+  color: #B5B5B5;
+}

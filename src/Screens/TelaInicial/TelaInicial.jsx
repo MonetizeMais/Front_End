@@ -1,8 +1,8 @@
 import React from 'react';
-import logo from '.././Assets/LogoPorco.png'; 
-import '.././App.css'; 
-import MainButton from '../components/button.jsx'; 
-import MainTitle from '../components/Title.jsx'; 
+import logo from '../../Assets/LogoPorco.png'; 
+import '../TelaInicial/TelaInicial.css'; 
+import MainButton from '../../components/Button/button.jsx'; 
+import MainTitle from '../../components/Title/Title.jsx'; 
 
 function TelaInicial() {
   return (
@@ -10,12 +10,12 @@ function TelaInicial() {
       <div className='box1'>
         <img className='LogoPrincipal' src={logo} alt="Logo do Porco" />
         <div>
-        <MainTitle text={'monetize+'}/>
+          <MainTitle text={'monetize+'}/>
           <h2>Dinheiro divertido, futuro seguro.</h2>
         </div>
       </div>
       <div className='box2'>
-        <MainButton text={'começar'}/>
+        <MainButton text={'começar'} url={'/InsereDados'}/>
         <p>já tenho uma conta</p>
       </div>
     </div>

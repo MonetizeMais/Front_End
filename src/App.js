@@ -1,11 +1,15 @@
 import React from 'react';
 import './App.css';
-import TelaInicial from './Screens/TelaInicial';
-import InsereDados from './Screens/InsereDados';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './Screens/Routes';
 
 function App() {
   return (
-     <InsereDados/>
+    <div>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </div>
   );
 }
 

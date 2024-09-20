@@ -1,0 +1,13 @@
+.TermsPrivacy p {
+    color: #B5B5B5;
+    text-align: justify;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  
+  .TermsPrivacy a {
+    color: #FA5B77;
+    text-decoration: none;
+    text-align: justify;
+    font-weight: 600;
+  }

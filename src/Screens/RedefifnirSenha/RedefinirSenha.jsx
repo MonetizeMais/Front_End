@@ -1,9 +1,9 @@
 import React from 'react';
-import '.././App.css'; 
-import MainButton from '../components/button.jsx'; 
-import MainTitle from '../components/Title.jsx'; 
-import MainInput from '../components/input.jsx'; 
-import MainDescription from '../components/description.jsx'; 
+import '../../../src/App.css'; 
+import MainButton from '../../components/Button/button.jsx'; 
+import MainTitle from '../../components/Title/Title.jsx'; 
+import MainInput from '../../components/Input/input.jsx'; 
+import MainDescription from '../../components/Description/description.jsx'; 
 
 function RedefinirSenha() {
     return (

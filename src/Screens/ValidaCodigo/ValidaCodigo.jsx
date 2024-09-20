@@ -1,9 +1,9 @@
 import React from 'react';
-import '.././App.css'; 
-import MainButton from '../components/button.jsx'; 
-import MainTitle from '../components/Title.jsx'; 
-import InputCode from '../components/inputCode.jsx'; 
-import MainDescription from '../components/description.jsx'; 
+import '../ValidaCodigo/ValidaCodigo.css'; 
+import MainButton from '../../components/Button/button.jsx'; 
+import MainTitle from '../../components/Title/Title.jsx'; 
+import InputCode from '../../components/InputCode/inputCode.jsx'; 
+import MainDescription from '../../components/Description/description.jsx'; 
 
 function ValidaCodigo() {
     return (

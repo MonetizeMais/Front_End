@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '.././Assets/LogoPorco.png'; 
-import '.././App.css'; 
+import logo from '../../Assets/LogoPorco.png'; 
+import '../Começar/Começar.css'; 
 import MainButton from '../../components/Button/button.jsx'; 
 import Typical from 'react-typical'
 

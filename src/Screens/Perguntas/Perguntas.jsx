@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '.././Assets/LogoPorco.png'; 
-import '.././App.css'; 
+import logo from '../../Assets/LogoPorco.png'; 
+import '../../../src/App.css'; 
 import MainButton from '../../components/Button/button.jsx'; 
 import Typical from 'react-typical'
 
@@ -19,7 +19,7 @@ function Comecar() {
         </div>
 
         <img className='LogoPrincipal' src={logo} alt="Logo do Porco" />
-        <MainButton text={'Continuar'} url={'/InsereDados'}/>
+        <MainButton text={'Continuar'} url={'/Pergunta1'}/>
          </div>
     </div>
   );

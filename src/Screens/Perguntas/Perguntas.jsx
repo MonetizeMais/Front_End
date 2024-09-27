@@ -19,7 +19,7 @@ function Comecar() {
         </div>
 
         <img className='LogoPrincipal' src={logo} alt="Logo do Porco" />
-        <MainButton text={'Continuar'} url={'/InsereDados'}/>
+        <MainButton text={'Continuar'} url={'/Pergunta1'}/>
          </div>
     </div>
   );

@@ -19,7 +19,7 @@ function Pergunta2() {
     setFade(true);
     setProgress(75);
     setTimeout(() => {
-      navigate('/OutraPergunta'); 
+      navigate('/Pergunta3'); 
     }, 600);
   };
 
@@ -69,7 +69,7 @@ function Pergunta2() {
 
       <InactiveButton 
         text="Continuar"
-        url={'/OutraPergunta'} 
+        url={'/Pergunta3'} 
         isActive={!!selectedOption}
         onClick={handleContinue}
       />

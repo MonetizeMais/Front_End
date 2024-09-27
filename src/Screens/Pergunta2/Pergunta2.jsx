@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import logo from '../../Assets/LogoPorco.png';
-import '../Pergunta1/Pergunta1.css';
+import '../Pergunta2/Pergunta2.css';
 import OptionButton from '../../components/OptionButton/OptionButton.jsx';
 import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';
 import { useNavigate } from 'react-router-dom';
 
-function Pergunta1() {
+function Pergunta2() {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [progress, setProgress] = useState(25);
+  const [progress, setProgress] = useState(50);
   const [fade, setFade] = useState(false);
   const navigate = useNavigate();
 
@@ -17,9 +17,9 @@ function Pergunta1() {
 
   const handleContinue = () => {
     setFade(true);
-    setProgress(50);
+    setProgress(75);
     setTimeout(() => {
-      navigate('/Pergunta2');
+      navigate('/OutraPergunta'); 
     }, 600);
   };
 
@@ -35,46 +35,41 @@ function Pergunta1() {
         <div className="question-section">
           <img className="LogoPrincipal" src={logo} alt="Logo do Porco" />
           <div className="question-box">
-            <span>Como você conheceu<br />o Monetize+?</span>
+            <span>O que você sabe de <br />educação financeira?</span>
           </div>
         </div>
         <div className="options">
           <OptionButton
-            text="Tiktok"
-            onClick={() => handleOptionClick('Tiktok')}
-            isSelected={selectedOption === 'Tiktok'}
+            text="Não sei nada sobre educação financeira"
+            onClick={() => handleOptionClick('Não sei nada sobre educação financeira')}
+            isSelected={selectedOption === 'Não sei nada sobre educação financeira'}
           />
           <OptionButton
-            text="Escola"
-            onClick={() => handleOptionClick('Escola')}
-            isSelected={selectedOption === 'Escola'}
+            text="Conheço algumas termos sobre"
+            onClick={() => handleOptionClick('Conheço algumas termos sobre')}
+            isSelected={selectedOption === 'Conheço algumas termos sobre'}
           />
           <OptionButton
-            text="Play Store ou App Store"
-            onClick={() => handleOptionClick('Play Store ou App Store')}
-            isSelected={selectedOption === 'Play Store ou App Store'}
+            text="Consigo ter uma conversa simples sobre"
+            onClick={() => handleOptionClick('Consigo ter uma conversa simples sobre')}
+            isSelected={selectedOption === 'Consigo ter uma conversa simples sobre'}
           />
           <OptionButton
-            text="Notícia"
-            onClick={() => handleOptionClick('Notícia')}
-            isSelected={selectedOption === 'Notícia'}
+            text="Consigo falar sobre temas variados"
+            onClick={() => handleOptionClick('Consigo falar sobre temas variados')}
+            isSelected={selectedOption === 'Consigo falar sobre temas variados'}
           />
           <OptionButton
-            text="Busca do Google"
-            onClick={() => handleOptionClick('Busca do Google')}
-            isSelected={selectedOption === 'Busca do Google'}
-          />
-          <OptionButton
-            text="Outros"
-            onClick={() => handleOptionClick('Outros')}
-            isSelected={selectedOption === 'Outros'}
+            text="Consigo falar sobre a maioria dos temas em detalhes"
+            onClick={() => handleOptionClick('Consigo falar sobre a maioria dos temas em detalhes')}
+            isSelected={selectedOption === 'Consigo falar sobre a maioria dos temas em detalhes'}
           />
         </div>
       </div>
 
       <InactiveButton 
         text="Continuar"
-        url={'/Pergunta2'}
+        url={'/OutraPergunta'} 
         isActive={!!selectedOption}
         onClick={handleContinue}
       />
@@ -82,4 +77,4 @@ function Pergunta1() {
   );
 }
 
-export default Pergunta1;
+export default Pergunta2;

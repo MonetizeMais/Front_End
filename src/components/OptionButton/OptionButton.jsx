@@ -1,9 +1,12 @@
 import React from 'react';
-import './OptionButton.css';
+import '../OptionButton/OptionButton.css';
 
-const OptionButton = ({ text, onClick }) => {
+const OptionButton = ({ text, onClick, isSelected }) => {
   return (
-    <button className="option-button" onClick={onClick}>
+    <button
+      className={`option-button ${isSelected ? 'selected' : ''}`}
+      onClick={onClick}
+    >
       {text}
     </button>
   );

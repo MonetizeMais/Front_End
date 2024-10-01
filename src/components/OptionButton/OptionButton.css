@@ -1,17 +1,18 @@
 .option-button {
-    background-color: #fff;
-    border: none;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
-    font-size: 16px;
-    color: #4f4f4f;
-    text-align: left;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s ease;
-  }
-  
-  .option-button:hover {
-    background-color: #f0f0f0;
-  }  
+  background-color: #fff;
+  border: none;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #4f4f4f;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.option-button.selected {
+  border: 2px solid #fa5b77;
+  color: #fa5b77;
+  font-weight: bold;
+}

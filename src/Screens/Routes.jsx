@@ -9,6 +9,7 @@ import Comecar from './Começar/Comecar';
 import Perguntas from './Perguntas/Perguntas';
 import Pergunta1 from './Pergunta1/Pergunta1';
 import HomePage from './HomePage/HomePage';
+import Pergunta2 from './Pergunta2/Pergunta2';
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -31,6 +32,7 @@ const AppRoutes = () => {
                     <Route path="/Perguntas" element={<Perguntas />} />
                     <Route path="/Pergunta1" element={<Pergunta1 />} />
                     <Route path="/HomePage" element={<HomePage/>} />
+                    <Route path="/Pergunta2" element={<Pergunta2 />} />
                 </Routes>
         //     </CSSTransition>
         // </TransitionGroup>

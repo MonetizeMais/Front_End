@@ -1,0 +1,24 @@
+.inactive-button {
+    height: 6vh;
+    width: 95%; 
+    margin-top: 30px;
+    border-radius: 15px;
+    border-color: transparent;
+    font-size: 120%;
+    color: #f8f8f8;
+  }
+  
+  .inactive-button.inactive {
+    background-color: #8c8383; 
+    color: #fff;
+  }
+  
+  .inactive-button.active {
+    background-color: #fa5b77; 
+    color: #fff;
+  }
+  
+  .inactive-button:disabled {
+    cursor: not-allowed;
+  }
+  

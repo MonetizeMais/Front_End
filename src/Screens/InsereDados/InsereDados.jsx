@@ -18,6 +18,7 @@ function InsereDadosScreen() {
             <PrivacyTerms/>
       </div>
     );
+    
   }
   
   export default InsereDadosScreen;

@@ -69,7 +69,7 @@ function Pergunta4() {
 
       <InactiveButton 
         text="Continuar"
-        url={'/Pergunta4'} 
+        url={'/Finalizar'} 
         isActive={!!selectedOption}
         onClick={handleContinue}
       />

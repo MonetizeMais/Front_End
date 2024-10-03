@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../Assets/LogoPorco.png';
+import logo from '../../Assets/Mascote 2.png';
 import '../Pergunta2/Pergunta2.css';
 import OptionButton from '../../components/OptionButton/OptionButton.jsx';
 import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';

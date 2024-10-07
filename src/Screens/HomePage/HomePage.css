@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 300px; /* Ajuste o tamanho conforme necessário */
+  height: 300px; 
 }
 
 .course-step {

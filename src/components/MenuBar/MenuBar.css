@@ -33,30 +33,19 @@
 .nav-links a {
     text-decoration: none;
     color: black;
-    font-size: 1.5rem; 
-    transition: color 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.nav-links a:hover {
-    color: #007bff; 
+.nav-links a.active {
+    transform: translateY(-10px); 
 }
 
-.icon-home:before {
-    content: '🏠'; 
+.nav-icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease; 
 }
 
-.icon-search:before {
-    content: '🔍';
-}
-
-.icon-add:before {
-    content: '➕';
-}
-
-.icon-favorites:before {
-    content: '❤️';
-}
-
-.icon-account:before {
-    content: '👤';
+.nav-links a.active .nav-icon {
+    transform: scale(1.2); 
 }

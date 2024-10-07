@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './PrivacyTerms.css'; // Certifique-se de que o CSS está correto
+import './PrivacyTerms.css'; 
 
 const PrivacyTerms = () => {
-  const [showModal, setShowModal] = useState(false); // Controla se o modal está visível
+  const [showModal, setShowModal] = useState(false); 
 
   const handleOpenModal = () => {
     setShowModal(true);

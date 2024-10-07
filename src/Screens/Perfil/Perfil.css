@@ -1,93 +1,100 @@
 .perfil-container {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: #F5F5F5;
-  }
-  
-  .perfil-header {
+    overflow: hidden;
+}
+
+.perfil-header {
     display: flex;
-    align-items: center;
     width: 100%;
-    padding-bottom: 2rem;
     background-color: #FFD1D1;
-  }
-  
-  .perfil-avatar {
+    height: 10vh;
+}
+
+.perfil-code{
+    position: fixed;
+  top: 2.5rem;    
+  left: 2.5rem;  
+  z-index: 1000; 
+}
+
+.perfil-avatar {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-  }
-  
-  .perfil-info {
+}
+
+.perfil-info {
     display: flex;
     flex-direction: column;
-  }
-  
-  .perfil-usuario {
+}
+
+.perfil-usuario {
     font-size: 18px;
     font-weight: bold;
-  }
-  
-  .perfil-handle {
+}
+
+.perfil-handle {
     font-size: 14px;
     color: #888;
-  }
-  
-  .perfil-settings {
+}
+
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    height: 80%;
+}
+
+.perfil-settings {
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
-  }
-  
-  .perfil-seguidores {
+    color: #888;
+}
+
+.perfil-seguidores {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 20px 0;
-    background-color: white;
-  }
-  
-  .seguidores-info, .seguindo-info {
+    justify-content: space-between;
+    width: 80%;
+}
+
+.seguidores-info, .seguindo-info {
     text-align: center;
-    margin: 0 20px;
-  }
-  
-  .btn-adicionar-amigos {
+    flex: 1;
+}
+
+.btn-adicionar-amigos {
     background-color: #FF7F7F;
     color: white;
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
     cursor: pointer;
-    margin: 20px 0;
-  }
-  
-  .perfil-completar {
+    width: 80%;
+}
+
+.perfil-completar {
     background-color: #FF7F7F;
     padding: 20px;
     border-radius: 20px;
     text-align: center;
     color: white;
-  }
-  
-  .btn-comecar {
+    width: 80%;
+}
+
+.btn-comecar {
     background-color: white;
     color: #FF7F7F;
-    padding: 10px 20px;
     border-radius: 25px;
     border: none;
     cursor: pointer;
     margin-top: 10px;
-  }
-  
-
-  .icon-home, .icon-friends, .icon-profile {
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
+    width: 100%;
+}

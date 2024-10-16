@@ -35,34 +35,34 @@ function Pergunta4() {
         <div className="question-section">
           <img className="LogoPrincipal" src={logo} alt="Logo do Porco" />
           <div className="question-box">
-            <span>Você quer aprender educação financeira <br />para...</span>
+            <span>Como você prefere aprender novos assuntos?<br /></span>
           </div>
         </div>
         <div className="options">
           <OptionButton
-            text="Não sei nada sobre educação financeira"
-            onClick={() => handleOptionClick('Não sei nada sobre educação financeira')}
-            isSelected={selectedOption === 'Não sei nada sobre educação financeira'}
+            text="Vídeos"
+            onClick={() => handleOptionClick('Vídeos')}
+            isSelected={selectedOption === 'Vídeos'}
           />
           <OptionButton
-            text="Conheço algumas termos sobre"
-            onClick={() => handleOptionClick('Conheço algumas termos sobre')}
-            isSelected={selectedOption === 'Conheço algumas termos sobre'}
+            text="Jogos"
+            onClick={() => handleOptionClick('Jogos')}
+            isSelected={selectedOption === 'Jogos'}
           />
           <OptionButton
-            text="Consigo ter uma conversa simples sobre"
-            onClick={() => handleOptionClick('Consigo ter uma conversa simples sobre')}
-            isSelected={selectedOption === 'Consigo ter uma conversa simples sobre'}
+            text="Leitura"
+            onClick={() => handleOptionClick('Leitura')}
+            isSelected={selectedOption === 'Leitura'}
           />
           <OptionButton
-            text="Consigo falar sobre temas variados"
-            onClick={() => handleOptionClick('Consigo falar sobre temas variados')}
-            isSelected={selectedOption === 'Consigo falar sobre temas variados'}
+            text="Exercícios práticos"
+            onClick={() => handleOptionClick('Exercícios práticos')}
+            isSelected={selectedOption === 'Exercícios práticos'}
           />
           <OptionButton
-            text="Consigo falar sobre a maioria dos temas em detalhes"
-            onClick={() => handleOptionClick('Consigo falar sobre a maioria dos temas em detalhes')}
-            isSelected={selectedOption === 'Consigo falar sobre a maioria dos temas em detalhes'}
+            text="Outros"
+            onClick={() => handleOptionClick('Outros')}
+            isSelected={selectedOption === 'Outros'}
           />
         </div>
       </div>

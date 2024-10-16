@@ -12,7 +12,7 @@ import HomePage from './HomePage/HomePage';
 import Pergunta2 from './Pergunta2/Pergunta2';
 import Pergunta3 from './Pergunta3/Pergunta3';
 import Pergunta4 from './Pergunta4/Pergunta4';
-import Personalizacao from './Personalizacao/Personalizacao';
+import Perfil from './Perfil/Perfil';
 import Finalizar from './Finalizar/Finalizar';
 import TelaPersonalizacao from './TelaPersonalizacao/telaPersonalizacao'
 
@@ -40,7 +40,7 @@ const AppRoutes = () => {
                     <Route path="/Pergunta2" element={<Pergunta2 />} />
                     <Route path="/Pergunta3" element={<Pergunta3 />} />
                     <Route path="/Pergunta4" element={<Pergunta4 />} />
-                    <Route path="/Personalizacao" element={<Personalizacao />} />
+                    <Route path="/Perfil" element={<Perfil />} />
                     <Route path="/Finalizar" element={<Finalizar />} />
                     <Route path="/TelaPersonalizacao" element={<TelaPersonalizacao />} />
                 </Routes>

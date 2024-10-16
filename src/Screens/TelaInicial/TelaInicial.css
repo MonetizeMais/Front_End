@@ -4,7 +4,7 @@
     flex-direction: column; 
     align-items: center; 
     justify-content: space-between; 
-    min-height: 100vh; 
+    height: 100vh;
     margin: 0; 
     padding: 0;   
   }
@@ -12,11 +12,6 @@
   .TelaInicial img {
     width: 60%;
     height: auto;
-  }
-  
-  .TelaInicial button {
-    padding: 10px 20px;
-    margin-top: 20px;
   }
   
   .TelaInicial h2{
@@ -31,7 +26,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
   }
   
   .TelaInicial .box1 h2{
@@ -61,7 +55,6 @@
   }
 
   .box2{
-    height: 70vh;
     width: 90%;
     display: flex;
     flex-direction: column;

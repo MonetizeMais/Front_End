@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../Assets/LogoPorco.png';
+import logo from '../../Assets/Mascote 2.png';
 import '../Pergunta3/Pergunta3.css';
 import OptionButton from '../../components/OptionButton/OptionButton.jsx';
 import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';
@@ -35,7 +35,7 @@ function Pergunta3() {
         <div className="question-section">
           <img className="LogoPrincipal" src={logo} alt="Logo do Porco" />
           <div className="question-box">
-            <span>Você quer aprender educação <br />financeira para...</span>
+            <span>Você quer aprender <br></br>educação financeira <br></br> para...</span>
           </div>
         </div>
         <div className="options">

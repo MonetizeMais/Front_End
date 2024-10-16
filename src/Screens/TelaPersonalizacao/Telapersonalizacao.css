@@ -1,0 +1,62 @@
+.personalizacao-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-color: #F5F5F5;
+  }
+  
+  .poupinho-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  .poupinho-avatar {
+    width: 250px; 
+    height: auto;
+  }
+  
+  .btn-estilizar {
+    background-color: #f9dbdb;
+    color: #FF7F7F;
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: solid 3px #fd8c8c;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  .itens-personalizacao {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .item-personalizacao {
+    background-color: #F5F5F5;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    border-radius: 25%;
+    border: 2px solid #FF7F7F;
+    box-shadow:  3px 3px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .item-personalizacao img {
+    width: 50px; 
+    height: auto;
+  }
+  
+  /* MenuBar estilos */
+  .icon-home, .icon-friends, .icon-profile {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  

@@ -35,7 +35,7 @@ function Pergunta4() {
         <div className="question-section">
           <img className="LogoPrincipal" src={logo} alt="Logo do Porco" />
           <div className="question-box">
-            <span>Quanto você entende de<br />educação financeira?</span>
+            <span>Você quer aprender educação financeira <br />para...</span>
           </div>
         </div>
         <div className="options">

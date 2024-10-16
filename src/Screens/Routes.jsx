@@ -14,6 +14,8 @@ import Pergunta3 from './Pergunta3/Pergunta3';
 import Pergunta4 from './Pergunta4/Pergunta4';
 import Perfil from './Perfil/Perfil';
 import Finalizar from './Finalizar/Finalizar';
+import TelaPersonalizacao from './TelaPersonalizacao/telaPersonalizacao'
+import Ranking from './Ranking/Ranking';
 import Quizz from "./Quizz/Quizz";
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
@@ -42,6 +44,8 @@ const AppRoutes = () => {
                     <Route path="/Pergunta4" element={<Pergunta4 />} />
                     <Route path="/Perfil" element={<Perfil />} />
                     <Route path="/Finalizar" element={<Finalizar />} />
+                    <Route path="/TelaPersonalizacao" element={<TelaPersonalizacao />} />
+                    <Route path="/Ranking" element={<Ranking />} />
                     <Route path="/Quizz" element={<Quizz />} />
                 </Routes>
         //     </CSSTransition>

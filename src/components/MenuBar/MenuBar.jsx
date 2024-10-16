@@ -13,17 +13,17 @@
               </Link>
             </li>
             <li>
-              <Link to="/" className={activePage === 'medalha' ? 'active' : ''}>
+              <Link to="/Ranking" className={activePage === 'medalha' ? 'active' : ''}>
               <i className="icon">🏅</i>
               </Link>
             </li>
             <li>
-              <Link to="/Personalizacao" className={activePage === 'pig' ? 'active' : ''}>
+              <Link to="/" className={activePage === 'pig' ? 'active' : ''}>
               <i className="icon">🖌️</i>
               </Link>
             </li>
             <li>
-              <Link to="/" className={activePage === 'perfil' ? 'active' : ''}>
+              <Link to="/Perfil" className={activePage === 'perfil' ? 'active' : ''}>
               <i className="icon">👤</i>
               </Link>
             </li>

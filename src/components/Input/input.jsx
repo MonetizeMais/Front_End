@@ -1,9 +1,16 @@
 import React from 'react';
 import '../Input/Input.css';
 
-const MainInput = ({ type ,text }) => {
+const MainInput = ({ name, type, text, value, onChange }) => {
   return (
-    <input className='MainInput' type={type} placeholder={text} />
+    <input 
+      className='MainInput' 
+      type={type} 
+      name={name}  
+      placeholder={text} 
+      value={value}  
+      onChange={onChange}  
+    />
   );
 };
 

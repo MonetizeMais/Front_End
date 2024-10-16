@@ -15,9 +15,7 @@
   }
   
   .TelaInicial h2{
-  
     color: #8C8383;
-  
   }
   
   .TelaInicial .box1{
@@ -61,3 +59,12 @@
     align-items: center;
     justify-content: space-around;
   }
+
+  .TelaInicial .box2 a {
+    text-decoration: none; 
+    color: #FA5B77; 
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+

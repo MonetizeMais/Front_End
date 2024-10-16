@@ -9,7 +9,7 @@ function RedefinirSenha() {
     return (
       <div className='MainBox3'>
         <MainTitle text={'Redefinir senha'}/>
-        <MainDescription text={'Digite o  e-mail utilizado na hora do cadastro.Enviaremos um código de verificação.'}/>
+        <MainDescription text={'Digite o  e-mail utilizado na hora do cadastro. Enviaremos um código de verificação.'}/>
         <div className='EnviarCadastro'>
         <form action="">
             <MainInput type={'text'} text={'E-mail usado no cadastro '}/>

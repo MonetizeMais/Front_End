@@ -1,33 +1,33 @@
-.MainBox2{
-    height: 60vh;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    align-items: center;
-    padding-top: 10%;
-    justify-content: space-around;
-  }
+.MainBox2 {
+  height: 70vh; 
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding-top: 5%; 
+  justify-content: space-around;
+}
   
-  .MainBox2 a{
-    color: #FA5B77;
-    text-decoration: none;
-    font-weight: bolder;
-    font-size: 0.85rem;
-  }
+.MainBox2 a {
+  color: #FA5B77;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 0.85rem;
+} 
   
-  .MainBox2 form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 60%;
-  }
+.MainBox2 form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 60%; 
+}
 
-  .TermsAccept{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-  }
+.TermsAccept {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}

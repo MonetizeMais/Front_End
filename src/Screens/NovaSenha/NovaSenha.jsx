@@ -13,7 +13,7 @@ function NovaSenha() {
             <MainInput type={'text'} text={'Nova senha'}/>
             <MainInput type={'text'} text={'Confirmação da senha'}/>
         </form>
-        <MainButton text={'Redefinir Senha'} url={'/Comecar'}/>
+        <MainButton text={'Redefinir Senha'} url={'/InsereDados'}/>
 
         </div>
       </div>

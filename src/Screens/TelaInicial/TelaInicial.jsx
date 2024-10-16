@@ -15,8 +15,8 @@ function TelaInicial() {
         </div>
       </div>
       <div className='box2'>
-        <MainButton text={'começar'} url={'/InsereDados'}/>
-        <p>já tenho uma conta</p>
+        <MainButton text={'começar'} url={'/CadastreDados'}/>
+        <a href='/InsereDados'>já tenho uma conta</a>
       </div>
     </div>
   );

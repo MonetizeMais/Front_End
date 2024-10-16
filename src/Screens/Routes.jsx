@@ -15,6 +15,7 @@ import Pergunta4 from './Pergunta4/Pergunta4';
 import Perfil from './Perfil/Perfil';
 import Finalizar from './Finalizar/Finalizar';
 import TelaPersonalizacao from './TelaPersonalizacao/telaPersonalizacao'
+import Ranking from './Ranking/Ranking';
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -43,6 +44,7 @@ const AppRoutes = () => {
                     <Route path="/Perfil" element={<Perfil />} />
                     <Route path="/Finalizar" element={<Finalizar />} />
                     <Route path="/TelaPersonalizacao" element={<TelaPersonalizacao />} />
+                    <Route path="/Ranking" element={<Ranking />} />
                 </Routes>
         //     </CSSTransition>
         // </TransitionGroup>

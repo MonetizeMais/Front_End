@@ -1,7 +1,7 @@
 import React from 'react';
 import '../TelaPersonalizacao/Telapersonalizacao.css';
 import MenuBar from '../../components/MenuBar/MenuBar';
-import logoPoupinho from '../../Assets/Mascote 2.png'; // A imagem do porquinho
+import logoPoupinho from '../../Assets/Mascote 2.png'; 
 import IconeChapeu from '../../Assets/Chapeu.png'; 
 
 

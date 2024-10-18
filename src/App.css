@@ -373,7 +373,7 @@
 
 .error-popup {
   position: fixed;
-  top: 20px;
+  bottom: 60px;
   background-color: rgba(255, 0, 0, 0.8);
   color: white;
   padding: 10px 20px;
@@ -381,6 +381,8 @@
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: fadeout 4s forwards;
+  right: 30px;
+  left: 30px;
 }
 
 @keyframes fadeout {

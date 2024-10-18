@@ -14,6 +14,7 @@ function CadastroDadosScreen() {
         email: '',
         apelido: '',
         senha: '',
+        confirmaSenha: '', // Incluindo campo de confirmação de senha
     });
     const [message, setMessage] = useState('');
 
@@ -38,6 +39,11 @@ function CadastroDadosScreen() {
             return;
         }
 
+        if (formData.senha !== formData.confirmaSenha) {
+            setMessage('As senhas não conferem.');
+            return;
+        }
+
         try {
             const url = 'https://back-end-retz.onrender.com/newUser'; 
 
@@ -48,12 +54,14 @@ function CadastroDadosScreen() {
                 apelido: formData.apelido,
                 senha: formData.senha,
                 ofensiva: 0,
-                vida: 0,
+                vida: 10,
                 coin: 0,
+                pontos: 0,
                 fotoPerfil: "string",
             });
 
             if (response.status === 200) {
+                localStorage.setItem('userId', response.data.ncdUsuario); 
                 window.location.href = '/Comecar'; 
             }
             setMessage('Usuário cadastrado com sucesso!');

@@ -18,7 +18,7 @@
               </Link>
             </li>
             <li>
-              <Link to="/" className={activePage === 'pig' ? 'active' : ''}>
+              <Link to="/TelaPersonalizacao" className={activePage === 'pig' ? 'active' : ''}>
               <i className="icon">🖌️</i>
               </Link>
             </li>

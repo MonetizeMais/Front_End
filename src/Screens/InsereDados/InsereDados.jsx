@@ -29,26 +29,32 @@ function InsereDadosScreen() {
         setMessage('');
         setShowError(false);
 
+        if (!formData.usernameOrEmail || !formData.senha) {
+            setMessage('Por favor, preencha todos os campos.');
+            setShowError(true);
+            setTimeout(() => {
+                setShowError(false);
+            }, 3000);
+            return;
+        }
+
         try {
-            const response = await axios.get('https://back-end-retz.onrender.com/getAllUsers');
-            const users = response.data;
+            const response = await axios.post('https://back-end-retz.onrender.com/userLogin', {
+                email: formData.usernameOrEmail,
+                senha: formData.senha,
+            });
 
-            const userFound = users.find(user => 
-                (user.email === formData.usernameOrEmail || user.apelido === formData.usernameOrEmail) 
-                && user.senha === formData.senha
-            );
-
-            if (userFound) {
+            if (response.status === 200) {
                 navigate('/HomePage');
-            } else {
-                setMessage('E-mail, nome de usuário ou senha incorretos.');
-                setShowError(true);
-                setTimeout(() => {
-                    setShowError(false);
-                }, 3000);
             }
         } catch (error) {
-            setMessage('Ocorreu um erro ao tentar fazer login. Tente novamente mais tarde.');
+            if (error.response && error.response.status === 401) {
+                setMessage('Senha incorreta.');
+            } else if (error.response && error.response.status === 404) {
+                setMessage('Usuário não encontrado.');
+            } else {
+                setMessage('Ocorreu um erro ao tentar fazer login. Tente novamente mais tarde.');
+            }
             setShowError(true);
             setTimeout(() => {
                 setShowError(false);
@@ -74,7 +80,6 @@ function InsereDadosScreen() {
                     onChange={handleChange} 
                     value={formData.senha}
                 />
-                
             </form>
             <button 
               type="button" 

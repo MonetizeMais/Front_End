@@ -14,7 +14,7 @@ function CadastroDadosScreen() {
         email: '',
         apelido: '',
         senha: '',
-        confirmaSenha: '', // Incluindo campo de confirmação de senha
+        confirmaSenha: '', 
     });
     const [message, setMessage] = useState('');
 

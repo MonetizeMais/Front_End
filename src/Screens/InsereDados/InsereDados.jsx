@@ -88,7 +88,7 @@ function InsereDadosScreen() {
               Entrar
             </button>
 
-            <a href="/RedefinirSenha">Esqueci a senha</a>
+            <a href="/NovaSenha">Esqueci a senha</a>
             <PrivacyTerms/>
 
             {showError && (

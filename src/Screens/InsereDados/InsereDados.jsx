@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
 import '../../../src/App.css'; 
-import MainButton from '../../components/Button/button.jsx'; 
 import MainTitle from '../../components/Title/Title.jsx'; 
 import MainInput from '../../components/Input/input.jsx'; 
 import PrivacyTerms from '../../components/PrivacyTerms/privacyTerms.jsx'; 

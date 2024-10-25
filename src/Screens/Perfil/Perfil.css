@@ -1,151 +1,74 @@
 .perfil-container {
-    width: 100%;
-    height: 85vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: #F5F5F5;
-}
-
-.perfil-header {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    height: 80vh;
+  }
+  
+  .perfil-title {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .perfil-code {
     display: flex;
-    justify-content: end;
-    width: 100%;
-    background-color: #FFD1D1;
-    height: 15vh;
-}
-
-.perfil-code{
-    position: fixed;
-  top: 4rem;    
-  left: 2.5rem;  
-  z-index: 1000; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.perfil-code img{
-    height: 100%;
-    width: 6.5rem;
-}
-
-.perfil-avatar {
-    width: 80px;
-    height: 80px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .perfil-avatar {
+    width: 9rem;
+    height: 9rem;
     border-radius: 50%;
-}
-
-.perfil-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.perfil-usuario {
-    background-color: #F7A7B6;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    border: 1px solid none;
-    border-radius: 2rem;
-    color: white;
-    font-weight: 400;
-}
-
-.perfil-handle {
-    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+  
+  .perfil-info {
     text-align: center;
-    color: #888;
-}
-
-.conteudo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;    
-    height: 80%;
-    width: 100%;
-    gap: 2.5rem;
-    margin-top: 5rem;
-}
-
-.perfil-settings {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #888;
-}
-
-.perfil-seguidores {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    gap: 4rem;
-}
-
-.status-info {
-    border-left: 1px solid black;
-    padding-left: 1rem;
-}
-
-.btn-adicionar-amigos {
-    background-color: #F5F5F7;
-    padding: 10px 20px;
-    border: 0.01rem solid #C7C7C9;
-    border-radius: 1rem;
-    height: 3rem;
-    width: 90%;
-    color: #FA5B77;
-    font-weight: bolder;
+  }
+  
+  .perfil-usuario {
     font-size: 1rem;
-}
-
-.perfil-completar {
-    background-color: #FA5B77;
-    padding: 1rem;
-    border-radius: 20px;
-    color: white;
+    font-weight: bold;
+  }
+  
+  .perfil-handle, .perfil-email {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .perfil-options {
     width: 80%;
-    height: 25%;
+    margin-top: 2rem;
+    height: 50%;
+
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-}
-
-.perfil-image{
-    width: 4rem;
-    height: 4rem;
-}
-
-.engrenagem{
-    height: 2rem;
-    width: 2rem;
-}
-
-.conteudo-popup{
-    width: 70%;
-}
-
-.box1{
-    display: flex;
     align-items: center;
     justify-content: center;
-    width: 20%;
-}
-
-.box2{
+    gap: 1rem;
+  }
+  
+  .perfil-option {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-}
-
-.btn-comecar {
-    background-color: white;
-    color: #FF7F7F;
-    border-radius: 3rem;
-    border: none;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
     width: 100%;
-    height: 3rem;
-    font-size: medium;
-    font-weight: 600;
-}
+    cursor: pointer;
+  }
+  
+  .perfil-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .perfil-seta {
+    width: 15px;
+    height: 15px;
+  }
+  

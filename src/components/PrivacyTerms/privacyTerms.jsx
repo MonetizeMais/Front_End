@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import './PrivacyTerms.css'; 
 
-const PrivacyTerms = () => {
-  const [showModal, setShowModal] = useState(false); 
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
+const PrivacyTerms = ({ onClose }) => {
+  const [showModal, setShowModal] = useState(true); 
 
   const handleCloseModal = () => {
     setShowModal(false);
+    onClose(); 
   };
 
   return (
     <div className='TermsPrivacy'>
       <p>
-        Ao entrar no Monetize+, você concorda com nossos <a href="#" onClick={handleOpenModal}>Termos</a> e <a href="#" onClick={handleOpenModal}>Política de Privacidade</a>.
+        Ao entrar no Monetize+, você concorda com nossos <a href="#" onClick={handleCloseModal}>Termos</a> e <a href="#" onClick={handleCloseModal}>Política de Privacidade</a>.
       </p>
 
       {showModal && (
@@ -23,7 +20,7 @@ const PrivacyTerms = () => {
           <div className="modal-content">
             <span className="close-button" onClick={handleCloseModal}>&times;</span>
             <h2>Termos e Política de Privacidade</h2>
-            <br></br>
+            <br />
             <div className="modal-body">
               <p><strong>1. Aceitação dos termos</strong><br/>
                 Ao utilizar o aplicativo Monetize+, você concorda com estes Termos e Condições. Se não concordar, não utilize o aplicativo.

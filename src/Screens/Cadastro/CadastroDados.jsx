@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import '../Cadastro/Cadastro.css'; 
 import MainButton from '../../components/Button/button.jsx'; 
@@ -17,6 +17,7 @@ function CadastroDadosScreen() {
         confirmaSenha: '', 
     });
     const [message, setMessage] = useState('');
+    const [showTerms, setShowTerms] = useState(false); 
 
     const handleCheckboxChange = (event) => {
         setTermsAccepted(event.target.checked);
@@ -48,7 +49,6 @@ function CadastroDadosScreen() {
             const url = 'https://back-end-retz.onrender.com/newUser'; 
 
             const response = await axios.post(url, {
-                id: formData.id,
                 nome: formData.nome,
                 email: formData.email,
                 apelido: formData.apelido,
@@ -70,6 +70,21 @@ function CadastroDadosScreen() {
             setMessage('Erro ao cadastrar usuário: ' + error.message);
         }
     };
+
+    const handleShowTerms = () => {
+        setShowTerms(true);
+    };
+
+    const handleCloseTerms = () => {
+        setShowTerms(false);
+    };
+
+    // Limpa o checkbox ao desmontar o componente
+    useEffect(() => {
+        return () => {
+            setTermsAccepted(false); // Limpa o estado do checkbox
+        };
+    }, []);
 
     return (
         <div className='MainBox2'>
@@ -125,10 +140,12 @@ function CadastroDadosScreen() {
                     checked={termsAccepted} 
                     onChange={handleCheckboxChange} 
                 />
-                <PrivacyTerms />
+                <span onClick={handleShowTerms} >Aceito os <a>Termos e Política de Privacidade</a></span>
             </div>
 
             {message && <p>{message}</p>} 
+
+            {showTerms && <PrivacyTerms onClose={handleCloseTerms} />} 
         </div>
     );
 }

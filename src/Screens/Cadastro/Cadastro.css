@@ -31,3 +31,10 @@
   align-items: center;
   gap: 1rem;
 }
+
+.TermsPrivacy a {
+  color: #FA5B77;
+  text-decoration: none;
+  text-align: justify;
+  font-weight: 700;
+}

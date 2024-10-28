@@ -16,6 +16,7 @@ import TelaPersonalizacao from './TelaPersonalizacao/telaPersonalizacao'
 import Ranking from './Ranking/Ranking';
 import Quizz from "./Quizz/Quizz";
 import Conteudo from "./Conteudo/Conteudo";
+// import Configuracoes from "./Configuracoes/Configuracoes";
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -45,6 +46,7 @@ const AppRoutes = () => {
                     <Route path="/Ranking" element={<Ranking />} />
                     <Route path="/Quizz" element={<Quizz />} />
                     <Route path="/Conteudo" element={<Conteudo />} />
+                    {/* <Route path="/Configuracoes" element={<Configuracoes />} /> */}
                 </Routes>
         //     </CSSTransition>
         // </TransitionGroup>

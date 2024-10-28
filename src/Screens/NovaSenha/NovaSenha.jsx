@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../NovaSenha/NovaSenha.css'; 
-import MainTitle from '../../components/Title/Title.jsx'; 
 import MainInput from '../../components/Input/input.jsx'; 
+import Cadeado from '../../Assets/cadeado 1.png'
 
 function NovaSenha() {
   const [email, setEmail] = useState(''); 
@@ -52,8 +52,14 @@ function NovaSenha() {
   }, [errorMessage]);
 
   return (
-    <div className='MainBox3'>
-      <MainTitle text={'Redefinir senha'} />
+    <div className='NovaSenhaScreen'>
+
+      <div className='title'>
+        <img src={Cadeado} className='cadeado'/>
+        <h1>Change Password</h1>
+        <p>Para manter sua conta segura, troque sua senha regularmente. Insira a senha atual e uma nova senha com pelo menos 8 caracteres, incluindo letras, números e símbolos. Confirme a nova senha e clique em 'Confirmar' para concluir.</p>
+      </div>
+
       <div className='EnviarNovaSenha'>
         <form onSubmit={handleSubmit}> 
           <MainInput 

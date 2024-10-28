@@ -11,9 +11,9 @@ const PrivacyTerms = ({ onClose }) => {
 
   return (
     <div className='TermsPrivacy'>
-      <p>
+      {/* <p>
         Ao entrar no Monetize+, você concorda com nossos <a href="#" onClick={handleCloseModal}>Termos</a> e <a href="#" onClick={handleCloseModal}>Política de Privacidade</a>.
-      </p>
+      </p> */}
 
       {showModal && (
         <div className="modal">

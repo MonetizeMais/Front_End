@@ -57,10 +57,13 @@ function CadastroDadosScreen() {
                 vida: 10,
                 coin: 0,
                 pontos: 0,
-                fotoPerfil: "string",
+                fotoPerfil: "https://photos.fife.usercontent.google.com/pw/AP1GczMqGftsoEW68gfgejIPB3oy5rf2pdoX-Gjvs9zIwkQKZe1_jpG6R4A=w228-h220-no?authuser=1",
             });
 
             if (response.status === 200) {
+                localStorage.setItem('userEmail', formData.email); 
+                console.log('Email salvo no localStorage:', formData.email);
+                localStorage.setItem('userName', formData.nome);
                 localStorage.setItem('userId', response.data.ncdUsuario); 
                 window.location.href = '/Comecar'; 
             }
@@ -79,10 +82,9 @@ function CadastroDadosScreen() {
         setShowTerms(false);
     };
 
-    // Limpa o checkbox ao desmontar o componente
     useEffect(() => {
         return () => {
-            setTermsAccepted(false); // Limpa o estado do checkbox
+            setTermsAccepted(false); 
         };
     }, []);
 

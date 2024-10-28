@@ -13,6 +13,7 @@ function InsereDadosScreen() {
     });
     const [showError, setShowError] = useState(false);
     const [message, setMessage] = useState('');
+    const [showTerms, setShowTerms] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -44,6 +45,7 @@ function InsereDadosScreen() {
             });
 
             if (response.status === 200) {
+                localStorage.setItem('userEmail', formData.usernameOrEmail); 
                 navigate('/HomePage');
             }
         } catch (error) {
@@ -61,6 +63,13 @@ function InsereDadosScreen() {
         }
     };
 
+    const handleShowTerms = () => {
+        setShowTerms(true);
+    };
+
+    const handleCloseTerms = () => {
+        setShowTerms(false);
+    };
     return (
         <div className='MainBox'>
             <MainTitle text={'Insira seus dados'}/>
@@ -88,7 +97,12 @@ function InsereDadosScreen() {
             </button>
 
             <a href="/NovaSenha">Esqueci a senha</a>
-            <PrivacyTerms/>
+            <div onClick={handleShowTerms} className='show-terms'>
+            <p>
+        Ao entrar no Monetize+, você concorda com nossos <a href="#" onClick={handleCloseTerms}>Termos</a> e <a href="#" onClick={handleCloseTerms}>Política de Privacidade</a>.
+      </p>
+            </div>
+            {showTerms && <PrivacyTerms onClose={handleCloseTerms} />}
 
             {showError && (
                 <div className="error-popup">

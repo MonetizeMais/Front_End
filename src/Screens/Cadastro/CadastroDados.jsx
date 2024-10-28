@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import axios from 'axios'; 
 import '../Cadastro/Cadastro.css'; 
 import MainButton from '../../components/Button/button.jsx'; 
@@ -19,6 +19,8 @@ function CadastroDadosScreen() {
     const [message, setMessage] = useState('');
     const [showTerms, setShowTerms] = useState(false); 
 
+    const allFieldsFilled = Object.values(formData).every((field) => field.trim() !== '');
+
     const handleCheckboxChange = (event) => {
         setTermsAccepted(event.target.checked);
     };
@@ -31,12 +33,27 @@ function CadastroDadosScreen() {
         }));
     };
 
+    const isValidPassword = (password) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+        return passwordRegex.test(password);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault(); 
         setMessage('');
 
         if (!termsAccepted) {
             setMessage('Você deve aceitar os termos para se cadastrar.');
+            return;
+        }
+
+        if (!formData.email.endsWith('@gmail.com')) {
+            setMessage('O e-mail deve ser um endereço @gmail.com.');
+            return;
+        }
+
+        if (!isValidPassword(formData.senha)) {
+            setMessage('A senha deve ter no mínimo 5 caracteres e incluir letras e números.');
             return;
         }
 
@@ -79,10 +96,9 @@ function CadastroDadosScreen() {
         setShowTerms(false);
     };
 
-    // Limpa o checkbox ao desmontar o componente
     useEffect(() => {
         return () => {
-            setTermsAccepted(false); // Limpa o estado do checkbox
+            setTermsAccepted(false); 
         };
     }, []);
 
@@ -139,6 +155,7 @@ function CadastroDadosScreen() {
                     id="CheckBox" 
                     checked={termsAccepted} 
                     onChange={handleCheckboxChange} 
+                    disabled={!allFieldsFilled} 
                 />
                 <span onClick={handleShowTerms} >Aceito os <a>Termos e Política de Privacidade</a></span>
             </div>

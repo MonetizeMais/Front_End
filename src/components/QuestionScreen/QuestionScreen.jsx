@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../Assets/Mascote 2.png';
+import Logo from '../../Assets/Mascote 2.png';
 import '../QuestionScreen/QuestionScreen.css';
 import OptionButton from '../../components/OptionButton/OptionButton.jsx';
 import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';
@@ -30,7 +30,7 @@ function QuestionScreen({ questionText, options, progress, nextRoute }) {
       </div>
 
       <div className="question-section">
-        <img className="LogoPrincipal" src={logo} alt="Logo" />
+        <img className="LogoPrincipal" src={Logo} alt="Logo" />
         <div className="question-box">
           <span>{questionText}</span>
         </div>

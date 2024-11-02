@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import axios from 'axios'; 
 import '../Cadastro/Cadastro.css'; 
 import MainButton from '../../components/Button/button.jsx'; 
@@ -14,9 +14,12 @@ function CadastroDadosScreen() {
         email: '',
         apelido: '',
         senha: '',
-        confirmaSenha: '', // Incluindo campo de confirmação de senha
+        confirmaSenha: '', 
     });
     const [message, setMessage] = useState('');
+    const [showTerms, setShowTerms] = useState(false); 
+
+    const allFieldsFilled = Object.values(formData).every((field) => field.trim() !== '');
 
     const handleCheckboxChange = (event) => {
         setTermsAccepted(event.target.checked);
@@ -30,12 +33,27 @@ function CadastroDadosScreen() {
         }));
     };
 
+    const isValidPassword = (password) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+        return passwordRegex.test(password);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault(); 
         setMessage('');
 
         if (!termsAccepted) {
             setMessage('Você deve aceitar os termos para se cadastrar.');
+            return;
+        }
+
+        if (!formData.email.endsWith('@gmail.com')) {
+            setMessage('O e-mail deve ser um endereço @gmail.com.');
+            return;
+        }
+
+        if (!isValidPassword(formData.senha)) {
+            setMessage('A senha deve ter no mínimo 5 caracteres e incluir letras e números.');
             return;
         }
 
@@ -48,7 +66,6 @@ function CadastroDadosScreen() {
             const url = 'https://back-end-retz.onrender.com/newUser'; 
 
             const response = await axios.post(url, {
-                id: formData.id,
                 nome: formData.nome,
                 email: formData.email,
                 apelido: formData.apelido,
@@ -57,10 +74,13 @@ function CadastroDadosScreen() {
                 vida: 10,
                 coin: 0,
                 pontos: 0,
-                fotoPerfil: "string",
+                fotoPerfil: "https://photos.fife.usercontent.google.com/pw/AP1GczMqGftsoEW68gfgejIPB3oy5rf2pdoX-Gjvs9zIwkQKZe1_jpG6R4A=w228-h220-no?authuser=1",
             });
 
             if (response.status === 200) {
+                localStorage.setItem('userEmail', formData.email); 
+                console.log('Email salvo no localStorage:', formData.email);
+                localStorage.setItem('userName', formData.nome);
                 localStorage.setItem('userId', response.data.ncdUsuario); 
                 window.location.href = '/Comecar'; 
             }
@@ -70,6 +90,20 @@ function CadastroDadosScreen() {
             setMessage('Erro ao cadastrar usuário: ' + error.message);
         }
     };
+
+    const handleShowTerms = () => {
+        setShowTerms(true);
+    };
+
+    const handleCloseTerms = () => {
+        setShowTerms(false);
+    };
+
+    useEffect(() => {
+        return () => {
+            setTermsAccepted(false); 
+        };
+    }, []);
 
     return (
         <div className='MainBox2'>
@@ -124,11 +158,14 @@ function CadastroDadosScreen() {
                     id="CheckBox" 
                     checked={termsAccepted} 
                     onChange={handleCheckboxChange} 
+                    disabled={!allFieldsFilled} 
                 />
-                <PrivacyTerms />
+                <span onClick={handleShowTerms} >Aceito os <a>Termos e Política de Privacidade</a></span>
             </div>
 
             {message && <p>{message}</p>} 
+
+            {showTerms && <PrivacyTerms onClose={handleCloseTerms} />} 
         </div>
     );
 }

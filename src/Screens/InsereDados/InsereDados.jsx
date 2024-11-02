@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'; 
 import '../../../src/App.css'; 
-import MainButton from '../../components/Button/button.jsx'; 
 import MainTitle from '../../components/Title/Title.jsx'; 
 import MainInput from '../../components/Input/input.jsx'; 
 import PrivacyTerms from '../../components/PrivacyTerms/privacyTerms.jsx'; 
@@ -14,6 +13,7 @@ function InsereDadosScreen() {
     });
     const [showError, setShowError] = useState(false);
     const [message, setMessage] = useState('');
+    const [showTerms, setShowTerms] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -45,6 +45,7 @@ function InsereDadosScreen() {
             });
 
             if (response.status === 200) {
+                localStorage.setItem('userEmail', formData.usernameOrEmail); 
                 navigate('/HomePage');
             }
         } catch (error) {
@@ -62,6 +63,13 @@ function InsereDadosScreen() {
         }
     };
 
+    const handleShowTerms = () => {
+        setShowTerms(true);
+    };
+
+    const handleCloseTerms = () => {
+        setShowTerms(false);
+    };
     return (
         <div className='MainBox'>
             <MainTitle text={'Insira seus dados'}/>
@@ -88,8 +96,13 @@ function InsereDadosScreen() {
               Entrar
             </button>
 
-            <a href="/RedefinirSenha">Esqueci a senha</a>
-            <PrivacyTerms/>
+            <a href="/NovaSenha">Esqueci a senha</a>
+            <div onClick={handleShowTerms} className='show-terms'>
+            <p>
+        Ao entrar no Monetize+, você concorda com nossos <a href="#" onClick={handleCloseTerms}>Termos</a> e <a href="#" onClick={handleCloseTerms}>Política de Privacidade</a>.
+      </p>
+            </div>
+            {showTerms && <PrivacyTerms onClose={handleCloseTerms} />}
 
             {showError && (
                 <div className="error-popup">

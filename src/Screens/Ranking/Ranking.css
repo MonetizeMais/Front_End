@@ -1,69 +1,68 @@
 .ranking-title {
-    text-align: center;
-    font-size: 24px;
-    margin-top: 20px;
-    color: #FA5B77;
-  }
-  
-  .ranking-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    margin-top: 20px; 
-    padding: 20px; 
-    overflow-y: auto; 
-    max-height: 660px;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+  color: #FA5B77;
 }
-  
-.ranking-card {
-    position: relative; 
-    width: 310px;
-    height: 55px;
-    background-color: #C7C7C9;
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    border-radius: 15px;
-    padding: 10px;
-  }
-  
-  .ranking-card.logged-user {
-    background-color: #FFB8C9;
-  }
-  
-  .ranking-card.first-place {
-    background-color: #FA5B77;
-    height: 70px; 
-    width: 325px;
-  }
-  
-  .user-photo {
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
-    margin-right: 10px;
-  }
-  
-  .user-photo img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .user-details {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .medal-container {
-    position: absolute; 
-    width: 25px; 
-    height: 25px; 
-    top: 42px; 
-    left: 45px; 
-  }
-  
-  .medalha {
-    width: 100%; 
-    height: auto; 
-  }
-  
+.ranking-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  margin-top: 20px; 
+  padding: 20px; 
+  overflow-y: auto; 
+  max-height: 660px;
+}
+
+.ranking-card {
+  position: relative; 
+  width: 310px;
+  height: 55px;
+  background-color: #C7C7C9;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.ranking-card.logged-user {
+  background-color: #FFB8C9; /* Cor do card do usuário logado */
+}
+
+.ranking-card.first-place {
+  background-color: #FA5B77; /* Cor do card do primeiro lugar */
+  height: 70px; 
+  width: 325px;
+}
+
+.user-photo {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.user-photo img {
+  width: 100%;
+  height: auto;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.medal-container {
+  position: absolute; 
+  width: 25px; 
+  height: 25px; 
+  top: 42px; 
+  left: 45px; 
+}
+
+.medalha {
+  width: 100%; 
+  height: auto; 
+}

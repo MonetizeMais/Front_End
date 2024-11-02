@@ -2,8 +2,6 @@ import React from "react";
 import TelaInicial from './TelaInicial/TelaInicial';
 import InsereDados from './InsereDados/InsereDados';
 import CadastroDados from './Cadastro/CadastroDados';
-import RedefinirSenha from './RedefifnirSenha/RedefinirSenha';
-import ValidaCodigo from './ValidaCodigo/ValidaCodigo';
 import NovaSenha from './NovaSenha/NovaSenha';
 import Comecar from './Começar/Comecar';
 import Perguntas from './Perguntas/Perguntas';
@@ -18,6 +16,7 @@ import TelaPersonalizacao from './TelaPersonalizacao/telaPersonalizacao'
 import Ranking from './Ranking/Ranking';
 import Quizz from "./Quizz/Quizz";
 import Conteudo from "./Conteudo/Conteudo";
+import Configuracoes from "./Configuracoes/Configuracoes";
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 // import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -33,8 +32,6 @@ const AppRoutes = () => {
                     <Route path="/" element={<TelaInicial />} />
                     <Route path="/InsereDados" element={<InsereDados />} />
                     <Route path="/CadastreDados" element={<CadastroDados />} />
-                    <Route path="/RedefinirSenha" element={<RedefinirSenha />} />
-                    <Route path="/ValidaCodigo" element={<ValidaCodigo />} />
                     <Route path="/NovaSenha" element={<NovaSenha />} />
                     <Route path="/Comecar" element={<Comecar />} />
                     <Route path="/Perguntas" element={<Perguntas />} />
@@ -49,6 +46,7 @@ const AppRoutes = () => {
                     <Route path="/Ranking" element={<Ranking />} />
                     <Route path="/Quizz" element={<Quizz />} />
                     <Route path="/Conteudo" element={<Conteudo />} />
+                     <Route path="/Configuracoes" element={<Configuracoes />} />
                 </Routes>
         //     </CSSTransition>
         // </TransitionGroup>

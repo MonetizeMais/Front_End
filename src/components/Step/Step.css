@@ -1,0 +1,50 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.progress-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: conic-gradient(#FA5B77 0deg, #EBEBEB 0deg);
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #F7A7B6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.level {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.selected .circle {
+  background-color: #FA5B77;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.selected p {
+  color: #FA5B77;
+}

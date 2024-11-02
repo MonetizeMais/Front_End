@@ -1,4 +1,4 @@
-.perfil-container {
+.configuracoes-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,40 +7,40 @@
     height: 80vh;
   }
   
-  .perfil-title {
+  .configuracoes-title {
     font-size: 1.5rem;
     margin-top: 1rem;
     margin-bottom: 2rem;
   }
   
-  .perfil-code {
+  .configuracoes-code {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  .perfil-avatar {
+  .configuracoes-avatar {
     width: 9rem;
     height: 9rem;
     border-radius: 50%;
     margin-bottom: 1rem;
   }
   
-  .perfil-info {
+  .configuracoes-info {
     text-align: center;
   }
   
-  .perfil-usuario {
+  .configuracoes-usuario {
     font-size: 1rem;
     font-weight: bold;
   }
   
-  .perfil-handle, .perfil-email {
+  .configuracoes-handle, .configuracoes-email {
     font-size: 14px;
     color: #888;
   }
   
-  .perfil-options {
+  .configuracoes-options {
     width: 80%;
     margin-top: 2rem;
     height: 50%;
@@ -52,7 +52,7 @@
     gap: 1rem;
   }
   
-  .perfil-option {
+  .configuracoes-option {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -62,13 +62,38 @@
     cursor: pointer;
   }
   
-  .perfil-icon {
+  .configuracoes-icon {
     width: 1.5rem;
     height: 1.5rem;
   }
   
-  .perfil-seta {
+  .configuracoes-seta {
     width: 15px;
     height: 15px;
   }
+  .configuracoes-dados {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
   
+  .configuracoes-dados label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    margin-right: 5px;
+    color: #333;
+  }
+
+  .configuracoes-input {
+    width: 70%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid white;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .botaoPrincipal {
+    cursor: pointer;
+    margin-top: 1rem;
+}

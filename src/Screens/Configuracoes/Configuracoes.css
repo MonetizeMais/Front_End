@@ -49,16 +49,6 @@
   border-radius: 5px;
 }
 
-.botaoPrincipal {
-  cursor: pointer;
-  margin-top: 1.5rem;
-  padding: 0.8rem 2rem;
-  background-color: #6b4a3d;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-}
 
 @media (max-width: 600px) {
   .configuracoes-container {

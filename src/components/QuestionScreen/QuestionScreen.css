@@ -21,16 +21,18 @@
     background-color: #f0f0f0;
     border-radius: 1rem;
     height: 0.65rem;
-    width: 80%; 
-    max-width: 600px; 
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    overflow: hidden;
   }
   
   .progress_Pergunta1 {
     background-color: #fa5b77;
     height: 100%;
-    width: 30%; 
+    width: 0; 
     border-radius: 10px;
-    transition: width 0.3s ease;
+    transition: width 0.6s ease; 
   }
   
   .question-section {
@@ -52,4 +54,10 @@
     flex-direction: column;
     width: 100%;
   }
-  
+  .seta-icon {
+    width: 1.5rem; 
+    height: 1.5rem;
+    left: 0.4rem;
+    position: fixed;
+    cursor: pointer;
+}

@@ -1,99 +1,72 @@
+/* Configuracoes.css */
+
 .configuracoes-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.configuracoes-title {
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.configuracoes-avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.configuracoes-avatar {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+
+.configuracoes-dados {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.configuracoes-dados label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.3rem;
+}
+
+.configuracoes-input {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 600px) {
+  .configuracoes-container {
+      padding: 10px;
   }
-  
   .configuracoes-title {
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
+      font-size: 1.5rem;
   }
-  
-  .configuracoes-code {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
   .configuracoes-avatar {
-    width: 9rem;
-    height: 9rem;
-    border-radius: 50%;
-    margin-bottom: 1rem;
+      width: 6rem;
+      height: 6rem;
   }
-  
-  .configuracoes-info {
-    text-align: center;
-  }
-  
-  .configuracoes-usuario {
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  
-  .configuracoes-handle, .configuracoes-email {
-    font-size: 14px;
-    color: #888;
-  }
-  
-  .configuracoes-options {
-    width: 80%;
-    margin-top: 2rem;
-    height: 50%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  .configuracoes-option {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
-    width: 100%;
-    cursor: pointer;
-  }
-  
-  .configuracoes-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  
-  .configuracoes-seta {
-    width: 15px;
-    height: 15px;
-  }
-  .configuracoes-dados {
-    display: flex;
-    align-items: center;
-    margin-top: 1.5rem;
-  }
-  
-  .configuracoes-dados label {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    margin-right: 5px;
-    color: #333;
-  }
-
   .configuracoes-input {
-    width: 70%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid white;
-    border-radius: 4px;
-    text-align: center;
+      font-size: 0.9rem;
+      padding: 0.6rem;
   }
-  
   .botaoPrincipal {
-    cursor: pointer;
-    margin-top: 1rem;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+  }
 }

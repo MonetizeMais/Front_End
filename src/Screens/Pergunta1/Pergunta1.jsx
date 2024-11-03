@@ -6,7 +6,7 @@ function Pergunta1() {
     <QuestionScreen
       questionText="Como você conheceu o Monetize+?"
       options={['Tiktok', 'Escola', 'Play Store ou App Store', 'Notícia', 'Busca do Google', 'Outros']}
-      progress={50}
+      progress={0}
       nextRoute='/Pergunta2'
     />
   );

@@ -5,8 +5,9 @@ function Pergunta3() {
   return (
     <QuestionScreen
       questionText="Você quer aprender educação financeira para..."
-      options={['Aprender coisas novas', 'Guardar meu dinheiro', 'Passar o tempo', 'Diversão', 'Outros']}
-      progress={50}
+      options={['Avançar o conhecimento', 'Usar bem o tempo', 'Diversão', 'Investir o dinheiro', 'Outros']}
+      progress={30}
+
       nextRoute='/Pergunta4'
     />
   );

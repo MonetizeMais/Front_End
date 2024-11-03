@@ -1,3 +1,5 @@
+// Configuracoes.js
+
 import React, { useState } from 'react';
 import './Configuracoes.css';
 import MenuBar from '../../components/MenuBar/MenuBar';
@@ -42,13 +44,12 @@ function Configuracoes() {
   const handleSubmit = (e) => {
     e.preventDefault(); 
     console.log("Dados salvos:", { nomeUsuario, username, email });
-    // alert("Dados atualizados com sucesso!");
   };
 
   return (
     <form onSubmit={handleSubmit} className="configuracoes-container">
       <h1 className="configuracoes-title">Configurações</h1>
-      <div className="configuracoes-code">
+      <div className="configuracoes-avatar-container">
         <img src={logo} alt="Avatar do usuário" className="configuracoes-avatar" />
       </div>
       <div className="configuracoes-dados">

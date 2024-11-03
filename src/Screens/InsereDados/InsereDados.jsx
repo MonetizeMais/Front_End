@@ -28,7 +28,7 @@ function InsereDadosScreen() {
         event.preventDefault();
         setMessage('');
         setShowError(false);
-
+    
         if (!formData.usernameOrEmail || !formData.senha) {
             setMessage('Por favor, preencha todos os campos.');
             setShowError(true);
@@ -37,13 +37,13 @@ function InsereDadosScreen() {
             }, 3000);
             return;
         }
-
+    
         try {
             const response = await axios.post('https://back-end-retz.onrender.com/userLogin', {
                 email: formData.usernameOrEmail,
                 senha: formData.senha,
             });
-
+    
             if (response.status === 200) {
                 localStorage.setItem('userEmail', formData.usernameOrEmail); 
                 navigate('/HomePage');
@@ -61,7 +61,7 @@ function InsereDadosScreen() {
                 setShowError(false);
             }, 3000);
         }
-    };
+    };    
 
     const handleShowTerms = () => {
         setShowTerms(true);

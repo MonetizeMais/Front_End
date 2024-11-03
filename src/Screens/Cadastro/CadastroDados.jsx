@@ -74,7 +74,7 @@ function CadastroDadosScreen() {
                 vida: 10,
                 coin: 0,
                 pontos: 0,
-                fotoPerfil: "https://photos.fife.usercontent.google.com/pw/AP1GczMqGftsoEW68gfgejIPB3oy5rf2pdoX-Gjvs9zIwkQKZe1_jpG6R4A=w228-h220-no?authuser=1",
+                fotoPerfil: "https://lh3.googleusercontent.com/pw/AP1GczOvc6d0ZiIAHmbP5QMYbOlHTsxeRapLHJwzIqlNHJUEn9lFoplFYWlKTTSyGAEbkCP7YEhiDb-TDJ-cwZbmMrVyU5jTbMN-LU5eL15ySoIlvcvq0upBoRqtpyCV2OXvEocoXLdj9O3konWcio15dn0=w631-h617-s-no-gm?authuser=1",
             });
 
             if (response.status === 200) {

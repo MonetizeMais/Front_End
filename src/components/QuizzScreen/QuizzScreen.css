@@ -35,28 +35,5 @@
   }
   
 
-  .feedback {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .correct-message, .incorrect-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .correct-icon, .incorrect-icon {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .correct-message p {
-    color: green;
-  }
-  
-  .incorrect-message p {
-    color: red;
-  }
   
   

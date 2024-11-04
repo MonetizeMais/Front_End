@@ -17,10 +17,13 @@ RUN npm run build
 # Use a minimal server to serve the static files
 FROM nginx:alpine
 
-# Copy built files from previous stag
+# Copy built files from previous stage
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose the por
+# Copy custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose the port
 EXPOSE 80
 
 # Start Nginx

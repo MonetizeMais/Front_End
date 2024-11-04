@@ -20,7 +20,7 @@ FROM nginx:alpine
 # Copy built files from previous stag
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose the port
+# Expose the por
 EXPOSE 80
 
 # Start Nginx

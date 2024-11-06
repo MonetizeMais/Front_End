@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Configuracoes.css';
 import logo from '../../Assets/Mascote 2.png';
-import setaIcon from '../../Assets/arrow.png'; // Importando o ícone da seta
+import setaIcon from '../../Assets/arrow.png'; 
 import MainButton from '../../components/Button/button';
-import { useNavigate } from 'react-router-dom'; // Importando useNavigate para navegação
+import { useNavigate } from 'react-router-dom'; 
 
 function Configuracoes() {
   const navigate = useNavigate(); 

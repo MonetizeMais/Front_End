@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Logo from '../../Assets/Mascote Teacher.png';
 import Close from '../../Assets/Close.png';
 import '../QuizzScreen/QuizzScreen.css';
@@ -6,42 +7,57 @@ import OptionButton from '../../components/OptionButton/OptionButton.jsx';
 import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';
 import { useNavigate } from 'react-router-dom';
 
-function QuizzScreen({ questionText, options, correctAnswer, progress, nextRoute }) {
+function QuizzScreen({ questionText, options, progress, nextRoute }) {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null); // To track if the answer is correct
   const [fade, setFade] = useState(false);
+  const [userStats, setUserStats] = useState({ vida: 0, coin: 0 }); 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userEmail = localStorage.getItem('userEmail');
+      
+      if (userEmail) {
+        try {
+          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
+          if (response.status === 200) {
+            const { vida, coin } = response.data;
+            setUserStats({ vida, coin });
+          }
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-
-    // Check if the selected option is correct
-    if (option === correctAnswer) {
-      setIsCorrect(true); // Mark as correct
-    } else {
-      setIsCorrect(false); // Mark as incorrect
-    }
   };
 
-  const handleContinue = () => {
-    setFade(true);
-    setTimeout(() => {
-      navigate(nextRoute);
-    }, 600);
-  };
+  const handleClose = () => {
+    navigate('/HomePage');
+  };  
 
   return (
     <div className={`Screen ${fade ? 'fade-out' : ''}`}>
       <div className="question-header_Quizz">
-        <img src={Close} className='Close_Quizz' alt="Close" />
+        <img 
+          src={Close} 
+          className='Close_Quizz' 
+          onClick={handleClose}
+          alt="Fechar"
+        />
 
         <div className="progress-bar_Quizz">
           <div className="progress_Quizz" style={{ width: `${progress}%` }}></div>
         </div>
 
         <ul className="header-links-Quizz">
-          <li><span className="icon-heart"></span> <span>5</span></li>
-          <li><span className="icon-gem"></span> <span>20</span></li>
+          <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>
+          <li><span className="icon-gem"></span> <span>{userStats.coin}</span></li>
         </ul>
       </div>
 
@@ -63,29 +79,10 @@ function QuizzScreen({ questionText, options, correctAnswer, progress, nextRoute
             />
           ))}
         </div>
-
-        {/* Feedback section */}
-        {isCorrect !== null && (
-          <div className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
-            {isCorrect ? (
-              <div className="correct-message">
-                <div className="correct-icon">✔️</div>
-                <p>Parabéns! Você acertou a resposta!</p>
-              </div>
-            ) : (
-              <div className="incorrect-message">
-                <div className="incorrect-icon">❌</div>
-                <p>Que pena! Você errou a resposta!</p>
-              </div>
-            )}
-          </div>
-        )}
-
         <InactiveButton 
           text="Continuar"
-          url={nextRoute} 
           isActive={!!selectedOption}
-          onClick={handleContinue}
+          url={"/Finalizar"}
         />
       </div>
     </div>

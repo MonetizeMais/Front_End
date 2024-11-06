@@ -3,9 +3,12 @@ import './HomePage.css';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import ScoreBar from '../../components/ScoreBar/ScoreBar';
 import Step from '../../components/Step/Step';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
 
 function HomePage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
+  const navigate = useNavigate();
 
   const steps = [
     { label: 'Básico 1', level: 1, progress: 20 },
@@ -48,9 +51,20 @@ function HomePage() {
     return grouped;
   };
 
-  const handleStepClick = (level) => {
-    setSelectedLevel(level);  
-  };
+  const handleStepClick = async (level) => {
+    setSelectedLevel(level);
+    
+    console.log("Selected Level:", level); 
+
+    try {
+        const response = await axios.get(`https://back-end-retz.onrender.com/getConteudo/${level}`);
+        const conteudo = response.data;
+
+        navigate('/Conteudo', { state: { conteudo, level } }); 
+    } catch (error) {
+        console.error('Error fetching content:', error);
+    }
+};
 
   const groupedSteps = groupStepsByRows(steps);
 
@@ -79,6 +93,5 @@ function HomePage() {
     </div>
   );
 }
-
 
 export default HomePage;

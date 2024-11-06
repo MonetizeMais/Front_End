@@ -1,77 +1,95 @@
-import React, { useState } from 'react';
-import LogoPorco from '../../Assets/LogoPorco.png';
-import OptionButton from '../../components/OptionButton/OptionButton.jsx';
-import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'; 
+import axios from 'axios';
+import LogoTeacher from '../../Assets/Mascote Teacher.png';
+import LogoStudent from '../../Assets/Mascote 2.png';
+import Close from '../../Assets/Close.png';
+import '../Conteudo/Conteudo.css';
 
 function Conteudo() {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [progress, setProgress] = useState(75);
-  const [fade, setFade] = useState(false);
-  const navigate = useNavigate();
+  const [messages, setMessages] = useState([]);
+  const [userStats, setUserStats] = useState({
+    vida: 0,
+    coin: 0,
+  });
+  const location = useLocation(); 
+  const navigate = useNavigate(); 
+  const conteudo = location.state ? location.state.conteudo : null; 
+  const level = location.state ? location.state.level : null; 
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userEmail = localStorage.getItem('userEmail');
+      
+      if (userEmail) {
+        try {
+          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
+          if (response.status === 200) {
+            const { vida, coin } = response.data;
+            setUserStats({ vida, coin });
+          }
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (conteudo) {
+      const formattedMessages = conteudo.conversa.map((item, index) => ({
+        id: index,
+        sender: item.falante.toLowerCase() === 'professor' ? 'teacher' : 'student',
+        text: item.texto,
+      }));
+      setMessages(formattedMessages);
+    }
+  }, [conteudo]);
+
+  const handleClose = () => {
+    navigate('/HomePage'); 
   };
 
-  const handleContinue = () => {
-    setFade(true);
-    setProgress(100);
-    setTimeout(() => {
-      navigate('/Pergunta3'); 
-    }, 600);
+  const handleStartQuizz = () => {
+    navigate('/Quizz', { state: { level } }); 
   };
 
   return (
-    <div>
-      <header>
-        <div className="progress-bar">
-          <div className="progress" style={{ width: `${progress}%` }}></div>
-        </div>
-      </header>
+    <div className="ConteudoScreen">
+      <div className="question-header_Quizz">
+        <img src={Close} alt="Close" className="Close_Quizz" onClick={handleClose} /> 
 
-      <div className="content">
-        <div className="question-section">
-          <img className="LogoPrincipal" src={LogoPorco} alt="Logo do Porco" />
-          <div className="question-box">
-            <p>Vamos falar sobre educação financeira?</p>
-          </div>
+        <div className="progress-bar_Quizz">
+          <div className="progress_Quizz" style={{ width: '50%' }}></div>
         </div>
-        <div className="options">
-          <OptionButton
-            text="Alternativa 1"
-            onClick={() => handleOptionClick('Alternativa 1')}
-            isSelected={selectedOption === 'Alternativa 1'}
-          />
-          <OptionButton
-            text="Alternativa 2"
-            onClick={() => handleOptionClick('Alternativa 2')}
-            isSelected={selectedOption === 'Alternativa 2'}
-          />
-          <OptionButton
-            text="Alternativa 3"
-            onClick={() => handleOptionClick('Alternativa 3')}
-            isSelected={selectedOption === 'Alternativa 3'}
-          />
-          <OptionButton
-            text="Alternativa 4"
-            onClick={() => handleOptionClick('Alternativa 4')}
-            isSelected={selectedOption === 'Alternativa 4'}
-          />
-          <OptionButton
-            text="Alternativa 5"
-            onClick={() => handleOptionClick('Alternativa 5')}
-            isSelected={selectedOption === 'Alternativa 5'}
-          />
+
+        <ul className="header-links-Quizz">
+          <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>
+          <li><span className="icon-gem"></span> <span>{userStats.coin}</span></li>
+        </ul>
+      </div>
+
+      <div className="question-section">
+        <img className="LogoPrincipal" src={LogoTeacher} alt="Logo" />
+        <div className="question-box">
+          <span>{conteudo ? conteudo.conteudo : 'Loading...'}</span>
         </div>
       </div>
 
-      <InactiveButton 
-        text="Continuar"
-        url={'/Pergunta4'} 
-        isActive={!!selectedOption}
-        onClick={handleContinue}
-      />
+      <div className='box3'>
+        <div className="chat">
+          {messages.map((message) => (
+            <div key={message.id} className={message.sender}>
+              {message.sender === 'teacher' && <img src={LogoTeacher} alt="Teacher Logo" className="logo" />}
+              <p>{message.text}</p>
+              {message.sender === 'student' && <img src={LogoStudent} alt="Student Logo" className="logo" />}
+            </div>
+          ))}
+        </div>
+        <button className='botaoPrincipal' onClick={handleStartQuizz}>ENTENDI</button>
+      </div>
     </div>
   );
 }

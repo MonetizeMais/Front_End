@@ -71,10 +71,11 @@ function CadastroDadosScreen() {
                 apelido: formData.apelido,
                 senha: formData.senha,
                 ofensiva: 0,
-                vida: 10,
-                coin: 0,
+                vida: 5,
+                coin: 10,
                 pontos: 0,
-                fotoPerfil: "https://photos.fife.usercontent.google.com/pw/AP1GczMqGftsoEW68gfgejIPB3oy5rf2pdoX-Gjvs9zIwkQKZe1_jpG6R4A=w228-h220-no?authuser=1",
+                progresso: 0,
+                fotoPerfil: "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700",
             });
 
             if (response.status === 200) {

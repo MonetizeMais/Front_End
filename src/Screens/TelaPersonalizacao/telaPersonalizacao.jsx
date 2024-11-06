@@ -1,51 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../TelaPersonalizacao/Telapersonalizacao.css';
 import MenuBar from '../../components/MenuBar/MenuBar';
 
-// Substituindo as imagens pelos links fornecidos
-const logoPoupinho = 'https://lh3.googleusercontent.com/pw/AP1GczOvc6d0ZiIAHmbP5QMYbOlHTsxeRapLHJwzIqlNHJUEn9lFoplFYWlKTTSyGAEbkCP7YEhiDb-TDJ-cwZbmMrVyU5jTbMN-LU5eL15ySoIlvcvq0upBoRqtpyCV2OXvEocoXLdj9O3konWcio15dn0=w631-h617-s-no-gm?authuser=1'; 
-const IconeChapeu1 = 'https://lh3.googleusercontent.com/pw/AP1GczPWV5ZupsR727NZkxJFhaCBUZtXxEocJtlqUAxfrCy1HoG61XnBIxQbm7_6fkag0IXcBGg_Ke1MzvkzN_QtwaQ279E5_DlQ5BSX2LJ3cyxE1wMHBXgYjhISWgsPR0Yx_iNewa-PLEzRShjt1qtxH5E=w631-h609-s-no-gm?authuser=1';
-const IconeChapeu2 = 'https://lh3.googleusercontent.com/pw/AP1GczOunzmY6NTlIJs8-tY-eH1vznRJIFWyqYXE_mgxkvbkPuCy9pHc0QO7LQgmaG8bbI6tJjkoQ9yZQKIKYVrH9n-bUQeb431QqNeb8iKKpI2wZu-nLFmq-mCBOtARs5gGNaqU0TLm4W8tQRx8lcsvqM0=w631-h624-s-no-gm?authuser=1';
-const IconeChapeu3 = 'https://lh3.googleusercontent.com/pw/AP1GczNVbQMQ6uf8WL2L3p4RQ5RDlqpiWydDG9lMItSEERJRSC3854pabaaxSH_gZgYqWI6yp10EMTBuZNFa8-xtb4ZITe-tcsPI4WeYZ-_2JKXxT5iWh61IHvxpWAzVcrU_553pV8fKTm16Hi8A64hg2dg=w631-h609-s-no-gm?authuser=1';
-const IconeChapeu4 = 'https://lh3.googleusercontent.com/pw/AP1GczPJF4CB1UkzcEU16la2jnE0YYeKOo6sorO_Rx5e53ncFDhBWdNsa3oHucshCMo18ATEsNVCqft7W8wDcLEkZJklyEzPOPg4uKNWkTjnAw9SPtREIXwmWjaCxZxUNS7IEjdWQTMmEfu-_VnyG8Zggoc=w631-h609-s-no-gm?authuser=1';
-const IconeChapeu5 = 'https://lh3.googleusercontent.com/pw/AP1GczMseCcmt0S_M3wAerek168oPGzxYxiq4VgZXn8ktPZWH2DoQzyu4SL-gIi1p5NpHThCDFdK5bHucFggbPFNZVTmQWRSCwr5pVfmpk_jS7OaVo-GEA4ubu-sE52mo_oJv6VlKh0ejW_gVOiCokHw928=w631-h609-s-no-gm?authuser=1';
-const IconeChapeu6 = 'https://lh3.googleusercontent.com/pw/AP1GczNmN-PudjK1GZnXjs96VnZ1FN3rmMO2twNoaNirsRS7MhHyYjgzkuPs9r1hA-D7jwBgD2lzX205s3adigIyMGNKTPH3KoFCdrkY9gQz718I3zjXleYNBq6SrmrF9N4sKt_NINvIe-P2F8O97maCODA=w631-h609-s-no-gm?authuser=1';
+const logoPoupinho = 'https://lh3.googleusercontent.com/pw/AP1GczOvc6d0ZiIAHmbP5QMYbOlHTsxeRapLHJwzIqlNHJUEn9lFoplFYWlKTTSyGAEbkCP7YEhiDb-TDJ-cwZbmMrVyU5jTbMN-LU5eL15ySoIlvcvq0upBoRqtpyCV2OXvEocoXLdj9O3konWcio15dn0=w631-h617-s-no-gm?authuser=1';
+const chapeus = [ 
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20rei.png?alt=media&token=807a1cf1-9356-43d5-a262-7961deb2ba86',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20rainha.png?alt=media&token=8f943150-c72d-45c6-b747-c0d03be644c5',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20bruxo.png?alt=media&token=c0190fa8-64aa-4732-811c-72f8e9af681c',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20festa.png?alt=media&token=8eecb493-67b7-4156-b471-9683c65701fd',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20la%C3%A7o.png?alt=media&token=b78c8c56-f6ea-4690-ae36-4b4e4f3a9115',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20chef.png?alt=media&token=9cdcda72-cc1a-411d-a275-5d167e81e864',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20cowboy.png?alt=media&token=9f3eb69a-4a7e-4c6d-9259-58f6e63ae3d9',
+  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20bigode.png?alt=media&token=d3e2f519-db12-4a81-8965-d81b52fb8c77',
+  ];
 
 function TelaPersonalizacao() {
+  const [selectedChapeu, setSelectedChapeu] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [popupVisible, setPopupVisible] = useState(false);
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('userEmail');
+    setUserEmail(storedEmail);
+
+    const storedImage = localStorage.getItem('profilePictureUrl');
+    if (storedImage) {
+      setSelectedChapeu(storedImage);
+    }
+  }, []);
+
+  const handleChapeuClick = (chapeuUrl) => {
+    setSelectedChapeu(chapeuUrl);
+    localStorage.setItem('profilePictureUrl', chapeuUrl); 
+  };
+
+  const updateProfilePicture = async (url) => {
+    const userEmail = localStorage.getItem('userEmail'); 
+    try {
+      const response = await axios.put('https://back-end-retz.onrender.com/updateProfilePicture', {
+        email: userEmail, 
+        fotoPerfil: url 
+      });
+      console.log('Foto de perfil atualizada com sucesso:', response.data);
+      return true; 
+    } catch (error) {
+      if (error.response) {
+        console.error('Erro ao atualizar a foto de perfil:', error.response.data);
+      } else if (error.request) {
+        console.error('Nenhuma resposta recebida do servidor:', error.request);
+      } else {
+        console.error('Erro ao configurar a requisição:', error.message);
+      }
+      return false; 
+    }
+  };
+
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const handleEstilizarClick = async () => {
+    if (selectedChapeu) {
+      setErrorMessage(null); 
+      const success = await updateProfilePicture(selectedChapeu);
+      if (success) {
+        localStorage.setItem('profilePictureUrl', selectedChapeu);
+        setPopupVisible(true);
+        setTimeout(() => setPopupVisible(false), 3000);
+      } else {
+        setErrorMessage("Falha ao atualizar a foto de perfil. Tente novamente.");
+      }
+    }
+  };
+  
+  {errorMessage && <div className="error-popup">{errorMessage}</div>}
+  
   return (
     <div className="personalizacao-container">
       <div className="poupinho-section">
-        <img 
-          src={logoPoupinho} 
-          alt="Poupinho" 
-          className="poupinho-avatar"
-        />
-        <button className="btn-estilizar">
+        <img src={selectedChapeu || logoPoupinho} alt="Poupinho" className="poupinho-avatar" />
+        <button className="btn-estilizar" onClick={handleEstilizarClick}>
           Estilizar o Poupinho!
         </button>
+        {popupVisible && (
+          <div className="popup">
+            <p>Visual atualizado!</p>
+          </div>
+        )}
       </div>
-
       <div className="itens-personalizacao">
-        <div className="item-personalizacao">
-          <img src={IconeChapeu1} alt="Chapéu 1" />
-        </div>
-        <div className="item-personalizacao">
-          <img src={IconeChapeu2} alt="Chapéu 2" />
-        </div>
-        <div className="item-personalizacao">
-          <img src={IconeChapeu3} alt="Chapéu 3" />
-        </div>
-        <div className="item-personalizacao">
-          <img src={IconeChapeu4} alt="Chapéu 4" />
-        </div>
-        <div className="item-personalizacao">
-          <img src={IconeChapeu5} alt="Chapéu 5" />
-        </div>
-        <div className="item-personalizacao">
-          <img src={IconeChapeu6} alt="Chapéu 6" />
-        </div>
+        {chapeus.map((chapeu, index) => (
+          <div key={index} className="item-personalizacao" onClick={() => handleChapeuClick(chapeu)}>
+            <img src={chapeu} alt={`Chapéu ${index + 1}`} />
+          </div>
+        ))}
       </div>
-
       <MenuBar />
     </div>
   );

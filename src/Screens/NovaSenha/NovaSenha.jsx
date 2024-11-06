@@ -56,8 +56,8 @@ function NovaSenha() {
 
       <div className='title'>
         <img src={Cadeado} className='cadeado'/>
-        <h1>Change Password</h1>
-        <p>Para manter sua conta segura, troque sua senha regularmente. Insira a senha atual e uma nova senha com pelo menos 8 caracteres, incluindo letras, números e símbolos. Confirme a nova senha e clique em 'Confirmar' para concluir.</p>
+        <h1>Redefinir Senha</h1>
+        <p>Para manter sua conta segura, troque sua senha regularmente. Insira a senha atual e uma nova senha com pelo menos 8 caracteres, incluindo letras, números e símbolos. Verifique a nova senha e clique em "Confirmar" para concluir.</p>
       </div>
 
       <div className='EnviarNovaSenha'>
@@ -85,7 +85,7 @@ function NovaSenha() {
             type="button" 
             className='botaoPrincipal' 
             onClick={handleSubmit}>
-            Redefinir senha
+            Confirmar
           </button>
       </div>
 

@@ -19,15 +19,9 @@ import Conteudo from "./Conteudo/Conteudo";
 import Configuracoes from "./Configuracoes/Configuracoes";
 
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-// import { CSSTransition, TransitionGroup } from 'react-transition-group';
-// import '../App.css'; // Certifique-se de que o CSS está correto
 
 const AppRoutes = () => {
-    // const location = useLocation();
-
     return (
-        // <TransitionGroup component={null}> {/* component={null} remove o div extra */}
-        //     <CSSTransition key={location.key} timeout={300} classNames="fade">
                 <Routes>
                     <Route path="/" element={<TelaInicial />} />
                     <Route path="/InsereDados" element={<InsereDados />} />

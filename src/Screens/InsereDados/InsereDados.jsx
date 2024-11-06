@@ -127,7 +127,7 @@ function InsereDadosScreen() {
             {showTerms && <PrivacyTerms onClose={handleCloseTerms} />}
 
             {showError && (
-                <div className="error-popup">
+                <div className="error">
                     <p>{message}</p>
                 </div>
             )}

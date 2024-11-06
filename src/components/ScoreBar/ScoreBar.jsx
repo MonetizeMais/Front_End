@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../ScoreBar/ScoreBar.css';
+import gemIcon from '../../Assets/GemIcon.png';
+import heartIcon from '../../Assets/HeartIcon.png';
 
 const ScoreBar = () => {
   const [userStats, setUserStats] = useState({
@@ -32,12 +34,13 @@ const ScoreBar = () => {
     <div>
       <header className="header">
         <ul className="header-links">
-          <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>
-          <li><span className="icon-gem"></span> <span>{userStats.coin}</span></li>
+          <li><img src={heartIcon} alt="Heart icon" className="custom-icon" /> <span>{userStats.vida}</span></li>
+          <li><img src={gemIcon} alt="Gem icon" className="custom-icon" /><span>{userStats.coin}</span></li>
         </ul>
       </header>
     </div>
   );
 };
+
 
 export default ScoreBar;

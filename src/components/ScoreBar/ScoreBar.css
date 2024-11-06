@@ -7,7 +7,7 @@
     width: 9rem;
     top: 0.75rem; 
     left: 25%; 
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     z-index: 1000;
 }
 
@@ -25,9 +25,29 @@
 }
 
 .icon-heart:before {
-    content: '❤️';
+    content: '';  
+    display: inline-block;
+    width: 24px; 
+    height: 24px; 
+    background-image: url("../../Assets/HeartIcon.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
 }
 
 .icon-gem:before {
-    content: '💎';
+    content: '';  
+    display: inline-block;
+    width: 24px; 
+    height: 24px;
+    background-image: url("../../Assets/GemIcon.png"); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+.custom-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }

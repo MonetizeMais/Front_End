@@ -41,5 +41,8 @@
 .icon {
     font-size: 1.5rem;
     font-style: normal;
-  }
-  
+}
+.custom-icon {
+    width: 24px;
+    height: 24px;
+}

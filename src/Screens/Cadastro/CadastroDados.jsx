@@ -74,15 +74,22 @@ function CadastroDadosScreen() {
                 vida: 5,
                 coin: 10,
                 pontos: 0,
-                progresso: 0,
+                progresso: 1,
                 fotoPerfil: "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700",
             });
 
             if (response.status === 200) {
-                localStorage.setItem('userEmail', formData.email); 
-                console.log('Email salvo no localStorage:', formData.email);
+                // Salva todos os dados no localStorage
+                localStorage.setItem('userEmail', formData.email);
                 localStorage.setItem('userName', formData.nome);
-                localStorage.setItem('userId', response.data.ncdUsuario); 
+                localStorage.setItem('userNickname', formData.apelido);
+                localStorage.setItem('userId', response.data.ncdUsuario);
+                localStorage.setItem('userVida', 5);
+                localStorage.setItem('userCoin', 10);
+                localStorage.setItem('userPontos', 0);
+                localStorage.setItem('userProgresso', 1);
+                localStorage.setItem('userFotoPerfil', "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700");
+
                 window.location.href = '/Comecar'; 
             }
             setMessage('Usuário cadastrado com sucesso!');

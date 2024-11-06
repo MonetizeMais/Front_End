@@ -4,13 +4,14 @@ import Logo from '../../Assets/Mascote Teacher.png';
 import Close from '../../Assets/Close.png';
 import '../QuizzScreen/QuizzScreen.css';
 import OptionButton from '../../components/OptionButton/OptionButton.jsx';
-import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';
 import { useNavigate } from 'react-router-dom';
 
-function QuizzScreen({ questionText, options, progress, nextRoute }) {
+function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextRoute }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [fade, setFade] = useState(false);
-  const [userStats, setUserStats] = useState({ vida: 0, coin: 0 }); 
+  const [userStats, setUserStats] = useState({ vida: 0, coin: 0, progresso: 0 });
+  const [showPopup, setShowPopup] = useState(false); // Estado para controlar o popup
+  const [isCorrect, setIsCorrect] = useState(null); // Estado para saber se a resposta está certa ou errada
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,10 +20,10 @@ function QuizzScreen({ questionText, options, progress, nextRoute }) {
       
       if (userEmail) {
         try {
-          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
+          const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
           if (response.status === 200) {
-            const { vida, coin } = response.data;
-            setUserStats({ vida, coin });
+            const { vida, coin, progresso } = response.data;
+            setUserStats({ vida, coin, progresso }); // Armazena o valor de progresso aqui
           }
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
@@ -39,7 +40,37 @@ function QuizzScreen({ questionText, options, progress, nextRoute }) {
 
   const handleClose = () => {
     navigate('/HomePage');
-  };  
+  };
+
+  const handleContinueClick = () => {
+    if (selectedOption) {
+      // Verifica se a resposta do usuário está correta
+      const correct = selectedOption === correctAnswer;
+      setIsCorrect(correct); // Atualiza o estado com a resposta correta/errada
+      setShowPopup(true); // Exibe o popup
+    }
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+    if (isCorrect) {
+      const newProgress = userStats.progresso + 0.5; // Usando o valor de 'progresso' do usuário diretamente
+      
+      const email = localStorage.getItem('userEmail');
+      if (email) {
+        axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
+          .then(response => {
+            console.log('Progresso atualizado:', response.data);
+          })
+          .catch(error => {
+            console.error('Erro ao atualizar progresso:', error);
+          });
+      }
+
+      handleAnswer(newProgress);
+    }
+    navigate(nextRoute);
+  };
 
   return (
     <div className={`Screen ${fade ? 'fade-out' : ''}`}>
@@ -52,7 +83,7 @@ function QuizzScreen({ questionText, options, progress, nextRoute }) {
         />
 
         <div className="progress-bar_Quizz">
-          <div className="progress_Quizz" style={{ width: `${progress}%` }}></div>
+          <div className="progress_Quizz" style={{ width: `${userStats.progresso * 100}%` }}></div> {/* Progresso baseado no campo 'progresso' */}
         </div>
 
         <ul className="header-links-Quizz">
@@ -79,12 +110,24 @@ function QuizzScreen({ questionText, options, progress, nextRoute }) {
             />
           ))}
         </div>
-        <InactiveButton 
-          text="Continuar"
-          isActive={!!selectedOption}
-          url={"/Finalizar"}
-        />
+
+        <button
+          className={`continuar ${selectedOption ? 'active' : 'inactive'}`}
+          onClick={handleContinueClick}
+          disabled={!selectedOption}
+        >
+          Continuar
+        </button>
       </div>
+
+      {showPopup && (
+        <div className="popup-pergunta">
+          <div className="popup-content-pergunta">
+            <p>{isCorrect ? 'Resposta certa!' : 'Resposta errada!'}</p>
+            <button onClick={handlePopupClose}>Fechar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

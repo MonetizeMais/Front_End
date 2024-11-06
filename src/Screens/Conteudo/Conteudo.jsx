@@ -11,6 +11,7 @@ function Conteudo() {
   const [userStats, setUserStats] = useState({
     vida: 0,
     coin: 0,
+    progresso: 0, // Incluindo progresso
   });
   const location = useLocation(); 
   const navigate = useNavigate(); 
@@ -25,8 +26,9 @@ function Conteudo() {
         try {
           const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
           if (response.status === 200) {
-            const { vida, coin } = response.data;
-            setUserStats({ vida, coin });
+            const { vida, coin, progresso } = response.data; // Incluindo progresso
+            setUserStats({ vida, coin, progresso });
+            localStorage.setItem('userProgresso', progresso); // Salvar progresso no localStorage
           }
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
@@ -52,8 +54,36 @@ function Conteudo() {
     navigate('/HomePage'); 
   };
 
-  const handleStartQuizz = () => {
-    navigate('/Quizz', { state: { level } }); 
+  const handleStartQuizz = async () => {
+    const userEmail = localStorage.getItem('userEmail');
+    const userProgresso = parseFloat(localStorage.getItem('userProgresso'));
+
+    if (userEmail && userStats.progresso === level) {
+      try {
+        // Calcular o novo progresso somando 0.5 ao progresso atual
+        const novoProgresso = userStats.progresso + 0.5;
+
+        // Chamada para a API
+        await axios.put(`https://back-end-retz.onrender.com/updateProgresso/${userEmail}/${novoProgresso}`);
+
+        // Atualizar o estado do progresso localmente após sucesso na atualização
+        setUserStats((prevStats) => ({
+          ...prevStats,
+          progresso: novoProgresso,
+        }));
+
+        // Atualizar o progresso no localStorage
+        localStorage.setItem('userProgresso', novoProgresso);
+
+        // Navegar para a página de Quizz
+        navigate('/Quizz', { state: { level } });
+      } catch (error) {
+        console.error('Erro ao atualizar progresso do usuário:', error);
+      }
+    } else {
+      // Navegar para o Quizz mesmo sem atualizar o progresso
+      navigate('/Quizz', { state: { level } });
+    }
   };
 
   return (

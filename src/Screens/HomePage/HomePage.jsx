@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './HomePage.css';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import ScoreBar from '../../components/ScoreBar/ScoreBar';
@@ -8,25 +8,47 @@ import axios from 'axios';
 
 function HomePage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
+  const [userProgress, setUserProgress] = useState(1); // Progresso inicial
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchUserProgress = async () => {
+      const userEmail = localStorage.getItem('userEmail'); // Pegue o email do usuário do localStorage
+      
+      if (userEmail) {
+        try {
+          const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
+          if (response.status === 200) {
+            const { progresso } = response.data; // Pegue o progresso do usuário
+            setUserProgress(progresso); // Atualize o estado com o valor do progresso
+          }
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        }
+      }
+    };
+
+    fetchUserProgress(); // Chama a função para buscar o progresso ao carregar o componente
+  }, []); // O useEffect será executado apenas uma vez, ao carregar o componente
+
   const steps = [
-    { label: 'Básico 1', level: 1, progress: 20 },
-    { label: 'Expressões', level: 2, progress: 50 },
-    { label: 'Animais', level: 3, progress: 30 },
-    { label: 'Animais', level: 4, progress: 70 },
-    { label: 'Animais', level: 5, progress: 80 },
-    { label: 'Animais', level: 6, progress: 100 },
-    { label: 'Animais', level: 7, progress: 10 },
-    { label: 'Animais', level: 8, progress: 20 },
-    { label: 'Animais', level: 9, progress: 50 },
-    { label: 'Animais', level: 10, progress: 60 },
-    { label: 'Animais', level: 11, progress: 20 },
-    { label: 'Animais', level: 12, progress: 70 },
-    { label: 'Animais', level: 13, progress: 90 },
-    { label: 'Animais', level: 14, progress: 30 },
-    { label: 'Animais', level: 15, progress: 50 },
-    { label: 'Animais', level: 16, progress: 10 },
+    { label: 'Básico 1', level: 1 },
+    { label: 'Expressões', level: 2 },
+    { label: 'Animais', level: 3 },
+    { label: 'Animais', level: 4 },
+    { label: 'Animais', level: 5 },
+    { label: 'Animais', level: 6 },
+    { label: 'Animais', level: 7 },
+    { label: 'Animais', level: 8 },
+    { label: 'Animais', level: 9 },
+    { label: 'Animais', level: 10 },
+    { label: 'Animais', level: 11 },
+    { label: 'Animais', level: 12 },
+    { label: 'Animais', level: 13 },
+    { label: 'Animais', level: 14 },
+    { label: 'Animais', level: 15 },
+    { label: 'Animais', level: 16 },
   ];
 
   const groupStepsByRows = (steps) => {
@@ -54,17 +76,22 @@ function HomePage() {
   const handleStepClick = async (level) => {
     setSelectedLevel(level);
     
-    console.log("Selected Level:", level); 
+    // Verificação do progresso do usuário
+    if (userProgress < level) {
+      setErrorMessage(`Progresso insuficiente! Complete o nível ${userProgress} antes de acessar o nível ${level}.`);
+      setTimeout(() => setErrorMessage(''), 3000); // Limpa a mensagem de erro após 3 segundos
+      return;
+    }
 
     try {
-        const response = await axios.get(`https://back-end-retz.onrender.com/getConteudo/${level}`);
-        const conteudo = response.data;
+      const response = await axios.get(`https://back-end-retz.onrender.com/getConteudo/${level}`);
+      const conteudo = response.data;
 
-        navigate('/Conteudo', { state: { conteudo, level } }); 
+      navigate('/Conteudo', { state: { conteudo, level } }); 
     } catch (error) {
-        console.error('Error fetching content:', error);
+      console.error('Error fetching content:', error);
     }
-};
+  };
 
   const groupedSteps = groupStepsByRows(steps);
 
@@ -81,14 +108,15 @@ function HomePage() {
                 label={step.label}
                 level={step.level}
                 isSelected={selectedLevel === step.level}
-                progress={step.progress}  
                 onClick={() => handleStepClick(step.level)}
               />
             ))}
           </div>
         ))}
       </div>
-      
+
+      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibe a mensagem de erro */}
+
       <MenuBar />
     </div>
   );

@@ -39,14 +39,35 @@ function InsereDadosScreen() {
         }
     
         try {
-            const response = await axios.post('https://back-end-retz.onrender.com/userLogin', {
+            const loginResponse = await axios.post('https://back-end-retz.onrender.com/userLogin', {
                 email: formData.usernameOrEmail,
                 senha: formData.senha,
             });
     
-            if (response.status === 200) {
-                localStorage.setItem('userEmail', formData.usernameOrEmail); 
-                navigate('/HomePage');
+            if (loginResponse.status === 200) {
+                // Agora faça a segunda chamada para obter os dados completos do usuário
+                const userResponse = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${formData.usernameOrEmail}`);
+
+                if (userResponse.status === 200 && userResponse.data) {
+                    const user = userResponse.data;
+                    
+                    // Salve todos os dados do usuário no localStorage
+                    localStorage.setItem('userId', user.nCdUsuario);
+                    localStorage.setItem('userName', user.nome);
+                    localStorage.setItem('userEmail', user.email);
+                    localStorage.setItem('userNickname', user.apelido);
+                    localStorage.setItem('userVida', user.vida);
+                    localStorage.setItem('userCoin', user.coin);
+                    localStorage.setItem('userPontos', user.pontos);
+                    localStorage.setItem('userProgresso', user.progresso);
+                    localStorage.setItem('userFotoPerfil', user.fotoPerfil);
+                    localStorage.setItem('userOfensiva', user.ofensiva);
+
+                    navigate('/HomePage');
+                } else {
+                    setMessage('Erro ao carregar os dados do usuário.');
+                    setShowError(true);
+                }
             }
         } catch (error) {
             if (error.response && error.response.status === 401) {
@@ -70,6 +91,7 @@ function InsereDadosScreen() {
     const handleCloseTerms = () => {
         setShowTerms(false);
     };
+
     return (
         <div className='MainBox'>
             <MainTitle text={'Insira seus dados'}/>
@@ -99,8 +121,8 @@ function InsereDadosScreen() {
             <a href="/NovaSenha">Esqueci a senha</a>
             <div onClick={handleShowTerms} className='show-terms'>
             <p>
-        Ao entrar no Monetize+, você concorda com nossos <a href="#" onClick={handleCloseTerms}>Termos</a> e <a href="#" onClick={handleCloseTerms}>Política de Privacidade</a>.
-      </p>
+                Ao entrar no Monetize+, você concorda com nossos <a href="#" onClick={handleCloseTerms}>Termos</a> e <a href="#" onClick={handleCloseTerms}>Política de Privacidade</a>.
+            </p>
             </div>
             {showTerms && <PrivacyTerms onClose={handleCloseTerms} />}
 

@@ -46,7 +46,7 @@ const AppRoutes = () => {
                     <Route path="/Ranking" element={<Ranking />} />
                     <Route path="/Quizz" element={<Quizz />} />
                     <Route path="/Conteudo" element={<Conteudo />} />
-                     <Route path="/Configuracoes" element={<Configuracoes />} />
+                    <Route path="/Configuracoes" element={<Configuracoes />} />
                 </Routes>
         //     </CSSTransition>
         // </TransitionGroup>

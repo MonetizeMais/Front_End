@@ -71,10 +71,11 @@ function CadastroDadosScreen() {
                 apelido: formData.apelido,
                 senha: formData.senha,
                 ofensiva: 0,
-                vida: 10,
-                coin: 0,
+                vida: 5,
+                coin: 10,
                 pontos: 0,
-                fotoPerfil: "https://lh3.googleusercontent.com/pw/AP1GczOvc6d0ZiIAHmbP5QMYbOlHTsxeRapLHJwzIqlNHJUEn9lFoplFYWlKTTSyGAEbkCP7YEhiDb-TDJ-cwZbmMrVyU5jTbMN-LU5eL15ySoIlvcvq0upBoRqtpyCV2OXvEocoXLdj9O3konWcio15dn0=w631-h617-s-no-gm?authuser=1",
+                progresso: 0,
+                fotoPerfil: "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700",
             });
 
             if (response.status === 200) {

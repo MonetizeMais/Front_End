@@ -91,9 +91,6 @@ function Conteudo() {
       <div className="question-header_Quizz">
         <img src={Close} alt="Close" className="Close_Quizz" onClick={handleClose} /> 
 
-        <div className="progress-bar_Quizz">
-          <div className="progress_Quizz" style={{ width: '50%' }}></div>
-        </div>
 
         <ul className="header-links-Quizz">
           <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>

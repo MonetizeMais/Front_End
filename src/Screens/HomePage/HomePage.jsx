@@ -4,7 +4,8 @@ import MenuBar from '../../components/MenuBar/MenuBar';
 import ScoreBar from '../../components/ScoreBar/ScoreBar';
 import Step from '../../components/Step/Step';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; 
+import axios from 'axios';
+import Popup from '../../components/Popup/Popup';
 
 function HomePage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
@@ -14,14 +15,14 @@ function HomePage() {
 
   useEffect(() => {
     const fetchUserProgress = async () => {
-      const userEmail = localStorage.getItem('userEmail'); // Pegue o email do usuário do localStorage
+      const userEmail = localStorage.getItem('userEmail');
       
       if (userEmail) {
         try {
           const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
           if (response.status === 200) {
-            const { progresso } = response.data; // Pegue o progresso do usuário
-            setUserProgress(progresso); // Atualize o estado com o valor do progresso
+            const { progresso } = response.data;
+            setUserProgress(progresso);
           }
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
@@ -29,8 +30,8 @@ function HomePage() {
       }
     };
 
-    fetchUserProgress(); // Chama a função para buscar o progresso ao carregar o componente
-  }, []); // O useEffect será executado apenas uma vez, ao carregar o componente
+    fetchUserProgress(); 
+  }, []); 
 
   const steps = [
     { label: 'Básico 1', level: 1 },
@@ -76,10 +77,8 @@ function HomePage() {
   const handleStepClick = async (level) => {
     setSelectedLevel(level);
     
-    // Verificação do progresso do usuário
     if (userProgress < level) {
       setErrorMessage(`Progresso insuficiente! Complete o nível ${userProgress} antes de acessar o nível ${level}.`);
-      setTimeout(() => setErrorMessage(''), 3000); // Limpa a mensagem de erro após 3 segundos
       return;
     }
 
@@ -115,7 +114,12 @@ function HomePage() {
         ))}
       </div>
 
-      {errorMessage && <div className="error-message">{errorMessage}</div>} {/* Exibe a mensagem de erro */}
+      {errorMessage && (
+        <Popup
+          message={errorMessage}
+          onClose={() => setErrorMessage('')}
+        />
+      )}
 
       <MenuBar />
     </div>

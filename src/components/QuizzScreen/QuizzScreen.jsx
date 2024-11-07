@@ -82,10 +82,6 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
           alt="Fechar"
         />
 
-        <div className="progress-bar_Quizz">
-          <div className="progress_Quizz" style={{ width: `${userStats.progresso * 100}%` }}></div> {/* Progresso baseado no campo 'progresso' */}
-        </div>
-
         <ul className="header-links-Quizz">
           <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>
           <li><span className="icon-gem"></span> <span>{userStats.coin}</span></li>

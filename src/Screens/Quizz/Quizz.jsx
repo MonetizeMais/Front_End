@@ -11,10 +11,9 @@ function Quizz() {
   const navigate = useNavigate();
   
   const level = location.state ? location.state.level : null;
-  const email = location.state ? location.state.email : null; // Supondo que o email do usuário esteja disponível na `location.state`
+  const email = location.state ? location.state.email : null; 
 
   useEffect(() => {
-    // Carregar o progresso do usuário do localStorage
     const storedProgress = localStorage.getItem('userProgress');
     if (storedProgress) {
       setUserProgress(parseFloat(storedProgress));
@@ -41,12 +40,12 @@ function Quizz() {
       if (userProgress < level) {
         const newProgress = userProgress + 0.5;
         setUserProgress(newProgress);
-        localStorage.setItem('userProgress', newProgress.toString()); // Atualiza no localStorage
+        localStorage.setItem('userProgress', newProgress.toString()); 
 
         if (email) {
           axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
             .then(response => {
-              console.log(response.data); // Exibe a resposta da API no console
+              console.log(response.data); 
             })
             .catch(error => {
               console.error('Erro ao atualizar o progresso no banco de dados:', error);
@@ -73,7 +72,7 @@ function Quizz() {
       handleAnswer={handleAnswer}
       nextRoute="/Finalizar"
       level={level}
-      userProgress={userProgress}  // Passando o progresso para o QuizzScreen
+      userProgress={userProgress}  
     />
   );
 }

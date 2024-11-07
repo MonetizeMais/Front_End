@@ -1,96 +1,120 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Configuracoes.css';
 import logo from '../../Assets/Mascote 2.png';
 import setaIcon from '../../Assets/arrow.png';
-import MainButton from '../../components/Button/button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Configuracoes() {
   const navigate = useNavigate();
-  const initialUsername = "username_exemplo";
-  const initialEmail = "email@exemplo.com";
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  // Obter o e-mail do localStorage
+  const [userEmail, setUserEmail] = useState('');
+  useEffect(() => {
+    const email = localStorage.getItem('userEmail');
+    if (email) {
+      setUserEmail(email); // Seta o e-mail do usuário logado
+    }
+  }, []);
+
+  const [novoNome, setNovoNome] = useState(''); // Estado para o novo nome
+  const [novoEmail, setNovoEmail] = useState(''); // Estado para o novo email
   const [senhaAntiga, setSenhaAntiga] = useState('');
   const [novaSenha, setNovaSenha] = useState('');
   const [confirmSenha, setConfirmSenha] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // Estado para a mensagem de erro
 
-  const handleUsernameChange = (e) => setUsername(e.target.value);
-  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleNovoNomeChange = (e) => setNovoNome(e.target.value);
+  const handleNovoEmailChange = (e) => setNovoEmail(e.target.value);
   const handleSenhaAntigaChange = (e) => setSenhaAntiga(e.target.value);
   const handleNovaSenhaChange = (e) => setNovaSenha(e.target.value);
   const handleConfirmSenhaChange = (e) => setConfirmSenha(e.target.value);
 
+  const handleVoltar = () => navigate('/perfil');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validação de senha
+    const senhaRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,}$/; // Senha com pelo menos 5 caracteres, letras e números
+    if (!senhaRegex.test(novaSenha)) {
+      setErrorMessage("A nova senha deve ter pelo menos 5 caracteres e conter letras e números.");
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
+      return;
+    }
+
+    if (novaSenha !== confirmSenha) {
+      setErrorMessage("As novas senhas não coincidem.");
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
+      return;
+    }
+
+    // Validação de e-mail
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (novoEmail && !emailRegex.test(novoEmail)) {
+      setErrorMessage("O e-mail deve ser do tipo @gmail.com.");
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
+      return;
+    }
+
     try {
-      if (username || email) {
-        // Atualizar username e/ou email
-        await axios.put(`https://back-end-retz.onrender.com/updateEmailApelido/{userId}`, {
-          apelido: username || initialUsername,
-          email: email || initialEmail
-        });
-      }
-      if (novaSenha && novaSenha === confirmSenha) {
-        // Atualizar senha
-        await axios.put('https://back-end-retz.onrender.com/updatePassword', {
-          email: email || initialEmail,
-          password: novaSenha,
-          oldPassword: senhaAntiga
-        });
-      }
+      const response = await axios.put('https://back-end-retz.onrender.com/updatePassword', {
+        email: userEmail, // Usando o e-mail do localStorage
+        password: novaSenha,
+      });
 
-      // Mostrar popup de sucesso
-      setShowPopup(true);
-      setTimeout(() => setShowPopup(false), 3000); // Oculta o popup após 3 segundos
-
-      // Limpar campos
-      setUsername('');
-      setEmail('');
-      setSenhaAntiga('');
-      setNovaSenha('');
-      setConfirmSenha('');
+      if (response.status === 200) {
+        setShowSuccessPopup(true);
+        setNovoNome(''); // Limpa o campo de nome após o sucesso
+        setNovoEmail(''); // Limpa o campo de email após o sucesso
+        setSenhaAntiga('');
+        setNovaSenha('');
+        setConfirmSenha('');
+        setErrorMessage(''); // Limpa a mensagem de erro
+        setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
+      }
     } catch (error) {
-      console.error('Erro ao atualizar configurações:', error);
+      console.error("Erro ao atualizar a senha:", error);
+      setErrorMessage("Erro ao atualizar a senha. Tente novamente.");
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
     }
   };
 
-  const handleVoltar = () => navigate('/perfil');
-
   return (
-    <div className="configuracoes-page">
+    <div className='teste'>
       <button onClick={handleVoltar} className="voltar-btn">
         <img src={setaIcon} alt="Ícone de Voltar" className="seta-icon" />
       </button>
       <h1 className="configuracoes-title">Configurações</h1>
-      <div className="configuracoes-avatar-container">
+      <div className="configuracoes-code">
         <img src={logo} alt="Avatar do usuário" className="configuracoes-avatar" />
       </div>
-      <form onSubmit={handleSubmit} className="configuracoes-form">
+      <form onSubmit={handleSubmit} className="configuracoes-container">
         <div className="configuracoes-dados">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Nome:</label>
           <input
             type="text"
-            id="username"
-            value={username}
-            onChange={handleUsernameChange}
+            id="novoNome"
+            value={novoNome} // Novo nome inserido pelo usuário
+            onChange={handleNovoNomeChange}
             className="configuracoes-input"
-            placeholder={initialUsername}
+            placeholder="Novo nome"
           />
         </div>
         <div className="configuracoes-dados">
           <label htmlFor="email">E-mail:</label>
           <input
             type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
+            id="novoEmail"
+            value={novoEmail} // Novo email inserido pelo usuário
+            onChange={handleNovoEmailChange}
             className="configuracoes-input"
-            placeholder={initialEmail}
+            placeholder="Novo email"
           />
         </div>
         <div className="configuracoes-dados">
@@ -101,7 +125,6 @@ function Configuracoes() {
             value={senhaAntiga}
             onChange={handleSenhaAntigaChange}
             className="configuracoes-input"
-            placeholder="Digite sua senha antiga"
           />
         </div>
         <div className="configuracoes-dados">
@@ -112,7 +135,6 @@ function Configuracoes() {
             value={novaSenha}
             onChange={handleNovaSenhaChange}
             className="configuracoes-input"
-            placeholder="Digite sua nova senha"
           />
         </div>
         <div className="configuracoes-dados">
@@ -123,13 +145,23 @@ function Configuracoes() {
             value={confirmSenha}
             onChange={handleConfirmSenhaChange}
             className="configuracoes-input"
-            placeholder="Confirme sua nova senha"
           />
         </div>
-        <button className='botaoPrincipal'>Salvar</button>
+        <button type="submit" className="botaoPrincipal">Salvar</button>
       </form>
 
-      {showPopup && <div className="popup-sucesso">Alterações salvas com sucesso!</div>}
+      {showSuccessPopup && (
+  <div 
+    className="popup-sucesso" 
+    style={{ 
+      backgroundColor: errorMessage ? '#fa5b77' : 'white', // Ajusta a cor de fundo corretamente
+      border: '2px solid #fa5b77' 
+    }}
+  >
+    {errorMessage || "Alterações salvas com sucesso!"}
+  </div>
+)}
+
     </div>
   );
 }

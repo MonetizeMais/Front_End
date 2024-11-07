@@ -20,7 +20,8 @@ function Ranking() {
       // Buscar todos os usuários com suas fotos de perfil atualizadas
       axios.get('https://back-end-retz.onrender.com/getAllUsersByPoints')
         .then(response => {
-          setUsers(response.data);  // Assume que response.data inclui a URL da foto de perfil e outros dados
+          setUsers(response.data);
+          console.log(response.data);  // Assume que response.data inclui a URL da foto de perfil e outros dados
         })
         .catch(error => {
           console.error('Erro ao buscar os usuários:', error);  
@@ -31,7 +32,19 @@ function Ranking() {
   return (
     <div>
       <MenuBar />
-      <h2 className="ranking-title">Venha ver o ranking!</h2>
+      <h2 className="ranking-title">RANKING</h2>
+
+      {users
+        .filter(user => user.email === loggedInUserEmail)
+        .map(user => (
+          <div className='user-container'>
+            <div className='user-information'>
+              <img key={user.email} src={user.fotoPerfil || pig} alt="Foto do usuário logado" className="logged-user-photo" />
+              <p id='nome'>{user.nome}</p>
+              <p id='nome'>{user.apelido}</p>
+              </div>
+            </div>
+      ))}
 
       {errorMessage ? (
         <p>{errorMessage}</p>
@@ -39,7 +52,7 @@ function Ranking() {
         <div className="ranking-container">
           {users.map((user, index) => {
             let cardClass = "ranking-card";
-            
+
             if (index === 0) {
               cardClass += " first-place"; 
             } else if (user.email === loggedInUserEmail) {
@@ -62,9 +75,8 @@ function Ranking() {
                     <div className="tag-eu">Eu</div>
                   )}
                 </div>
-                <div className="user-details">
-                  <p>{user.nome}</p>
-                </div>
+                <p id='nome'>{user.apelido}</p>
+                <p>{user.pontos}</p>
               </div>
             );
           })}

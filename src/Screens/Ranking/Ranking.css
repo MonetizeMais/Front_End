@@ -9,57 +9,93 @@
   display: flex;
   flex-direction: column; 
   align-items: center; 
-  margin-top: 20px; 
-  padding: 20px; 
+  margin-top: 2rem; 
   overflow-y: auto; 
-  max-height: 660px;
+  height: 100%;
 }
 
 .ranking-card {
-  position: relative; 
-  width: 310px;
-  height: 55px;
-  background-color: #C7C7C9;
+  width: 80%;
+  height: 3rem;
+  background-color: #f7f7f7;
   display: flex;
   align-items: center;
-  margin: 10px 0;
-  border-radius: 15px;
-  padding: 10px;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0.5rem 0;
+  gap: 1rem;
+  font-family: Arial, sans-serif;
 }
 
-.ranking-card.logged-user {
-  background-color: #FFB8C9;
+.ranking-card img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.ranking-card .position {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.ranking-card .name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.ranking-card p{
+  height: 100%;
+  margin: auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.logged-user-photo{
+  height: 7rem;
+  width: 7rem;
+}
+
+.user-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-information{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
 }
 
 .ranking-card.first-place {
-  background-color: #FA5B77;
-  height: 100px; 
-  width: 325px;
+  background-color: #FFB8C9;
+  height: 3rem; 
+  width: 80%;
 }
 
 .user-photo {
-  width: 60px;
-  height: 60px;
-  overflow: hidden;
-  margin-right: 10px;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .user-photo img {
-  width: 100%;
-  height: auto;
-}
-
-.user-details {
-  display: flex;
-  flex-direction: column;
+  width: 90%;
+  height: 90%;
 }
 
 .medal-container {
-  position: absolute; 
-  width: 25px; 
-  height: 25px; 
-  top: 49px; 
-  left: 44px; 
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .medalha {
@@ -73,9 +109,5 @@
   border-radius: 10px;
   padding: 0.2px 20px;
   font-size: 12px;
-  position: absolute;
-  bottom: 2px;
-  left: 12.3%;
-  transform: translateX(-50%);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }

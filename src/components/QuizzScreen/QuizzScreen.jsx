@@ -4,15 +4,17 @@ import Logo from '../../Assets/Mascote Teacher.png';
 import Close from '../../Assets/Close.png';
 import '../QuizzScreen/QuizzScreen.css';
 import OptionButton from '../../components/OptionButton/OptionButton.jsx';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextRoute }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [fade, setFade] = useState(false);
   const [userStats, setUserStats] = useState({ vida: 0, coin: 0, progresso: 0 });
-  const [showPopup, setShowPopup] = useState(false); // Estado para controlar o popup
-  const [isCorrect, setIsCorrect] = useState(null); // Estado para saber se a resposta está certa ou errada
+  const [showPopup, setShowPopup] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
+  const levelAtual = location.state ? location.state.level : null; // Obtém o nível esperado do usuário
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -23,7 +25,7 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
           const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
           if (response.status === 200) {
             const { vida, coin, progresso } = response.data;
-            setUserStats({ vida, coin, progresso }); // Armazena o valor de progresso aqui
+            setUserStats({ vida, coin, progresso });
           }
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
@@ -44,31 +46,47 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
 
   const handleContinueClick = () => {
     if (selectedOption) {
-      // Verifica se a resposta do usuário está correta
       const correct = selectedOption === correctAnswer;
-      setIsCorrect(correct); // Atualiza o estado com a resposta correta/errada
-      setShowPopup(true); // Exibe o popup
+      setIsCorrect(correct);
+      setShowPopup(true); 
     }
   };
 
   const handlePopupClose = () => {
     setShowPopup(false);
-    if (isCorrect) {
-      const newProgress = userStats.progresso + 0.5; // Usando o valor de 'progresso' do usuário diretamente
-      
-      const email = localStorage.getItem('userEmail');
-      if (email) {
-        axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
-          .then(response => {
-            console.log('Progresso atualizado:', response.data);
-          })
-          .catch(error => {
-            console.error('Erro ao atualizar progresso:', error);
-          });
-      }
 
-      handleAnswer(newProgress);
+    // Primeiro if para verificar se a resposta está correta
+    if (isCorrect) {
+      // Segundo if para verificar a lógica do progresso
+      const userProgressVerification = userStats.progresso + 0.5;
+      const userProgressVerification2 = userStats.progresso - 0.5;
+
+      if ((userProgressVerification === levelAtual) || (userProgressVerification2 === levelAtual)) {
+        const newProgress = userStats.progresso + 0.5;
+        const email = localStorage.getItem('userEmail');
+
+        if (email) {
+          // Atualiza o progresso no backend
+          axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
+            .then(response => {
+              console.log('Progresso atualizado:', response.data);
+              setUserStats((prevStats) => ({
+                ...prevStats,
+                progresso: newProgress,
+              }));
+              localStorage.setItem('userProgresso', newProgress);
+            })
+            .catch(error => {
+              console.error('Erro ao atualizar progresso:', error);
+            });
+        }
+
+        // Chama o handler para processar a resposta correta
+        handleAnswer(newProgress);
+      }
     }
+
+    // Navega para a próxima rota
     navigate(nextRoute);
   };
 

@@ -11,7 +11,7 @@ function Conteudo() {
   const [userStats, setUserStats] = useState({
     vida: 0,
     coin: 0,
-    progresso: 0, // Incluindo progresso
+    progresso: 0, 
   });
   const location = useLocation(); 
   const navigate = useNavigate(); 
@@ -26,9 +26,10 @@ function Conteudo() {
         try {
           const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
           if (response.status === 200) {
-            const { vida, coin, progresso } = response.data; // Incluindo progresso
+            const { vida, coin, progresso } = response.data; 
             setUserStats({ vida, coin, progresso });
-            localStorage.setItem('userProgresso', progresso); // Salvar progresso no localStorage
+            // Salva o progresso atual no localStorage
+            localStorage.setItem('userProgresso', progresso); 
           }
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
@@ -56,32 +57,24 @@ function Conteudo() {
 
   const handleStartQuizz = async () => {
     const userEmail = localStorage.getItem('userEmail');
-    const userProgresso = parseFloat(localStorage.getItem('userProgresso'));
-
-    if (userEmail && userStats.progresso === level) {
+    window.alert(userStats.progresso)
+    window.alert(level)
+    if (userEmail && userStats.progresso == level) {
       try {
-        // Calcular o novo progresso somando 0.5 ao progresso atual
         const novoProgresso = userStats.progresso + 0.5;
-
-        // Chamada para a API
         await axios.put(`https://back-end-retz.onrender.com/updateProgresso/${userEmail}/${novoProgresso}`);
-
-        // Atualizar o estado do progresso localmente após sucesso na atualização
         setUserStats((prevStats) => ({
           ...prevStats,
           progresso: novoProgresso,
         }));
 
-        // Atualizar o progresso no localStorage
         localStorage.setItem('userProgresso', novoProgresso);
 
-        // Navegar para a página de Quizz
         navigate('/Quizz', { state: { level } });
       } catch (error) {
         console.error('Erro ao atualizar progresso do usuário:', error);
       }
     } else {
-      // Navegar para o Quizz mesmo sem atualizar o progresso
       navigate('/Quizz', { state: { level } });
     }
   };
@@ -90,7 +83,6 @@ function Conteudo() {
     <div className="ConteudoScreen">
       <div className="question-header_Quizz">
         <img src={Close} alt="Close" className="Close_Quizz" onClick={handleClose} /> 
-
 
         <ul className="header-links-Quizz">
           <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>

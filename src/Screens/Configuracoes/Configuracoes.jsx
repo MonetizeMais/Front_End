@@ -8,25 +8,36 @@ import axios from 'axios';
 function Configuracoes() {
   const navigate = useNavigate();
 
-  // Obter o e-mail do localStorage
   const [userEmail, setUserEmail] = useState('');
+  const [userSenha, setUserSenha] = useState('');  
   useEffect(() => {
     const email = localStorage.getItem('userEmail');
     if (email) {
-      setUserEmail(email); // Seta o e-mail do usuário logado
+      setUserEmail(email);  
+      fetchUserData(email); 
     }
   }, []);
 
-  const [novoNome, setNovoNome] = useState(''); // Estado para o novo nome
-  const [novoEmail, setNovoEmail] = useState(''); // Estado para o novo email
+  const fetchUserData = async (email) => {
+    try {
+      const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${email}`);
+      if (response.status === 200) {
+        setUserSenha(response.data.senha); 
+      }
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error);
+    }
+  };
+
+  const [novoNome, setNovoNome] = useState('');
   const [senhaAntiga, setSenhaAntiga] = useState('');
   const [novaSenha, setNovaSenha] = useState('');
   const [confirmSenha, setConfirmSenha] = useState('');
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); // Estado para a mensagem de erro
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isError, setIsError] = useState(false); 
 
   const handleNovoNomeChange = (e) => setNovoNome(e.target.value);
-  const handleNovoEmailChange = (e) => setNovoEmail(e.target.value);
   const handleSenhaAntigaChange = (e) => setSenhaAntiga(e.target.value);
   const handleNovaSenhaChange = (e) => setNovaSenha(e.target.value);
   const handleConfirmSenhaChange = (e) => setConfirmSenha(e.target.value);
@@ -35,55 +46,71 @@ function Configuracoes() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validação de senha
-    const senhaRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,}$/; // Senha com pelo menos 5 caracteres, letras e números
-    if (!senhaRegex.test(novaSenha)) {
+  
+    // Verificar se a senha antiga está correta, mas somente se o campo da senha antiga for preenchido
+    if (senhaAntiga && senhaAntiga !== userSenha) {
+      setErrorMessage("Senha antiga incorreta");
+      setIsError(true);
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+      return;
+    }
+  
+    // Verificar se as novas senhas coincidem, mas somente se o campo nova senha for preenchido
+    if (novaSenha && novaSenha !== confirmSenha) {
+      setErrorMessage("Novas senhas não coincidem");
+      setIsError(true);
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+      return;
+    }
+  
+    // Verificar a validade da nova senha, mas somente se o campo nova senha for preenchido
+    const senhaRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
+    if (novaSenha && !senhaRegex.test(novaSenha)) {
       setErrorMessage("A nova senha deve ter pelo menos 5 caracteres e conter letras e números.");
+      setIsError(true);
       setShowSuccessPopup(true);
-      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
+      setTimeout(() => setShowSuccessPopup(false), 3000);
       return;
     }
-
-    if (novaSenha !== confirmSenha) {
-      setErrorMessage("As novas senhas não coincidem.");
-      setShowSuccessPopup(true);
-      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
-      return;
-    }
-
-    // Validação de e-mail
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-    if (novoEmail && !emailRegex.test(novoEmail)) {
-      setErrorMessage("O e-mail deve ser do tipo @gmail.com.");
-      setShowSuccessPopup(true);
-      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
-      return;
-    }
-
+  
     try {
-      const response = await axios.put('https://back-end-retz.onrender.com/updatePassword', {
-        email: userEmail, // Usando o e-mail do localStorage
-        password: novaSenha,
-      });
-
-      if (response.status === 200) {
-        setShowSuccessPopup(true);
-        setNovoNome(''); // Limpa o campo de nome após o sucesso
-        setNovoEmail(''); // Limpa o campo de email após o sucesso
-        setSenhaAntiga('');
-        setNovaSenha('');
-        setConfirmSenha('');
-        setErrorMessage(''); // Limpa a mensagem de erro
-        setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
+      // Atualizar o username, se houver
+      if (novoNome) {
+        const nomeResponse = await axios.put(`https://back-end-retz.onrender.com/updateApelido/${userEmail}/${novoNome}`);
+        if (nomeResponse.status === 200) {
+          localStorage.setItem('userName', novoNome);
+        }
       }
-    } catch (error) {
-      console.error("Erro ao atualizar a senha:", error);
-      setErrorMessage("Erro ao atualizar a senha. Tente novamente.");
+  
+      // Atualizar a senha, se houver
+      if (novaSenha) {
+        await axios.put('https://back-end-retz.onrender.com/updatePassword', {
+          email: userEmail,
+          password: novaSenha,
+        });
+      }
+  
+      // Limpar os campos e exibir mensagem de sucesso
+      setIsError(false);
+      setErrorMessage('');
+      setNovoNome('');
+      setSenhaAntiga('');
+      setNovaSenha('');
+      setConfirmSenha('');
       setShowSuccessPopup(true);
-      setTimeout(() => setShowSuccessPopup(false), 3000); // Fecha o popup após 3 segundos
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+  
+    } catch (error) {
+      console.error("Erro ao atualizar as informações:", error);
+      setErrorMessage("Erro ao atualizar as informações. Tente novamente.");
+      setIsError(true);
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
     }
   };
+  
 
   return (
     <div className='teste'>
@@ -96,25 +123,14 @@ function Configuracoes() {
       </div>
       <form onSubmit={handleSubmit} className="configuracoes-container">
         <div className="configuracoes-dados">
-          <label htmlFor="username">Nome:</label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="novoNome"
-            value={novoNome} // Novo nome inserido pelo usuário
+            value={novoNome}
             onChange={handleNovoNomeChange}
             className="configuracoes-input"
-            placeholder="Novo nome"
-          />
-        </div>
-        <div className="configuracoes-dados">
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="novoEmail"
-            value={novoEmail} // Novo email inserido pelo usuário
-            onChange={handleNovoEmailChange}
-            className="configuracoes-input"
-            placeholder="Novo email"
+            placeholder="Username"
           />
         </div>
         <div className="configuracoes-dados">
@@ -151,17 +167,16 @@ function Configuracoes() {
       </form>
 
       {showSuccessPopup && (
-  <div 
-    className="popup-sucesso" 
-    style={{ 
-      backgroundColor: errorMessage ? '#fa5b77' : 'white', // Ajusta a cor de fundo corretamente
-      border: '2px solid #fa5b77' 
-    }}
-  >
-    {errorMessage || "Alterações salvas com sucesso!"}
-  </div>
-)}
-
+        <div
+          className="popup-sucesso"
+          style={{
+            backgroundColor: isError ? '#fa5b77' : 'white',
+            color: isError ? 'white' : '#fa5b77'
+          }}
+        >
+          {errorMessage || "Alterações salvas com sucesso!"}
+        </div>
+      )}
     </div>
   );
 }

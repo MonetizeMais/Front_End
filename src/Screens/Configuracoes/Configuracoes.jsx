@@ -46,15 +46,17 @@ function Configuracoes() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (senhaAntiga !== userSenha) {
+  
+    // Verificar se a senha antiga está correta, mas somente se o campo da senha antiga for preenchido
+    if (senhaAntiga && senhaAntiga !== userSenha) {
       setErrorMessage("Senha antiga incorreta");
       setIsError(true);
       setShowSuccessPopup(true);
       setTimeout(() => setShowSuccessPopup(false), 3000);
       return;
     }
-
+  
+    // Verificar se as novas senhas coincidem, mas somente se o campo nova senha for preenchido
     if (novaSenha && novaSenha !== confirmSenha) {
       setErrorMessage("Novas senhas não coincidem");
       setIsError(true);
@@ -62,7 +64,8 @@ function Configuracoes() {
       setTimeout(() => setShowSuccessPopup(false), 3000);
       return;
     }
-
+  
+    // Verificar a validade da nova senha, mas somente se o campo nova senha for preenchido
     const senhaRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
     if (novaSenha && !senhaRegex.test(novaSenha)) {
       setErrorMessage("A nova senha deve ter pelo menos 5 caracteres e conter letras e números.");
@@ -71,22 +74,25 @@ function Configuracoes() {
       setTimeout(() => setShowSuccessPopup(false), 3000);
       return;
     }
-
+  
     try {
+      // Atualizar o username, se houver
       if (novoNome) {
         const nomeResponse = await axios.put(`https://back-end-retz.onrender.com/updateApelido/${userEmail}/${novoNome}`);
         if (nomeResponse.status === 200) {
           localStorage.setItem('userName', novoNome);
         }
       }
-
+  
+      // Atualizar a senha, se houver
       if (novaSenha) {
         await axios.put('https://back-end-retz.onrender.com/updatePassword', {
           email: userEmail,
           password: novaSenha,
         });
       }
-
+  
+      // Limpar os campos e exibir mensagem de sucesso
       setIsError(false);
       setErrorMessage('');
       setNovoNome('');
@@ -95,7 +101,7 @@ function Configuracoes() {
       setConfirmSenha('');
       setShowSuccessPopup(true);
       setTimeout(() => setShowSuccessPopup(false), 3000);
-
+  
     } catch (error) {
       console.error("Erro ao atualizar as informações:", error);
       setErrorMessage("Erro ao atualizar as informações. Tente novamente.");
@@ -104,6 +110,7 @@ function Configuracoes() {
       setTimeout(() => setShowSuccessPopup(false), 3000);
     }
   };
+  
 
   return (
     <div className='teste'>

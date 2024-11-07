@@ -45,13 +45,11 @@ function InsereDadosScreen() {
             });
     
             if (loginResponse.status === 200) {
-                // Agora faça a segunda chamada para obter os dados completos do usuário
                 const userResponse = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${formData.usernameOrEmail}`);
 
                 if (userResponse.status === 200 && userResponse.data) {
                     const user = userResponse.data;
                     
-                    // Salve todos os dados do usuário no localStorage
                     localStorage.setItem('userId', user.nCdUsuario);
                     localStorage.setItem('userName', user.nome);
                     localStorage.setItem('userEmail', user.email);
@@ -117,7 +115,7 @@ function InsereDadosScreen() {
               onClick={handleSubmit}>
               Entrar
             </button>
-
+            <br />
             <a href="/NovaSenha">Esqueci a senha</a>
             <div onClick={handleShowTerms} className='show-terms'>
             <p>

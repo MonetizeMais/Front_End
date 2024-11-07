@@ -1,4 +1,3 @@
-// Perfil.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Perfil.css';
@@ -14,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 function Perfil() {
   const navigate = useNavigate();
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
-  const [userData, setUserData] = useState({ nome: '', email: '' });
+  const [userData, setUserData] = useState({ apelido: '', email: '', fotoPerfil: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -31,7 +30,6 @@ function Perfil() {
         const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${email}`);
         if (response.status === 200) {
           setUserData(response.data);
-          // Atualiza o localStorage com a foto de perfil do banco de dados
           localStorage.setItem('profilePictureUrl', response.data.fotoPerfil);
         } else {
           setError('Usuário não encontrado.');
@@ -74,7 +72,7 @@ function Perfil() {
             <p className="perfil-error">{error}</p>
           ) : (
             <>
-              <p className="perfil-usuario">{userData.nome || 'Nome não disponível'}</p>
+              <p className="perfil-usuario">{userData.apelido || 'Nome não disponível'}</p>
               <p className="perfil-email">{userData.email || 'Email não disponível'}</p>
             </>
           )}

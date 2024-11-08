@@ -24,7 +24,7 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
 
       if (userEmail) {
         try {
-          const response = await axios.get(`http://localhost:8080/findUserByEmail/${userEmail}`);
+          const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
           if (response.status === 200) {
             const { vida, coin, progresso } = response.data;
             setUserStats({ vida, coin, progresso });
@@ -71,7 +71,7 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
       if ((userProgressVerification === levelAtual) || (userProgressVerification2 === levelAtual)) {
         const newProgress = userStats.progresso + 0.5;
       
-          axios.put(`http://localhost:8080/updateProgresso/${email}/${newProgress}`, {
+          axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`, {
             coin: userStats.coin + 5
           })
             .then(response => {
@@ -92,7 +92,7 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
       }
     } else {
       const vida = userStats.vida - 1;
-      axios.put(`http://localhost:8080/updateLife/${email}/${vida}`)
+      axios.put(`https://back-end-retz.onrender.com/updateLife/${email}/${vida}`)
         .then(response => {
           console.log('Progresso atualizado:', response.data);
           setUserStats((prevStats) => ({

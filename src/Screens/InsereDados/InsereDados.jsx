@@ -39,13 +39,13 @@ function InsereDadosScreen() {
         }
     
         try {
-            const loginResponse = await axios.post('http://localhost:8080/userLogin', {
+            const loginResponse = await axios.post('https://back-end-retz.onrender.com/userLogin', {
                 email: formData.usernameOrEmail,
                 senha: formData.senha,
             });
     
             if (loginResponse.status === 200) {
-                const userResponse = await axios.get(`http://localhost:8080/findUserByEmail/${formData.usernameOrEmail}`);
+                const userResponse = await axios.get(`hhttps://back-end-retz.onrender.com/findUserByEmail/${formData.usernameOrEmail}`);
 
                 if (userResponse.status === 200 && userResponse.data) {
                     const user = userResponse.data;

@@ -21,7 +21,7 @@ function HomePage() {
 
       if (userEmail) {
         try {
-          const response = await axios.get(`http://localhost:8080/findUserByEmail/${userEmail}`);
+          const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
           if (response.status === 200) {
             const { progresso } = response.data;
             setUserProgress(progresso);
@@ -62,7 +62,7 @@ function HomePage() {
     }
 
     try {
-      const response = await axios.get(`http://localhost:8080/getConteudo/${level}`);
+      const response = await axios.get(`https://back-end-retz.onrender.com/getConteudo/${level}`);
       const conteudo = response.data;
 
       navigate('/Conteudo', { state: { conteudo, level } });

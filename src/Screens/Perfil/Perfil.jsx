@@ -27,7 +27,7 @@ function Perfil() {
       }
   
       try {
-        const response = await axios.get(`http://localhost:8080/getUserByEmail/${email}`);
+        const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${email}`);
         if (response.status === 200) {
           setUserData(response.data);
           localStorage.setItem('profilePictureUrl', response.data.fotoPerfil);

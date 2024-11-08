@@ -42,7 +42,7 @@ function TelaPersonalizacao() {
     const fetchUserData = async () => {
       if (storedEmail) {
         try {
-          const response = await axios.get(`http://localhost:8080/getUserByEmail/${storedEmail}`);
+          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${storedEmail}`);
           if (response.status === 200) {
             setUserStats(response.data);
           }
@@ -77,7 +77,7 @@ function TelaPersonalizacao() {
     const preco = chapeus[selectedChapeuIndex].price ?? 0;
     if (userStats.coin >= preco) {
       try {
-        await axios.put(`http://localhost:8080/updateCoin/${userEmail}/${userStats.coin - preco}`);
+        await axios.put(`https://back-end-retz.onrender.com/updateCoin/${userEmail}/${userStats.coin - preco}`);
 
         setUserStats((prevStats) => ({ ...prevStats, coin: prevStats.coin - preco }));
         setChapelUnlocked((prev) => {
@@ -113,7 +113,7 @@ function TelaPersonalizacao() {
 
   const updateProfilePicture = async (url) => {
     try {
-      const response = await axios.put('http://localhost:8080/updateProfilePicture', {
+      const response = await axios.put('https://back-end-retz.onrender.com/updateProfilePicture', {
         email: userEmail,
         fotoPerfil: url
       });

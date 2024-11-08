@@ -14,7 +14,7 @@ function Comecar() {
       const storedEmail = localStorage.getItem('userEmail');
       if (storedEmail) {
         try {
-          const response = await axios.get(`http://localhost:8080/getUserByEmail/${storedEmail}`);
+          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${storedEmail}`);
           if (response.status === 200 && response.data) {
             setUserName(response.data.nome);
           } else {

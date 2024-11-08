@@ -20,7 +20,7 @@ function Configuracoes() {
 
   const fetchUserData = async (email) => {
     try {
-      const response = await axios.get(`http://localhost:8080/getUserByEmail/${email}`);
+      const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${email}`);
       if (response.status === 200) {
         setUserSenha(response.data.senha); 
       }
@@ -78,7 +78,7 @@ function Configuracoes() {
     try {
       // Atualizar o username, se houver
       if (novoNome) {
-        const nomeResponse = await axios.put(`http://localhost:8080/updateApelido/${userEmail}/${novoNome}`);
+        const nomeResponse = await axios.put(`https://back-end-retz.onrender.com/updateApelido/${userEmail}/${novoNome}`);
         if (nomeResponse.status === 200) {
           localStorage.setItem('userName', novoNome);
         }
@@ -86,7 +86,7 @@ function Configuracoes() {
   
       // Atualizar a senha, se houver
       if (novaSenha) {
-        await axios.put('http://localhost:8080/updatePassword', {
+        await axios.put('https://back-end-retz.onrender.com/updatePassword', {
           email: userEmail,
           password: novaSenha,
         });

@@ -16,7 +16,7 @@ const ScoreBar = () => {
       
       if (userEmail) {
         try {
-          const response = await axios.get(`http://localhost:8080/getUserByEmail/${userEmail}`);
+          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
           if (response.status === 200) {
             const { vida, coin } = response.data;
             setUserStats({ vida, coin });

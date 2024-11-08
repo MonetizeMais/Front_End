@@ -21,7 +21,7 @@ function Quizz() {
 
     const fetchQuestion = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/getPergunta/${level}`);
+        const response = await axios.get(`https://back-end-retz.onrender.com/getPergunta/${level}`);
         setQuestionData(response.data);
       } catch (error) {
         console.error('Error fetching question data:', error);
@@ -43,7 +43,7 @@ function Quizz() {
         localStorage.setItem('userProgress', newProgress.toString()); 
 
         if (email) {
-          axios.put(`http://localhost:8080/updateProgresso/${email}/${newProgress}`)
+          axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
             .then(response => {
               console.log(response.data); 
               navigate("/HomePage");

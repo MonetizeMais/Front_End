@@ -2,79 +2,129 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../TelaPersonalizacao/Telapersonalizacao.css';
 import MenuBar from '../../components/MenuBar/MenuBar';
+import Lock from '../../Assets/lock.png';
 
-const logoPoupinho = 'https://lh3.googleusercontent.com/pw/AP1GczOvc6d0ZiIAHmbP5QMYbOlHTsxeRapLHJwzIqlNHJUEn9lFoplFYWlKTTSyGAEbkCP7YEhiDb-TDJ-cwZbmMrVyU5jTbMN-LU5eL15ySoIlvcvq0upBoRqtpyCV2OXvEocoXLdj9O3konWcio15dn0=w631-h617-s-no-gm?authuser=1';
-const chapeus = [ 
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20rei.png?alt=media&token=807a1cf1-9356-43d5-a262-7961deb2ba86',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20rainha.png?alt=media&token=8f943150-c72d-45c6-b747-c0d03be644c5',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20bruxo.png?alt=media&token=c0190fa8-64aa-4732-811c-72f8e9af681c',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20festa.png?alt=media&token=8eecb493-67b7-4156-b471-9683c65701fd',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20la%C3%A7o.png?alt=media&token=b78c8c56-f6ea-4690-ae36-4b4e4f3a9115',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20chef.png?alt=media&token=9cdcda72-cc1a-411d-a275-5d167e81e864',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20cowboy.png?alt=media&token=9f3eb69a-4a7e-4c6d-9259-58f6e63ae3d9',
-  'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho%20-%20bigode.png?alt=media&token=d3e2f519-db12-4a81-8965-d81b52fb8c77',
-  ];
+const logoPoupinho = 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho9.png?alt=media&token=3f2fe64c-2967-4c08-96a7-62f55f924051';
+const chapeus = [
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho8.png?alt=media&token=7569346f-c23b-4aed-8e2d-03c6dd3b33c2' },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho7.png?alt=media&token=eb1cffbb-b698-446d-bbaa-5cbaf7b0a265' },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho6.png?alt=media&token=c14b8930-0a34-414c-9d78-0108a635b1ef' },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho5.png?alt=media&token=c59a6ac0-f880-4f04-bd3f-3a6dd4c5f9e4' },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho4.png?alt=media&token=dbdd8281-c14d-46d6-90a1-693a647c96c2' },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho3.png?alt=media&token=df2dadfe-b908-4489-a773-8dd5df6b3e0f' },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho2.png?alt=media&token=49a61666-df68-42a3-989e-7a762f854f4d' },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho1.png?alt=media&token=345e8c3b-9664-4179-b1f7-e74dffb9017e', price: 5 },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/poupinho9.png?alt=media&token=3f2fe64c-2967-4c08-96a7-62f55f924051', price: 10 },
+];
 
 function TelaPersonalizacao() {
   const [selectedChapeu, setSelectedChapeu] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [popupVisible, setPopupVisible] = useState(false);
+  const [userStats, setUserStats] = useState({ vida: 0, coin: 0 });
+  const [chapelUnlocked, setChapelUnlocked] = useState({});
+  const [purchasePopupVisible, setPurchasePopupVisible] = useState(false);
+  const [selectedChapeuIndex, setSelectedChapeuIndex] = useState(null);
+  const [popupMessage, setPopupMessage] = useState('');
 
   useEffect(() => {
     const storedEmail = localStorage.getItem('userEmail');
     setUserEmail(storedEmail);
 
     const storedImage = localStorage.getItem('profilePictureUrl');
-    if (storedImage) {
-      setSelectedChapeu(storedImage);
+    if (storedImage) setSelectedChapeu(storedImage);
+
+    const storedUnlockedHats = localStorage.getItem('unlockedHats');
+    if (storedUnlockedHats) {
+      setChapelUnlocked(JSON.parse(storedUnlockedHats));
     }
+
+    const fetchUserData = async () => {
+      if (storedEmail) {
+        try {
+          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${storedEmail}`);
+          if (response.status === 200) {
+            setUserStats(response.data);
+          }
+        } catch (error) {
+          console.error('Erro ao buscar dados do usuário:', error);
+        }
+      }
+    };
+    fetchUserData();
   }, []);
 
-  const handleChapeuClick = (chapeuUrl) => {
-    setSelectedChapeu(chapeuUrl);
-    localStorage.setItem('profilePictureUrl', chapeuUrl); 
-  };
+  const handleChapeuClick = (chapeuUrl, index) => {
+    const preco = chapeus[index]?.price ?? 0;
 
-  const updateProfilePicture = async (url) => {
-    const userEmail = localStorage.getItem('userEmail'); 
-    try {
-      const response = await axios.put('https://back-end-retz.onrender.com/updateProfilePicture', {
-        email: userEmail, 
-        fotoPerfil: url 
-      });
-      console.log('Foto de perfil atualizada com sucesso:', response.data);
-      return true; 
-    } catch (error) {
-      if (error.response) {
-        console.error('Erro ao atualizar a foto de perfil:', error.response.data);
-      } else if (error.request) {
-        console.error('Nenhuma resposta recebida do servidor:', error.request);
+    if (preco && !chapelUnlocked[index]) {
+      setSelectedChapeuIndex(index);
+
+      if (userStats.coin >= preco) {
+        setPopupMessage(`Deseja comprar este chapéu por ${preco} gemas?`);
+        setPurchasePopupVisible(true);
       } else {
-        console.error('Erro ao configurar a requisição:', error.message);
+        setPopupMessage(`Você não tem gemas suficientes para comprar este chapéu.`);
+        setPurchasePopupVisible(true);
       }
-      return false; 
+    } else {
+      setSelectedChapeu(chapeuUrl);
+      localStorage.setItem('profilePictureUrl', chapeuUrl);
     }
   };
 
-  const [errorMessage, setErrorMessage] = useState(null);
+  const handlePurchase = async () => {
+    const preco = chapeus[selectedChapeuIndex].price ?? 0;
+    if (userStats.coin >= preco) {
+      try {
+        await axios.put(`https://back-end-retz.onrender.com/updateCoin/${userEmail}/${userStats.coin - preco}`);
+
+        setUserStats((prevStats) => ({ ...prevStats, coin: prevStats.coin - preco }));
+        setChapelUnlocked((prev) => {
+          const updatedUnlocked = { ...prev, [selectedChapeuIndex]: true };
+          localStorage.setItem('unlockedHats', JSON.stringify(updatedUnlocked));
+          return updatedUnlocked;
+        });
+
+        setSelectedChapeu(chapeus[selectedChapeuIndex].image);
+        localStorage.setItem('profilePictureUrl', chapeus[selectedChapeuIndex].image);
+
+        setPurchasePopupVisible(false);
+      } catch (error) {
+        console.error('Erro ao atualizar gemas:', error);
+      }
+    } else {
+      setPurchasePopupVisible(false);
+    }
+  };
+
+
+  const closePurchasePopup = () => setPurchasePopupVisible(false);
 
   const handleEstilizarClick = async () => {
     if (selectedChapeu) {
-      setErrorMessage(null); 
       const success = await updateProfilePicture(selectedChapeu);
       if (success) {
-        localStorage.setItem('profilePictureUrl', selectedChapeu);
         setPopupVisible(true);
         setTimeout(() => setPopupVisible(false), 3000);
-      } else {
-        setErrorMessage("Falha ao atualizar a foto de perfil. Tente novamente.");
       }
     }
   };
-  
-  {errorMessage && <div className="error-popup">{errorMessage}</div>}
-  
+
+  const updateProfilePicture = async (url) => {
+    try {
+      const response = await axios.put('https://back-end-retz.onrender.com/updateProfilePicture', {
+        email: userEmail,
+        fotoPerfil: url
+      });
+      console.log('Foto de perfil atualizada com sucesso:', response.data);
+      return true;
+    } catch (error) {
+      console.error('Erro ao atualizar a foto de perfil:', error);
+      return false;
+    }
+  };
+
   return (
     <div className="personalizacao-container">
       <div className="poupinho-section">
@@ -83,18 +133,33 @@ function TelaPersonalizacao() {
           Estilizar o Poupinho!
         </button>
         {popupVisible && (
-          <div className="popup">
+          <div className="popup2">
             <p>Visual atualizado!</p>
           </div>
         )}
       </div>
       <div className="itens-personalizacao">
         {chapeus.map((chapeu, index) => (
-          <div key={index} className="item-personalizacao" onClick={() => handleChapeuClick(chapeu)}>
-            <img src={chapeu} alt={`Chapéu ${index + 1}`} />
+          <div key={index} className="item-personalizacao" onClick={() => handleChapeuClick(chapeu.image, index)}>
+            <img src={chapeu.image} alt={`Chapéu ${index + 1}`} className='hat-image' />
+            {chapeu.price && !chapelUnlocked[index] && (
+              <div className='lock-blur'>
+                <img src={Lock} width={35} className='lock-image' />
+              </div>
+            )}
           </div>
         ))}
       </div>
+
+      {purchasePopupVisible && (
+        <div className="popup-compra">
+          <p>{popupMessage}</p>
+          {userStats.coin >= chapeus[selectedChapeuIndex].price && (
+            <button onClick={handlePurchase}>Comprar</button>
+          )}
+          <button onClick={closePurchasePopup}>Cancelar</button>
+        </div>
+      )}
       <MenuBar />
     </div>
   );

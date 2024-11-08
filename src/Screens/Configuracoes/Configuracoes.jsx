@@ -1,55 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Configuracoes.css';
 import logo from '../../Assets/Mascote 2.png';
-import setaIcon from '../../Assets/arrow.png'; 
-import MainButton from '../../components/Button/button';
-import { useNavigate } from 'react-router-dom'; 
+import setaIcon from '../../Assets/arrow.png';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Configuracoes() {
-  const navigate = useNavigate(); 
-  const initialNome = "Nome do Usuário";
-  const initialUsername = "username_exemplo";
-  const initialEmail = "email@exemplo.com";
+  const navigate = useNavigate();
 
-  const [nomeUsuario, setNomeUsuario] = useState(initialNome);
-  const [username, setUsername] = useState(initialUsername);
-  const [email, setEmail] = useState(initialEmail);
+  const [userEmail, setUserEmail] = useState('');
+  const [userSenha, setUserSenha] = useState('');  
+  useEffect(() => {
+    const email = localStorage.getItem('userEmail');
+    if (email) {
+      setUserEmail(email);  
+      fetchUserData(email); 
+    }
+  }, []);
+
+  const fetchUserData = async (email) => {
+    try {
+      const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${email}`);
+      if (response.status === 200) {
+        setUserSenha(response.data.senha); 
+      }
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error);
+    }
+  };
+
+  const [novoNome, setNovoNome] = useState('');
   const [senhaAntiga, setSenhaAntiga] = useState('');
   const [novaSenha, setNovaSenha] = useState('');
   const [confirmSenha, setConfirmSenha] = useState('');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isError, setIsError] = useState(false); 
 
-  const handleNomeChange = (e) => {
-    setNomeUsuario(e.target.value);
-  };
+  const handleNovoNomeChange = (e) => setNovoNome(e.target.value);
+  const handleSenhaAntigaChange = (e) => setSenhaAntiga(e.target.value);
+  const handleNovaSenhaChange = (e) => setNovaSenha(e.target.value);
+  const handleConfirmSenhaChange = (e) => setConfirmSenha(e.target.value);
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
+  const handleVoltar = () => navigate('/perfil');
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleSenhaAntigaChange = (e) => {
-    setSenhaAntiga(e.target.value);
-  };
-
-  const handleNovaSenhaChange = (e) => {
-    setNovaSenha(e.target.value);
-  };
-
-  const handleConfirmSenhaChange = (e) => {
-    setConfirmSenha(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Dados salvos:", { nomeUsuario, username, email, senhaAntiga, novaSenha });
+  
+    // Verificar se a senha antiga está correta, mas somente se o campo da senha antiga for preenchido
+    if (senhaAntiga && senhaAntiga !== userSenha) {
+      setErrorMessage("Senha antiga incorreta");
+      setIsError(true);
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+      return;
+    }
+  
+    // Verificar se as novas senhas coincidem, mas somente se o campo nova senha for preenchido
+    if (novaSenha && novaSenha !== confirmSenha) {
+      setErrorMessage("Novas senhas não coincidem");
+      setIsError(true);
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+      return;
+    }
+  
+    // Verificar a validade da nova senha, mas somente se o campo nova senha for preenchido
+    const senhaRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
+    if (novaSenha && !senhaRegex.test(novaSenha)) {
+      setErrorMessage("A nova senha deve ter pelo menos 5 caracteres e conter letras e números.");
+      setIsError(true);
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+      return;
+    }
+  
+    try {
+      // Atualizar o username, se houver
+      if (novoNome) {
+        const nomeResponse = await axios.put(`https://back-end-retz.onrender.com/updateApelido/${userEmail}/${novoNome}`);
+        if (nomeResponse.status === 200) {
+          localStorage.setItem('userName', novoNome);
+        }
+      }
+  
+      // Atualizar a senha, se houver
+      if (novaSenha) {
+        await axios.put('https://back-end-retz.onrender.com/updatePassword', {
+          email: userEmail,
+          password: novaSenha,
+        });
+      }
+  
+      // Limpar os campos e exibir mensagem de sucesso
+      setIsError(false);
+      setErrorMessage('');
+      setNovoNome('');
+      setSenhaAntiga('');
+      setNovaSenha('');
+      setConfirmSenha('');
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+  
+    } catch (error) {
+      console.error("Erro ao atualizar as informações:", error);
+      setErrorMessage("Erro ao atualizar as informações. Tente novamente.");
+      setIsError(true);
+      setShowSuccessPopup(true);
+      setTimeout(() => setShowSuccessPopup(false), 3000);
+    }
   };
-
-  const handleVoltar = () => {
-    navigate('/perfil'); 
-  };
+  
 
   return (
     <div className='teste'>
@@ -62,36 +123,14 @@ function Configuracoes() {
       </div>
       <form onSubmit={handleSubmit} className="configuracoes-container">
         <div className="configuracoes-dados">
-          <label htmlFor="nome">Nome:</label>
-          <input
-            type="text"
-            id="nome"
-            value={nomeUsuario}
-            onChange={handleNomeChange}
-            className="configuracoes-input"
-            placeholder="Digite seu nome"
-          />
-        </div>
-        <div className="configuracoes-dados">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
-            id="username"
-            value={username}
-            onChange={handleUsernameChange}
+            id="novoNome"
+            value={novoNome}
+            onChange={handleNovoNomeChange}
             className="configuracoes-input"
-            placeholder="Digite seu username"
-          />
-        </div>
-        <div className="configuracoes-dados">
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            className="configuracoes-input"
-            placeholder="Digite seu e-mail"
+            placeholder="Username"
           />
         </div>
         <div className="configuracoes-dados">
@@ -124,8 +163,20 @@ function Configuracoes() {
             className="configuracoes-input"
           />
         </div>
-        <MainButton text="Salvar" />
+        <button type="submit" className="botaoPrincipal">Salvar</button>
       </form>
+
+      {showSuccessPopup && (
+        <div
+          className="popup-sucesso"
+          style={{
+            backgroundColor: isError ? '#fa5b77' : 'white',
+            color: isError ? 'white' : '#fa5b77'
+          }}
+        >
+          {errorMessage || "Alterações salvas com sucesso!"}
+        </div>
+      )}
     </div>
   );
 }

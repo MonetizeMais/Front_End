@@ -11,6 +11,7 @@ function Conteudo() {
   const [userStats, setUserStats] = useState({
     vida: 0,
     coin: 0,
+    progresso: 0, 
   });
   const location = useLocation(); 
   const navigate = useNavigate(); 
@@ -25,8 +26,10 @@ function Conteudo() {
         try {
           const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
           if (response.status === 200) {
-            const { vida, coin } = response.data;
-            setUserStats({ vida, coin });
+            const { vida, coin, progresso } = response.data; 
+            setUserStats({ vida, coin, progresso });
+            // Salva o progresso atual no localStorage
+            localStorage.setItem('userProgresso', progresso); 
           }
         } catch (error) {
           console.error('Erro ao buscar dados do usuário:', error);
@@ -52,18 +55,32 @@ function Conteudo() {
     navigate('/HomePage'); 
   };
 
-  const handleStartQuizz = () => {
-    navigate('/Quizz', { state: { level } }); 
+  const handleStartQuizz = async () => {
+    const userEmail = localStorage.getItem('userEmail');
+    if (userEmail && userStats.progresso == level) {
+      try {
+        const novoProgresso = userStats.progresso + 0.5;
+        await axios.put(`https://back-end-retz.onrender.com/updateProgresso/${userEmail}/${novoProgresso}`);
+        setUserStats((prevStats) => ({
+          ...prevStats,
+          progresso: novoProgresso,
+        }));
+
+        localStorage.setItem('userProgresso', novoProgresso);
+
+        navigate('/Quizz', { state: { level } });
+      } catch (error) {
+        console.error('Erro ao atualizar progresso do usuário:', error);
+      }
+    } else {
+      navigate('/Quizz', { state: { level } });
+    }
   };
 
   return (
     <div className="ConteudoScreen">
       <div className="question-header_Quizz">
         <img src={Close} alt="Close" className="Close_Quizz" onClick={handleClose} /> 
-
-        <div className="progress-bar_Quizz">
-          <div className="progress_Quizz" style={{ width: '50%' }}></div>
-        </div>
 
         <ul className="header-links-Quizz">
           <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>

@@ -56,47 +56,56 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
 
   const handlePopupClose = () => {
     setShowPopup(false);
-
+  
     const email = localStorage.getItem('userEmail');
-
-    if(!email) {
+  
+    if (!email) {
       return false;
     }
-    navigate('/HomePage');
+  
     if (isCorrect) {
       const userProgressVerification = userStats.progresso + 0.5;
       const userProgressVerification2 = userStats.progresso - 0.5;
-
+  
       if ((userProgressVerification === levelAtual) || (userProgressVerification2 === levelAtual)) {
         const newProgress = userStats.progresso + 0.5;
         const newPontos = userStats.pontos + 15;
-      
+        
         axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`, {
           coin: userStats.coin + 5
         })
-          .then(response => {
-            console.log('Progresso atualizado:', response.data);
-            setUserStats((prevStats) => ({
-              ...prevStats,
-              progresso: newProgress,
-              pontos: newPontos
-            }));
-            axios.put(`https://back-end-retz.onrender.com/updatePontos/${email}/${newPontos}`);
-            localStorage.setItem('userProgresso', newProgress);
-            navigate(nextRoute);
-          })
-          .catch(error => {
-            console.error('Erro ao atualizar progresso:', error);
-          });
-
+        .then(response => {
+          console.log('Progresso atualizado:', response.data);
+          setUserStats((prevStats) => ({
+            ...prevStats,
+            progresso: newProgress,
+            pontos: newPontos
+          }));
+          axios.put(`https://back-end-retz.onrender.com/updatePontos/${email}/${newPontos}`);
+          localStorage.setItem('userProgresso', newProgress);
+          navigate(nextRoute);
+        })
+        .catch(error => {
+          console.error('Erro ao atualizar progresso:', error);
+        });
+  
         handleAnswer(newProgress);
       }
     } else {
-      const vida = userStats.vida - 1;
+      let vida = userStats.vida - 1;
+      let progresso = userStats.progresso;
       const newPontos = userStats.pontos - 5;
+  
+      if (vida <= 0) {
+        vida = 5;
+        if (![1, 2, 3].includes(progresso)) {
+          progresso -= 2.5; 
+        }
+      }
+  
       axios.put(`https://back-end-retz.onrender.com/updateLife/${email}/${vida}`)
         .then(response => {
-          console.log('Progresso atualizado:', response.data);
+          console.log('Vida atualizada:', response.data);
           setUserStats((prevStats) => ({
             ...prevStats,
             vida,
@@ -109,8 +118,18 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
         .catch(error => {
           console.error('Erro ao atualizar progresso:', error);
         });
+
+        axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${progresso}`)
+        .then(response => {
+          console.log('Progresso atualizado:', response.data);
+          setUserStats((prevStats) => ({
+            ...prevStats,
+            progresso: progresso,
+          }));
+        })
     }
   };
+  
 
   return (
     <div className={`Screen ${fade ? 'fade-out' : ''}`}>
@@ -125,7 +144,6 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
         <ul className="header-links-Quizz">
           <li><span className="icon-heart"></span> <span>{userStats.vida}</span></li>
           <li><span className="icon-gem"></span> <span>{userStats.coin}</span></li>
-          <li><span className="icon-star"></span> <span>{userStats.pontos}</span></li>
         </ul>
       </div>
 

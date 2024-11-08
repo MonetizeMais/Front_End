@@ -6,6 +6,8 @@ import Step from '../../components/Step/Step';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Popup from '../../components/Popup/Popup';
+import LeftPath from "../../Assets/left-path.png";
+import RightPath from "../../Assets/right-path.png";
 
 function HomePage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
@@ -16,10 +18,10 @@ function HomePage() {
   useEffect(() => {
     const fetchUserProgress = async () => {
       const userEmail = localStorage.getItem('userEmail');
-      
+
       if (userEmail) {
         try {
-          const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
+          const response = await axios.get(`http://localhost:8080/findUserByEmail/${userEmail}`);
           if (response.status === 200) {
             const { progresso } = response.data;
             setUserProgress(progresso);
@@ -30,8 +32,8 @@ function HomePage() {
       }
     };
 
-    fetchUserProgress(); 
-  }, []); 
+    fetchUserProgress();
+  }, []);
 
   const steps = [
     { label: 'Básico 1', level: 1 },
@@ -52,63 +54,40 @@ function HomePage() {
     { label: 'Animais', level: 16 },
   ];
 
-  const groupStepsByRows = (steps) => {
-    const grouped = [];
-    let currentGroup = [];
-    let itemsInRow = 1;
-
-    steps.forEach((step) => {
-      currentGroup.push(step);
-
-      if (currentGroup.length === itemsInRow) {
-        grouped.push(currentGroup);
-        currentGroup = [];
-        itemsInRow = itemsInRow === 3 ? 1 : itemsInRow + 1; 
-      }
-    });
-
-    if (currentGroup.length > 0) {
-      grouped.push(currentGroup);
-    }
-
-    return grouped;
-  };
-
   const handleStepClick = async (level) => {
     setSelectedLevel(level);
     if (userProgress < level) {
-        setErrorMessage(`Progresso insuficiente! Complete o nível ${userProgress} antes de acessar o nível ${level}.`);
-        return;
+      setErrorMessage(`Progresso insuficiente! Complete o nível ${userProgress} antes de acessar o nível ${level}.`);
+      return;
     }
 
     try {
-      const response = await axios.get(`https://back-end-retz.onrender.com/getConteudo/${level}`);
+      const response = await axios.get(`http://localhost:8080/getConteudo/${level}`);
       const conteudo = response.data;
 
-      navigate('/Conteudo', { state: { conteudo, level } }); 
+      navigate('/Conteudo', { state: { conteudo, level } });
     } catch (error) {
       console.error('Error fetching content:', error);
     }
   };
 
-  const groupedSteps = groupStepsByRows(steps);
-
   return (
     <div className="homepage">
       <ScoreBar />
-      
+
       <div className="scroll-container">
-        {groupedSteps.map((row, rowIndex) => (
-          <div key={rowIndex} className="step-row">
-            {row.map((step, index) => (
-              <Step
-                key={index}
-                label={step.label}
-                level={step.level}
-                isSelected={selectedLevel === step.level}
-                onClick={() => handleStepClick(step.level)}
-              />
-            ))}
+        {steps.map((step, index) => (
+          <div key={index} className='step-card'>
+            <Step
+              index={index}
+              progress={userProgress}
+              {...step}
+              isSelected={selectedLevel === step.level}
+              onClick={() => handleStepClick(step.level)}
+            />
+            {index !== steps.length - 1 && (
+              <img style={{ width: "20%", opacity: userProgress - step.level > 0 ? 1 : 0.55 }} src={index % 2 !== 0 ? LeftPath : RightPath} />
+            )}
           </div>
         ))}
       </div>

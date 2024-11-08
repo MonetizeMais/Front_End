@@ -21,7 +21,7 @@ function Quizz() {
 
     const fetchQuestion = async () => {
       try {
-        const response = await axios.get(`https://back-end-retz.onrender.com/getPergunta/${level}`);
+        const response = await axios.get(`http://localhost:8080/getPergunta/${level}`);
         setQuestionData(response.data);
       } catch (error) {
         console.error('Error fetching question data:', error);
@@ -43,9 +43,10 @@ function Quizz() {
         localStorage.setItem('userProgress', newProgress.toString()); 
 
         if (email) {
-          axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
+          axios.put(`http://localhost:8080/updateProgresso/${email}/${newProgress}`)
             .then(response => {
               console.log(response.data); 
+              navigate("/HomePage");
             })
             .catch(error => {
               console.error('Erro ao atualizar o progresso no banco de dados:', error);
@@ -53,8 +54,6 @@ function Quizz() {
         }
       }
     }
-
-    navigate("/Finalizar");
   };
 
   if (!questionData) {
@@ -70,7 +69,7 @@ function Quizz() {
       options={options}
       correctAnswer={correctAnswer}
       handleAnswer={handleAnswer}
-      nextRoute="/Finalizar"
+      nextRoute="/HomePage"
       level={level}
       userProgress={userProgress}  
     />

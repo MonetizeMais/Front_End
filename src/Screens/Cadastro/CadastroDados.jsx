@@ -63,7 +63,7 @@ function CadastroDadosScreen() {
         }
 
         try {
-            const url = 'https://back-end-retz.onrender.com/newUser'; 
+            const url = 'http://localhost:8080/newUser'; 
 
             const response = await axios.post(url, {
                 nome: formData.nome,

@@ -25,7 +25,7 @@ function NovaSenha() {
     };
 
     try {
-      const response = await fetch('https://back-end-retz.onrender.com/updatePassword', {
+      const response = await fetch('http://localhost:8080/updatePassword', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

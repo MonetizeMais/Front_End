@@ -5,6 +5,8 @@ import Close from '../../Assets/Close.png';
 import '../QuizzScreen/QuizzScreen.css';
 import OptionButton from '../../components/OptionButton/OptionButton.jsx';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Check from "../../Assets/check.png";
+import X from "../../Assets/x.png";
 
 function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextRoute }) {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -19,10 +21,10 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
   useEffect(() => {
     const fetchUserData = async () => {
       const userEmail = localStorage.getItem('userEmail');
-      
+
       if (userEmail) {
         try {
-          const response = await axios.get(`https://back-end-retz.onrender.com/findUserByEmail/${userEmail}`);
+          const response = await axios.get(`http://localhost:8080/findUserByEmail/${userEmail}`);
           if (response.status === 200) {
             const { vida, coin, progresso } = response.data;
             setUserStats({ vida, coin, progresso });
@@ -48,26 +50,30 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
     if (selectedOption) {
       const correct = selectedOption === correctAnswer;
       setIsCorrect(correct);
-      setShowPopup(true); 
+      setShowPopup(true);
     }
   };
 
   const handlePopupClose = () => {
     setShowPopup(false);
 
-    // Primeiro if para verificar se a resposta está correta
+    const email = localStorage.getItem('userEmail');
+
+    if(!email) {
+      return false;
+    }
+
     if (isCorrect) {
-      // Segundo if para verificar a lógica do progresso
       const userProgressVerification = userStats.progresso + 0.5;
       const userProgressVerification2 = userStats.progresso - 0.5;
 
+
       if ((userProgressVerification === levelAtual) || (userProgressVerification2 === levelAtual)) {
         const newProgress = userStats.progresso + 0.5;
-        const email = localStorage.getItem('userEmail');
-
-        if (email) {
-          // Atualiza o progresso no backend
-          axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
+      
+          axios.put(`http://localhost:8080/updateProgresso/${email}/${newProgress}`, {
+            coin: userStats.coin + 5
+          })
             .then(response => {
               console.log('Progresso atualizado:', response.data);
               setUserStats((prevStats) => ({
@@ -75,27 +81,39 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
                 progresso: newProgress,
               }));
               localStorage.setItem('userProgresso', newProgress);
+              navigate(nextRoute);
             })
             .catch(error => {
               console.error('Erro ao atualizar progresso:', error);
             });
-        }
 
         // Chama o handler para processar a resposta correta
         handleAnswer(newProgress);
       }
+    } else {
+      const vida = userStats.vida - 1;
+      axios.put(`http://localhost:8080/updateLife/${email}/${vida}`)
+        .then(response => {
+          console.log('Progresso atualizado:', response.data);
+          setUserStats((prevStats) => ({
+            ...prevStats,
+            vida
+          }));
+          localStorage.setItem('userVida', vida);
+          navigate(nextRoute);
+        })
+        .catch(error => {
+          console.error('Erro ao atualizar progresso:', error);
+        });
     }
-
-    // Navega para a próxima rota
-    navigate(nextRoute);
   };
 
   return (
     <div className={`Screen ${fade ? 'fade-out' : ''}`}>
       <div className="question-header_Quizz">
-        <img 
-          src={Close} 
-          className='Close_Quizz' 
+        <img
+          src={Close}
+          className='Close_Quizz'
           onClick={handleClose}
           alt="Fechar"
         />
@@ -137,7 +155,9 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
       {showPopup && (
         <div className="popup-pergunta">
           <div className="popup-content-pergunta">
-            <p>{isCorrect ? 'Resposta certa!' : 'Resposta errada!'}</p>
+            <img width={100} src={isCorrect ? Check : X} alt="" />
+            <p className='title'>{isCorrect ? 'Resposta certa!' : 'Resposta errada!'}</p>
+            <p>{isCorrect ? 'Parabéns! 🎉 Cada acerto te deixa mais perto de dominar o mundo dos investimentos!' : 'Não foi dessa vez, mas é errando que se aprende. Continue firme!'}</p>
             <button onClick={handlePopupClose}>Fechar</button>
           </div>
         </div>

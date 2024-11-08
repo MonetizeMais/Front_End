@@ -24,7 +24,7 @@ function Conteudo() {
       
       if (userEmail) {
         try {
-          const response = await axios.get(`https://back-end-retz.onrender.com/getUserByEmail/${userEmail}`);
+          const response = await axios.get(`http://localhost:8080/getUserByEmail/${userEmail}`);
           if (response.status === 200) {
             const { vida, coin, progresso } = response.data; 
             setUserStats({ vida, coin, progresso });
@@ -57,12 +57,10 @@ function Conteudo() {
 
   const handleStartQuizz = async () => {
     const userEmail = localStorage.getItem('userEmail');
-    window.alert(userStats.progresso)
-    window.alert(level)
     if (userEmail && userStats.progresso == level) {
       try {
         const novoProgresso = userStats.progresso + 0.5;
-        await axios.put(`https://back-end-retz.onrender.com/updateProgresso/${userEmail}/${novoProgresso}`);
+        await axios.put(`http://localhost:8080/updateProgresso/${userEmail}/${novoProgresso}`);
         setUserStats((prevStats) => ({
           ...prevStats,
           progresso: novoProgresso,

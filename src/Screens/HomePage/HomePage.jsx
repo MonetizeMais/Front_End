@@ -11,7 +11,7 @@ import RightPath from "../../Assets/right-path.png";
 
 function HomePage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
-  const [userProgress, setUserProgress] = useState(1); // Progresso inicial
+  const [userProgress, setUserProgress] = useState(1); 
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
@@ -36,22 +36,18 @@ function HomePage() {
   }, []);
 
   const steps = [
-    { label: 'Básico 1', level: 1 },
-    { label: 'Expressões', level: 2 },
-    { label: 'Animais', level: 3 },
-    { label: 'Animais', level: 4 },
-    { label: 'Animais', level: 5 },
-    { label: 'Animais', level: 6 },
-    { label: 'Animais', level: 7 },
-    { label: 'Animais', level: 8 },
-    { label: 'Animais', level: 9 },
-    { label: 'Animais', level: 10 },
-    { label: 'Animais', level: 11 },
-    { label: 'Animais', level: 12 },
-    { label: 'Animais', level: 13 },
-    { label: 'Animais', level: 14 },
-    { label: 'Animais', level: 15 },
-    { label: 'Animais', level: 16 },
+    { level: 1 },
+    { level: 2 },
+    { level: 3 },
+    { level: 4 },
+    { level: 5 },
+    { level: 6 },
+    { level: 7 },
+    { level: 8 },
+    { level: 9 },
+    { level: 10 },
+    { level: 11 },
+    { level: 12 }
   ];
 
   const handleStepClick = async (level) => {

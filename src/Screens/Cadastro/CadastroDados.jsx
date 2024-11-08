@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Importa o hook de navegação
+import { useNavigate } from 'react-router-dom'; 
 import setaIcon from '../../Assets/arrow.png';
 import '../Cadastro/Cadastro.css';
 import MainButton from '../../components/Button/button.jsx';
@@ -20,7 +20,7 @@ function CadastroDadosScreen() {
     });
     const [message, setMessage] = useState('');
     const [showTerms, setShowTerms] = useState(false);
-    const navigate = useNavigate(); // Hook de navegação
+    const navigate = useNavigate(); 
 
     const allFieldsFilled = Object.values(formData).every((field) => field.trim() !== '');
 
@@ -82,7 +82,6 @@ function CadastroDadosScreen() {
             });
 
             if (response.status === 200) {
-                // Salva todos os dados no localStorage
                 localStorage.setItem('userEmail', formData.email);
                 localStorage.setItem('userEmail', formData.email);
                 localStorage.setItem('userName', formData.nome);

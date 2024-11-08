@@ -40,7 +40,6 @@ function InsereDadosScreen() {
     
         try {
             const loginResponse = await axios.post('https://back-end-retz.onrender.com/userLogin', {
-            const loginResponse = await axios.post('https://back-end-retz.onrender.com/userLogin', {
                 email: formData.usernameOrEmail,
                 senha: formData.senha,
             });

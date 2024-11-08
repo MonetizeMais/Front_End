@@ -18,7 +18,7 @@ function Ranking() {
     } else {
       setLoggedInUserEmail(email);
   
-      axios.get('http://localhost:8080/getAllUsersByPoints')
+      axios.get('https://back-end-retz.onrender.com/getAllUsersByPoints')
         .then(response => {
           setUsers(response.data);
         })

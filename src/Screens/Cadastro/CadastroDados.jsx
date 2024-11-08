@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'; 
-import axios from 'axios'; 
-import '../Cadastro/Cadastro.css'; 
-import MainButton from '../../components/Button/button.jsx'; 
-import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx'; 
-import MainTitle from '../../components/Title/Title.jsx'; 
-import MainInput from '../../components/Input/input.jsx'; 
-import PrivacyTerms from '../../components/PrivacyTerms/privacyTerms.jsx'; 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Importa o hook de navegação
+import setaIcon from '../../Assets/arrow.png';
+import '../Cadastro/Cadastro.css';
+import MainButton from '../../components/Button/button.jsx';
+import InactiveButton from '../../components/InactiveButton/InactiveButton.jsx';
+import MainTitle from '../../components/Title/Title.jsx';
+import MainInput from '../../components/Input/input.jsx';
+import PrivacyTerms from '../../components/PrivacyTerms/privacyTerms.jsx';
 
 function CadastroDadosScreen() {
     const [termsAccepted, setTermsAccepted] = useState(false);
@@ -14,10 +16,11 @@ function CadastroDadosScreen() {
         email: '',
         apelido: '',
         senha: '',
-        confirmaSenha: '', 
+        confirmaSenha: '',
     });
     const [message, setMessage] = useState('');
-    const [showTerms, setShowTerms] = useState(false); 
+    const [showTerms, setShowTerms] = useState(false);
+    const navigate = useNavigate(); // Hook de navegação
 
     const allFieldsFilled = Object.values(formData).every((field) => field.trim() !== '');
 
@@ -39,7 +42,7 @@ function CadastroDadosScreen() {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         setMessage('');
 
         if (!termsAccepted) {
@@ -81,6 +84,7 @@ function CadastroDadosScreen() {
             if (response.status === 200) {
                 // Salva todos os dados no localStorage
                 localStorage.setItem('userEmail', formData.email);
+                localStorage.setItem('userEmail', formData.email);
                 localStorage.setItem('userName', formData.nome);
                 localStorage.setItem('userNickname', formData.apelido);
                 localStorage.setItem('userId', response.data.ncdUsuario);
@@ -91,6 +95,8 @@ function CadastroDadosScreen() {
                 localStorage.setItem('userFotoPerfil', "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700");
 
                 window.location.href = '/Comecar'; 
+                localStorage.setItem('userId', response.data.ncdUsuario);
+                window.location.href = '/Comecar';
             }
             setMessage('Usuário cadastrado com sucesso!');
         } catch (error) {
@@ -107,16 +113,26 @@ function CadastroDadosScreen() {
         setShowTerms(false);
     };
 
+    const handleBackToHome = () => {
+        navigate('/');
+    };
+
     useEffect(() => {
         return () => {
-            setTermsAccepted(false); 
+            setTermsAccepted(false);
         };
     }, []);
 
     return (
         <div className='MainBox2'>
+            <img 
+                src={setaIcon} 
+                alt="Voltar" 
+                className="backArrow" 
+                onClick={handleBackToHome} 
+            />
             <MainTitle text={'Cadastre seus dados'}/>
-            <form onSubmit={handleSubmit}> 
+            <form onSubmit={handleSubmit}>
                 <MainInput 
                     name='nome' 
                     type={'text'} 
@@ -168,12 +184,12 @@ function CadastroDadosScreen() {
                     onChange={handleCheckboxChange} 
                     disabled={!allFieldsFilled} 
                 />
-                <span onClick={handleShowTerms} >Aceito os <a>Termos e Política de Privacidade</a></span>
+                <span onClick={handleShowTerms}>Aceito os <a>Termos e Política de Privacidade</a></span>
             </div>
 
-            {message && <p>{message}</p>} 
+            {message && <p>{message}</p>}
 
-            {showTerms && <PrivacyTerms onClose={handleCloseTerms} />} 
+            {showTerms && <PrivacyTerms onClose={handleCloseTerms} />}
         </div>
     );
 }

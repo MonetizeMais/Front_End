@@ -34,11 +34,12 @@ function InsereDadosScreen() {
             setShowError(true);
             setTimeout(() => {
                 setShowError(false);
-            }, 3000);
+            }, 10000);
             return;
         }
     
         try {
+            const loginResponse = await axios.post('https://back-end-retz.onrender.com/userLogin', {
             const loginResponse = await axios.post('https://back-end-retz.onrender.com/userLogin', {
                 email: formData.usernameOrEmail,
                 senha: formData.senha,
@@ -78,7 +79,7 @@ function InsereDadosScreen() {
             setShowError(true);
             setTimeout(() => {
                 setShowError(false);
-            }, 3000);
+            }, 10000);
         }
     };    
 

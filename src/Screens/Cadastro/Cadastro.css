@@ -38,3 +38,13 @@
   text-align: justify;
   font-weight: 700;
 }
+.backArrow {
+  position: absolute;
+  top: 15px;
+  left: 9px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s;
+}
+

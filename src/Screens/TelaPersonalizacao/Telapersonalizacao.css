@@ -47,11 +47,27 @@
   border-radius: 25%;
   border: 2px solid #FF7F7F;
   box-shadow:  3px 3px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.item-personalizacao img {
+.item-personalizacao .hat-image {
   width: 55px; 
   height: auto;
+}
+
+.lock-blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 24%;
+}
+
+.item-personalizacao .lock-image {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  opacity: 0.35;
 }
 
 .icon-home, .icon-friends, .icon-profile {

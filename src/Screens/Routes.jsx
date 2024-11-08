@@ -3,7 +3,7 @@ import TelaInicial from './TelaInicial/TelaInicial';
 import InsereDados from './InsereDados/InsereDados';
 import CadastroDados from './Cadastro/CadastroDados';
 import NovaSenha from './NovaSenha/NovaSenha';
-import Comecar from './Começar/Comecar';
+import Comecar from './Comecar/Comecar';
 import Perguntas from './Perguntas/Perguntas';
 import Pergunta1 from './Pergunta1/Pergunta1';
 import HomePage from './HomePage/HomePage';

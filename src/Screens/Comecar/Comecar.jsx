@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../../Assets/LogoPorco.png'; 
-import '../Começar/Começar.css'; 
+import './Comecar.css'; 
 import MainButton from '../../components/Button/button.jsx'; 
 import Typical from 'react-typical';
 import axios from 'axios';

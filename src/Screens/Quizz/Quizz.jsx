@@ -46,6 +46,7 @@ function Quizz() {
           axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${newProgress}`)
             .then(response => {
               console.log(response.data); 
+              navigate("/HomePage");
             })
             .catch(error => {
               console.error('Erro ao atualizar o progresso no banco de dados:', error);
@@ -53,8 +54,6 @@ function Quizz() {
         }
       }
     }
-
-    navigate("/Finalizar");
   };
 
   if (!questionData) {
@@ -70,7 +69,7 @@ function Quizz() {
       options={options}
       correctAnswer={correctAnswer}
       handleAnswer={handleAnswer}
-      nextRoute="/Finalizar"
+      nextRoute="/HomePage"
       level={level}
       userProgress={userProgress}  
     />

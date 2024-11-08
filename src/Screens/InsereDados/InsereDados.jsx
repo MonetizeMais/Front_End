@@ -34,7 +34,7 @@ function InsereDadosScreen() {
             setShowError(true);
             setTimeout(() => {
                 setShowError(false);
-            }, 3000);
+            }, 10000);
             return;
         }
     
@@ -59,7 +59,7 @@ function InsereDadosScreen() {
             setShowError(true);
             setTimeout(() => {
                 setShowError(false);
-            }, 3000);
+            }, 10000);
         }
     };    
 

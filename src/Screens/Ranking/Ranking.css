@@ -30,9 +30,8 @@
 }
 
 .ranking-card img {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
 }
 
 .ranking-card .position {
@@ -75,8 +74,8 @@
 
 .ranking-card.first-place {
   background-color: #FFB8C9;
-  height: 3rem; 
-  width: 80%;
+  height: 4rem; 
+  width: 87%;
 }
 
 .user-photo {
@@ -96,11 +95,6 @@
 .medal-container {
   height: 1.5rem;
   width: 1.5rem;
-}
-
-.medalha {
-  width: 100%; 
-  height: auto; 
 }
 
 .tag-eu {

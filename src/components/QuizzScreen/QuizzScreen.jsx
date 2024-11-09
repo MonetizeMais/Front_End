@@ -93,41 +93,41 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
       }
     } else {
       let vida = userStats.vida - 1;
-      let progresso = userStats.progresso;
-      const newPontos = userStats.pontos - 5;
-  
-      if (vida <= 0) {
-        vida = 5;
-        if (![1, 2, 3].includes(progresso)) {
-          progresso -= 2.5; 
-        }
-      }
-  
-      axios.put(`https://back-end-retz.onrender.com/updateLife/${email}/${vida}`)
-        .then(response => {
-          console.log('Vida atualizada:', response.data);
-          setUserStats((prevStats) => ({
-            ...prevStats,
-            vida,
-            pontos: newPontos
-          }));
-          axios.put(`https://back-end-retz.onrender.com/updatePontos/${email}/${newPontos}`);
-          localStorage.setItem('userVida', vida);
-          navigate(nextRoute);
-        })
-        .catch(error => {
-          console.error('Erro ao atualizar progresso:', error);
-        });
+  let progresso = userStats.progresso;
+  const newPontos = Math.max(0, userStats.pontos - 5); // Impede que os pontos fiquem negativos
 
-        axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${progresso}`)
-        .then(response => {
-          console.log('Progresso atualizado:', response.data);
-          setUserStats((prevStats) => ({
-            ...prevStats,
-            progresso: progresso,
-          }));
-        })
+  if (vida <= 0) {
+    vida = 5;
+    if (![1, 2, 3, 1.5, 2.5, 3.5].includes(progresso)) {
+      progresso -= 2.5; 
     }
+  }
+
+  axios.put(`https://back-end-retz.onrender.com/updateLife/${email}/${vida}`)
+    .then(response => {
+      console.log('Vida atualizada:', response.data);
+      setUserStats((prevStats) => ({
+        ...prevStats,
+        vida,
+        pontos: newPontos
+      }));
+      axios.put(`https://back-end-retz.onrender.com/updatePontos/${email}/${newPontos}`);
+      localStorage.setItem('userVida', vida);
+      navigate(nextRoute);
+    })
+    .catch(error => {
+      console.error('Erro ao atualizar progresso:', error);
+    });
+
+  axios.put(`https://back-end-retz.onrender.com/updateProgresso/${email}/${progresso}`)
+    .then(response => {
+      console.log('Progresso atualizado:', response.data);
+      setUserStats((prevStats) => ({
+        ...prevStats,
+        progresso: progresso,
+      }));
+    });
+}
   };  
 
   return (

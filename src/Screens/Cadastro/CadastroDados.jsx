@@ -78,7 +78,7 @@ function CadastroDadosScreen() {
                 coin: 10,
                 pontos: 0,
                 progresso: 1,
-                fotoPerfil: "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700",
+                fotoPerfil: "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho%20simples.png?alt=media&token=188f26bd-7dc9-4fec-aed0-812e232db58e",
             });
 
             if (response.status === 200) {
@@ -91,7 +91,7 @@ function CadastroDadosScreen() {
                 localStorage.setItem('userCoin', 10);
                 localStorage.setItem('userPontos', 0);
                 localStorage.setItem('userProgresso', 1);
-                localStorage.setItem('userFotoPerfil', "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/logo%20-%20poupinho.png?alt=media&token=9f122a63-3f73-4f4f-987f-51487582c700");
+                localStorage.setItem('userFotoPerfil', "https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho%20simples.png?alt=media&token=188f26bd-7dc9-4fec-aed0-812e232db58e");
 
                 window.location.href = '/Comecar'; 
                 localStorage.setItem('userId', response.data.ncdUsuario);
@@ -100,7 +100,11 @@ function CadastroDadosScreen() {
             setMessage('Usuário cadastrado com sucesso!');
         } catch (error) {
             console.error('Erro ao cadastrar usuário:', error);
+        if (error.response && error.response.status === 401 && error.response.data === 'Email já cadastrado') {
+            setMessage('Este e-mail já está cadastrado.');
+        } else {
             setMessage('Erro ao cadastrar usuário: ' + error.message);
+        }
         }
     };
 

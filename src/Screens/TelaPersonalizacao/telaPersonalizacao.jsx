@@ -13,8 +13,8 @@ const chapeus = [
   { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho8.png?alt=media&token=d534f9a7-6fc5-417c-be62-808b42a61327' }, 
   { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho9.png?alt=media&token=0662c18a-998c-4557-8603-a83feacc7037' }, 
   { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho1.png?alt=media&token=df077539-7c4e-4863-a0d7-893322c2b9bf'},
-  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho2.png?alt=media&token=65823cad-f998-4cb7-a477-2d0f3e1bacc1', price: 5 },
-  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho3.png?alt=media&token=50cd0bcd-0fad-49ac-a2e5-0f4652882466', price: 10}, 
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho2.png?alt=media&token=65823cad-f998-4cb7-a477-2d0f3e1bacc1', price: 15 },
+  { image: 'https://firebasestorage.googleapis.com/v0/b/monetizemais-64f46.appspot.com/o/Poupinho3.png?alt=media&token=50cd0bcd-0fad-49ac-a2e5-0f4652882466', price: 20}, 
 ];
 
 function TelaPersonalizacao() {

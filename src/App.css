@@ -371,7 +371,7 @@
   box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
   animation: slideIn 0.5s ease-in-out, fadeout 4s 0.5s forwards;
   display: flex;
-  align-items: center;  /* Centraliza verticalmente o texto */
+  align-items: center;  
   justify-content: center;
 }
 
@@ -399,5 +399,3 @@
   90% { opacity: 1; }
   100% { opacity: 0; }
 }
-
-

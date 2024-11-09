@@ -97,7 +97,7 @@ function InsereDadosScreen() {
                 <MainInput 
                     name='usernameOrEmail' 
                     type={'text'} 
-                    text={'E-mail ou nome de usuário'} 
+                    text={'E-mail'} 
                     onChange={handleChange} 
                     value={formData.usernameOrEmail}
                 />

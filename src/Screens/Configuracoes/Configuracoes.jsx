@@ -47,7 +47,6 @@ function Configuracoes() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Verificar se a senha antiga está correta, mas somente se o campo da senha antiga for preenchido
     if (senhaAntiga && senhaAntiga !== userSenha) {
       setErrorMessage("Senha antiga incorreta");
       setIsError(true);
@@ -56,7 +55,6 @@ function Configuracoes() {
       return;
     }
   
-    // Verificar se as novas senhas coincidem, mas somente se o campo nova senha for preenchido
     if (novaSenha && novaSenha !== confirmSenha) {
       setErrorMessage("Novas senhas não coincidem");
       setIsError(true);
@@ -65,7 +63,6 @@ function Configuracoes() {
       return;
     }
   
-    // Verificar a validade da nova senha, mas somente se o campo nova senha for preenchido
     const senhaRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
     if (novaSenha && !senhaRegex.test(novaSenha)) {
       setErrorMessage("A nova senha deve ter pelo menos 5 caracteres e conter letras e números.");
@@ -76,7 +73,6 @@ function Configuracoes() {
     }
   
     try {
-      // Atualizar o username, se houver
       if (novoNome) {
         const nomeResponse = await axios.put(`https://back-end-retz.onrender.com/updateApelido/${userEmail}/${novoNome}`);
         if (nomeResponse.status === 200) {
@@ -84,7 +80,6 @@ function Configuracoes() {
         }
       }
   
-      // Atualizar a senha, se houver
       if (novaSenha) {
         await axios.put('https://back-end-retz.onrender.com/updatePassword', {
           email: userEmail,
@@ -92,7 +87,6 @@ function Configuracoes() {
         });
       }
   
-      // Limpar os campos e exibir mensagem de sucesso
       setIsError(false);
       setErrorMessage('');
       setNovoNome('');

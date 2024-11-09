@@ -1,4 +1,3 @@
-// QuestionScreen.js
 import React, { useState, useEffect } from 'react';
 import logo from '../../Assets/Mascote 2.png';
 import '../QuestionScreen/QuestionScreen.css';

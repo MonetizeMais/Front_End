@@ -117,7 +117,7 @@
 }
 
 .popup-compra .error-message {
-  color: #FF0000; /* Vermelho para mensagem de erro */
+  color: #FF0000; 
   font-size: 16px;
   margin-bottom: 20px;
 }

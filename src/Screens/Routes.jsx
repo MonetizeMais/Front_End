@@ -42,8 +42,6 @@ const AppRoutes = () => {
                     <Route path="/Conteudo" element={<Conteudo />} />
                     <Route path="/Configuracoes" element={<Configuracoes />} />
                 </Routes>
-        //     </CSSTransition>
-        // </TransitionGroup>
     );
 }
 

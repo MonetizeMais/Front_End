@@ -36,7 +36,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-top: 2rem; /* Adicionando espaçamento superior */
+  margin-top: 2rem; 
 }
 
 .EnviarNovaSenha {
@@ -46,7 +46,7 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2rem; /* Adicionando espaçamento superior */
+  margin-top: 2rem; 
 }
 
 .botaoPrincipal{

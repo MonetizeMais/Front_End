@@ -128,8 +128,7 @@ function QuizzScreen({ questionText, options, correctAnswer, handleAnswer, nextR
           }));
         })
     }
-  };
-  
+  };  
 
   return (
     <div className={`Screen ${fade ? 'fade-out' : ''}`}>

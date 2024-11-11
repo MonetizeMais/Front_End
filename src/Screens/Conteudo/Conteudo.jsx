@@ -90,7 +90,7 @@ function Conteudo() {
       <div className="question-section">
         <img className="LogoPrincipal" src={LogoTeacher} alt="Logo" />
         <div className="question-box">
-          <span>{conteudo ? conteudo.conteudo : 'Loading...'}</span>
+          <span>{conteudo ? conteudo.conteudo : 'Carregando...'}</span>
         </div>
       </div>
 

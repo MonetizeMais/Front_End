@@ -53,7 +53,7 @@ function HomePage() {
   const handleStepClick = async (level) => {
     setSelectedLevel(level);
     if (userProgress < level) {
-      setErrorMessage(`Progresso insuficiente! Complete o nível ${userProgress} antes de acessar o nível ${level}.`);
+      setErrorMessage(`Progresso insuficiente! Complete o nível anterior antes de acessar o nível ${level}.`);
       return;
     }
 
